@@ -2,6 +2,7 @@
 using GoBye.BLL.Dtos.EndBranchDtos;
 using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.BLL.Managers.EndBranchManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,14 +24,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithDestinationNameAsync()
         {
-            IEnumerable<EndBranchWithDestinationNameDto>? endBranchWithDestinationNameDtos = await _endBranchManager.GetAllWithDestinationNameAsync();
+            Response response = await _endBranchManager.GetAllWithDestinationNameAsync();
 
-            if (endBranchWithDestinationNameDtos is not null)
+            if (response.Success)
             {
-                return Ok(endBranchWithDestinationNameDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no EndBranches found");
+            return NotFound(response);
 
         }
         #endregion
@@ -40,14 +41,14 @@ namespace GoBye.API.Controllers
         [HttpGet("destinationId/{id:int}")]
         public async Task<IActionResult> GetAllByDestinationIdAsync(int id)
         {
-            IEnumerable<EndBranchReadDto>? endBranchReadDtos = await _endBranchManager.GetAllByDestinationIdAsync(id);
+            Response response = await _endBranchManager.GetAllByDestinationIdAsync(id);
 
-            if (endBranchReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(endBranchReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no EndBranches with DestinationId ({id}) not found");
+            return NotFound(response);
 
         }
         #endregion
@@ -57,14 +58,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdWithDestinationNameAsync(int id)
         {
-            EndBranchReadDto? endBranchReadDto = await _endBranchManager.GetByIdWithDestinationNameAsync(id);
+            Response response = await _endBranchManager.GetByIdWithDestinationNameAsync(id);
 
-            if (endBranchReadDto is not null)
+            if (response.Success)
             {
-                return Ok(endBranchReadDto);
+                return Ok(response);
             }
 
-            return NotFound($"EndBranch with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -75,12 +76,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _endBranchManager.AddAsync(endBranchAddDto);
+                Response response = await _endBranchManager.AddAsync(endBranchAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(endBranchAddDto);
@@ -94,12 +94,14 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _endBranchManager.UpdateAsync(id, endBranchUpdateDto);
+                Response response = await _endBranchManager.UpdateAsync(id, endBranchUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
 
             return BadRequest(endBranchUpdateDto);
@@ -111,14 +113,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _endBranchManager.DeleteAsync(id);
+            Response response = await _endBranchManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"EndBranch with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 

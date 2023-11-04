@@ -14,7 +14,11 @@ namespace GoBye.DAL.Data.Configurations
                .HasColumnType("int")
                .IsRequired();
 
-            builder.Property(x => x.Message)
+            builder.Property(x => x.MessageTitle)
+               .HasColumnType("varchar(max)")
+               .IsRequired();
+
+            builder.Property(x => x.MessageContent)
                .HasColumnType("varchar(max)")
                .IsRequired();
 

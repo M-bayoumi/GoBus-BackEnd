@@ -1,4 +1,6 @@
-﻿using GoBye.BLL.Dtos.StartBranchDtos;
+﻿using GoBye.BLL.Dtos.EndBranchDtos;
+using GoBye.BLL.Dtos.StartBranchDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,6 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         Task<bool> AddAsync(StartBranchAddDto startBranchAddDto);
         Task<bool> UpdateAsync(int id, StartBranchUpdateDto startBranchUpdateDto);
         Task<bool> DeleteAsync(int id);
+
     }
 }

@@ -2,6 +2,7 @@
 using GoBye.BLL.Dtos.DestinationDtos;
 using GoBye.BLL.Managers.BusClassManagers;
 using GoBye.BLL.Managers.DestinationManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,35 +20,52 @@ namespace GoBye.API.Controllers
         }
 
 
+        
+
         #region GetAllAsync
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            IEnumerable<DestinationReadDto>? destinationReadDtos = await _destinationManager.GetAllAsync();
+            Response response = await _destinationManager.GetAllAsync();
 
-            if (destinationReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(destinationReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Destinations found");
+            return NotFound(response);
 
         }
         #endregion
 
+        #region GetAllWithBranchesDetailsAsync
+        [HttpGet("branches")]
+        public async Task<IActionResult> GetAllWithBranchesDetailsAsync()
+        {
+            Response response = await _destinationManager.GetAllWithBranchesDetailsAsync();
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+
+        }
+        #endregion
 
         #region GetByIdAsync
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            DestinationReadDto? destinationReadDto = await _destinationManager.GetByIdAsync(id);
+            Response response = await _destinationManager.GetByIdAsync(id);
 
-            if (destinationReadDto is not null)
+            if (response.Success)
             {
-                return Ok(destinationReadDto);
+                return Ok(response);
             }
 
-            return NotFound($"Destination with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -58,16 +76,16 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _destinationManager.AddAsync(destinationAddDto);
+                Response response = await _destinationManager.AddAsync(destinationAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(destinationAddDto);
         }
+    
         #endregion
 
 
@@ -77,12 +95,14 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _destinationManager.UpdateAsync(id, destinationUpdateDto);
+                Response response = await _destinationManager.UpdateAsync(id, destinationUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
 
             return BadRequest(destinationUpdateDto);
@@ -94,14 +114,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _destinationManager.DeleteAsync(id);
+            Response response = await _destinationManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"Destination with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

@@ -46,21 +46,21 @@ namespace GoBye.DAL.Data.Configurations
                 {
                     Id=2,
                     Name="Red Sea",
-                    ImageURL = "https://go-bus.com/destination/%D8%B4%D8%B1%D9%85-%D8%A7%D9%84%D8%B4%D9%8A%D8%AE-2"
+                    ImageURL = "https://go-bus.com:8181/wp-content/uploads/2019/04/Sharm-hero.jpg"
                 },
 
                 new Destination
                 {
                     Id=3,
                     Name="South Sinai",
-                    ImageURL = "https://go-bus.com/destination/%D8%A7%D9%84%D8%B9%D9%8A%D9%86-%D8%A7%D9%84%D8%B3%D8%AE%D9%86%D8%A9"
+                    ImageURL = "https://go-bus.com:8181/wp-content/uploads/2019/04/sokhna-hero-1.jpg"
                 },
 
                 new Destination
                 {
                     Id=4,
                     Name="Alexandria",
-                    ImageURL = "https://go-bus.com/destination/%D8%A7%D8%B3%D9%83%D9%86%D8%AF%D8%B1%D9%8A%D9%87"
+                    ImageURL = "https://go-bus.com:8181/wp-content/uploads/2018/05/Alex-hero.jpg"
                 },
 
                 new Destination

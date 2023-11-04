@@ -1,7 +1,9 @@
-﻿using GoBye.BLL.Dtos.PolicyDtos;
+﻿using GoBye.BLL.Dtos.DestinationDtos;
+using GoBye.BLL.Dtos.PolicyDtos;
 using GoBye.BLL.Dtos.PublicActivityDtos;
 using GoBye.BLL.Managers.PolicyManager;
 using GoBye.BLL.Managers.PublicActivityManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,14 +25,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            IEnumerable<PublicActivityReadDto>? publicActivityReadDtos = await _publicActivityManager.GetAllAsync();
+            Response response = await _publicActivityManager.GetAllAsync();
 
-            if (publicActivityReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(publicActivityReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no PublicActivity found");
+            return NotFound(response);
 
         }
         #endregion
@@ -40,14 +42,14 @@ namespace GoBye.API.Controllers
         [HttpGet("destinationId/{id:int}")]
         public async Task<IActionResult> GetAllByDestinationIdAsync(int id)
         {
-            IEnumerable<PublicActivityReadDto>? publicActivityReadDtos = await _publicActivityManager.GetAllByDestinationIdAsync(id);
+            Response response = await _publicActivityManager.GetAllByDestinationIdAsync(id);
 
-            if (publicActivityReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(publicActivityReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no PublicActivity with DestinationId ({id}) found");
+            return NotFound(response);
 
         }
         #endregion
@@ -57,14 +59,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            PublicActivityReadDto? publicActivityReadDto = await _publicActivityManager.GetByIdAsync(id);
+            Response response = await _publicActivityManager.GetByIdAsync(id);
 
-            if (publicActivityReadDto is not null)
+            if (response.Success)
             {
-                return Ok(publicActivityReadDto);
+                return Ok(response);
             }
 
-            return NotFound($"PublicActivity with Id ({id}) not found");
+            return NotFound(response);
 
         }
         #endregion
@@ -76,12 +78,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _publicActivityManager.AddAsync(publicActivityAddDto);
+                Response response = await _publicActivityManager.AddAsync(publicActivityAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(publicActivityAddDto);
@@ -95,12 +96,14 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _publicActivityManager.UpdateAsync(id, publicActivityUpdateDto);
+                Response response = await _publicActivityManager.UpdateAsync(id, publicActivityUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
 
             return BadRequest(publicActivityUpdateDto);
@@ -112,14 +115,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _publicActivityManager.DeleteAsync(id);
+            Response response = await _publicActivityManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"PublicActivity with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

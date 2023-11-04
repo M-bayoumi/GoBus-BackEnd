@@ -67,7 +67,8 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     {
                         Id = y.Id,
                         ReservationNumber = y.ReservationNumber,
-                        Message = y.Message
+                        MessageTitle = y.MessageTitle,
+                        MessageContent = y.MessageContent,
                     })
                 });
                 return _unitOfWork.Response(true, data, null);
@@ -189,7 +190,8 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     {
                         Id = y.Id,
                         ReservationNumber = y.ReservationNumber,
-                        Message = y.Message
+                        MessageTitle = y.MessageTitle,
+                        MessageContent = y.MessageContent,
                     })
                 };
                 return _unitOfWork.Response(true, data, null);

@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.EndBranchDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace GoBye.BLL.Managers.EndBranchManagers
 {
     public interface IEndBranchManager
     {
-        Task<IEnumerable<EndBranchWithDestinationNameDto>?> GetAllWithDestinationNameAsync();
-        Task<IEnumerable<EndBranchReadDto>?> GetAllByDestinationIdAsync(int id);
-        Task<EndBranchReadDto?> GetByIdWithDestinationNameAsync(int id);
-        Task<bool> AddAsync(EndBranchAddDto endBranchAddDto);
-        Task<bool> UpdateAsync(int id, EndBranchUpdateDto endBranchUpdateDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllWithDestinationNameAsync();
+        Task<Response> GetAllByDestinationIdAsync(int id);
+        Task<Response> GetByIdWithDestinationNameAsync(int id);
+        Task<Response> AddAsync(EndBranchAddDto endBranchAddDto);
+        Task<Response> UpdateAsync(int id, EndBranchUpdateDto endBranchUpdateDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

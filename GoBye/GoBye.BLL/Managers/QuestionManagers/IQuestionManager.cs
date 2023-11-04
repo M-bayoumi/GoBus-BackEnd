@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.QuestionDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace GoBye.BLL.Managers.QuestionManagers
 {
     public interface IQuestionManager
     {
-        Task<IEnumerable<QuestionReadDto>?> GetAllAsync();
-        Task<QuestionReadDto?> GetByIdAsync(int id);
-        Task<bool> AddAsync(QuestionAddDto questionAddDto);
-        Task<bool> UpdateAsync(int id, QuestionUpdateDto questionUpdateDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllAsync();
+        Task<Response> GetByIdAsync(int id);
+        Task<Response> AddAsync(QuestionAddDto questionAddDto);
+        Task<Response> UpdateAsync(int id, QuestionUpdateDto questionUpdateDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

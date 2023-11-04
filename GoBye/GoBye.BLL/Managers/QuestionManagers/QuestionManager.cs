@@ -22,46 +22,50 @@ namespace GoBye.BLL.Managers.QuestionManagers
 
 
         #region GetAllAsync
-        public async Task<IEnumerable<QuestionReadDto>?> GetAllAsync()
+        public async Task<Response> GetAllAsync()
         {
             IEnumerable<Question>? questions = await _unitOfWork.QuestionRepo.GetAllAsync();
 
             if (questions is not null)
             {
-                return questions.Select(x => new QuestionReadDto
+                var data = questions.Select(x => new QuestionReadDto
                 {
                     Id = x.Id,
                     Title = x.Title,
                     Answer = x.Answer
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Questions");
         }
         #endregion
 
 
         #region GetByIdAsync
-        public async Task<QuestionReadDto?> GetByIdAsync(int id)
+        public async Task<Response> GetByIdAsync(int id)
         {
             Question? question = await _unitOfWork.QuestionRepo.GetByIdAsync(id);
 
             if (question is not null)
             {
-                QuestionReadDto questionReadDto = new QuestionReadDto
+                var data = new QuestionReadDto
                 {
                     Id = question.Id,
                     Title = question.Title,
                     Answer = question.Answer
                 };
-                return questionReadDto;
+                return _unitOfWork.Response(true, data, null);
+
             }
-            return null;
+            return _unitOfWork.Response(false, null, $"Destination with id ({id}) is not found");
+
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(QuestionAddDto questionAddDto)
+        public async Task<Response> AddAsync(QuestionAddDto questionAddDto)
         {
             Question question = new Question
             {
@@ -70,13 +74,18 @@ namespace GoBye.BLL.Managers.QuestionManagers
             };
             await _unitOfWork.QuestionRepo.AddAsync(question);
 
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Question has been added successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to add Question");
         }
         #endregion
 
 
         #region UpdateAsync
-        public async Task<bool> UpdateAsync(int id, QuestionUpdateDto questionUpdateDto)
+        public async Task<Response> UpdateAsync(int id, QuestionUpdateDto questionUpdateDto)
         {
             Question? question = await _unitOfWork.QuestionRepo.GetByIdAsync(id);
             if (question is not null)
@@ -84,21 +93,32 @@ namespace GoBye.BLL.Managers.QuestionManagers
                 question.Title = questionUpdateDto.Title;
                 question.Answer = questionUpdateDto.Answer;
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Question has been updated successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to update Question");
         }
         #endregion
 
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             Question? question = await _unitOfWork.QuestionRepo.GetByIdAsync(id);
 
             if (question is not null)
             {
                 _unitOfWork.QuestionRepo.Delete(question);
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The Question has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete Question");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"Question with id ({id}) is not found");
         }
         #endregion
     }

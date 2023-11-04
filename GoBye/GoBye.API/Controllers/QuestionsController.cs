@@ -1,7 +1,9 @@
-﻿using GoBye.BLL.Dtos.PublicActivityDtos;
+﻿using GoBye.BLL.Dtos.DestinationDtos;
+using GoBye.BLL.Dtos.PublicActivityDtos;
 using GoBye.BLL.Dtos.QuestionDtos;
 using GoBye.BLL.Managers.PublicActivityManagers;
 using GoBye.BLL.Managers.QuestionManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,14 +25,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            IEnumerable<QuestionReadDto>? questionReadDtos = await _questionManager.GetAllAsync();
+            Response response = await _questionManager.GetAllAsync();
 
-            if (questionReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(questionReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Questions found");
+            return NotFound(response);
 
         }
         #endregion
@@ -40,14 +42,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            QuestionReadDto? questionReadDto = await _questionManager.GetByIdAsync(id);
+            Response response = await _questionManager.GetByIdAsync(id);
 
-            if (questionReadDto is not null)
+            if (response.Success)
             {
-                return Ok(questionReadDto);
+                return Ok(response);
             }
 
-            return NotFound($"Question with Id ({id}) not found");
+            return NotFound(response);
 
         }
         #endregion
@@ -59,12 +61,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _questionManager.AddAsync(questionAddDto);
+                Response response = await _questionManager.AddAsync(questionAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(questionAddDto);
@@ -78,12 +79,14 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _questionManager.UpdateAsync(id, questionUpdateDto);
+                Response response = await _questionManager.UpdateAsync(id, questionUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
 
             return BadRequest(questionUpdateDto);
@@ -95,14 +98,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _questionManager.DeleteAsync(id);
+            Response response = await _questionManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"Question with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

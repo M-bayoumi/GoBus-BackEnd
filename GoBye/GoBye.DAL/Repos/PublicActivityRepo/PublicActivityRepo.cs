@@ -22,7 +22,7 @@ namespace GoBye.DAL.Repos.PublicActivityRepo
 
         public async Task<IEnumerable<PublicActivity>?> GetAllByDestinationIdAsync(int id)
         {
-            return await _appDbContext.PublicActivities.Where(x=>x.DestinationID == id).ToListAsync();
+            return await _appDbContext.PublicActivities.Include(x=>x.Destination).Where(x=>x.DestinationID == id).ToListAsync();
         }
     }
 }

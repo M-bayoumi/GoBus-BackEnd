@@ -10,5 +10,6 @@ namespace GoBye.DAL.Repos.DestinationRepo
 {
     public interface IDestinationRepo:IGenericRepo<Destination>
     {
+        Task<IEnumerable<Destination>?> GetAllWithBranchesDetailsAsync();
     }
 }

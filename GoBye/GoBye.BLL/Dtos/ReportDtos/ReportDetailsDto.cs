@@ -11,7 +11,8 @@ namespace GoBye.BLL.Dtos.ReportDtos
     {
         public int Id { get; set; }
         public int ReservationNumber { get; set; }
-        public string Message { get; set; } = string.Empty;
+        public string MessageTitle { get; set; } = string.Empty;
+        public string MessageContent { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;
         public string UserPhone { get; set; } = string.Empty;

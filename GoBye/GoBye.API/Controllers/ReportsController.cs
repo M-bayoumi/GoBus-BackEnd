@@ -1,7 +1,10 @@
-﻿using GoBye.BLL.Dtos.BusDtos;
+﻿
+using GoBye.BLL.Dtos.BusDtos;
+using GoBye.BLL.Dtos.QuestionDtos;
 using GoBye.BLL.Dtos.ReportDtos;
 using GoBye.BLL.Managers.BusManagers;
 using GoBye.BLL.Managers.ReportManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,14 +26,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithUserInfoAsync()
         {
-            IEnumerable<ReportDetailsDto>? reportDetailsDtos = await _reportManager.GetAllWithUserInfoAsync();
+            Response response = await _reportManager.GetAllWithUserInfoAsync();
 
-            if (reportDetailsDtos is not null)
+            if (response.Success)
             {
-                return Ok(reportDetailsDtos);
+                return Ok(response);
             }
 
-            return NotFound("There is no Reports found");
+            return NotFound(response);
         }
         #endregion
 
@@ -39,14 +42,14 @@ namespace GoBye.API.Controllers
         [HttpGet("userId/{id}")]
         public async Task<IActionResult> GetAllByUserIdAsync(string id)
         {
-            IEnumerable<ReportUserDto>? reportUserDtos = await _reportManager.GetAllByUserIdAsync(id);
+            Response response = await _reportManager.GetAllByUserIdAsync(id);
 
-            if (reportUserDtos is not null)
+            if (response.Success)
             {
-                return Ok(reportUserDtos);
+                return Ok(response);
             }
 
-            return NotFound($"Repoerts with UserId ({id}) are not found");
+            return NotFound(response);
         }
         #endregion
         
@@ -55,14 +58,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdWithUserInfoAsync(int id)
         {
-            ReportDetailsDto? reportDetailsDto = await _reportManager.GetByIdWithUserInfoAsync(id);
+            Response response = await _reportManager.GetByIdWithUserInfoAsync(id);
 
-            if (reportDetailsDto is not null)
+            if (response.Success)
             {
-                return Ok(reportDetailsDto);
+                return Ok(response);
             }
 
-            return NotFound($"Report with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -73,12 +76,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _reportManager.AddAsync(reportAddDto);
+                Response response = await _reportManager.AddAsync(reportAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(reportAddDto);
@@ -90,14 +92,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _reportManager.DeleteAsync(id);
+            Response response = await _reportManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"Report with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

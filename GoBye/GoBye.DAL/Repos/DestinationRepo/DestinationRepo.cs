@@ -18,5 +18,15 @@ namespace GoBye.DAL.Repos.DestinationRepo
         {
             _appDbContext = appDbContext;
         }
+
+
+        public async Task<IEnumerable<Destination>?> GetAllWithBranchesDetailsAsync()
+        {
+            return await
+                _appDbContext
+                .Destinations
+                .Include(x => x.EndBranchs)
+                .ToListAsync();
+        }
     }
 }

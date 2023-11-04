@@ -54,3 +54,17 @@ D:\Graduation-Project\2023-11-2\GoBye\GoBye.DAL\obj\Debug\net7.0\refint\GoBye.DA
 D:\Graduation-Project\2023-11-2\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.pdb
 D:\Graduation-Project\2023-11-2\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.genruntimeconfig.cache
 D:\Graduation-Project\2023-11-2\GoBye\GoBye.DAL\obj\Debug\net7.0\ref\GoBye.DAL.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\bin\Debug\net7.0\GoBye.DAL.deps.json
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\bin\Debug\net7.0\GoBye.DAL.runtimeconfig.json
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\bin\Debug\net7.0\GoBye.DAL.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\bin\Debug\net7.0\GoBye.DAL.pdb
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.csproj.AssemblyReference.cache
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.AssemblyInfoInputs.cache
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.AssemblyInfo.cs
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.csproj.CoreCompileInputs.cache
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\refint\GoBye.DAL.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.pdb
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\GoBye.DAL.genruntimeconfig.cache
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.DAL\obj\Debug\net7.0\ref\GoBye.DAL.dll

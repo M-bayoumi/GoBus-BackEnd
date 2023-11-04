@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.ReportDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace GoBye.BLL.Managers.ReportManagers
 {
     public interface IReportManager
     {
-        Task<IEnumerable<ReportDetailsDto>?> GetAllWithUserInfoAsync();
-        Task<IEnumerable<ReportUserDto>?> GetAllByUserIdAsync(string id);
-        Task<ReportDetailsDto?> GetByIdWithUserInfoAsync(int id);
-        Task<bool> AddAsync(ReportAddDto reportAddDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllWithUserInfoAsync();
+        Task<Response> GetAllByUserIdAsync(string id);
+        Task<Response> GetByIdWithUserInfoAsync(int id);
+        Task<Response> AddAsync(ReportAddDto reportAddDto);
+        Task<Response> DeleteAsync(int id);
     }
 }
