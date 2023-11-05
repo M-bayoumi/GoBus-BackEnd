@@ -34,5 +34,9 @@ namespace GoBye.DAL.Repos.EndBranchRepo
         {
             return await _appDbContext.EndBranches.Where(x => x.DestinationId == id).ToListAsync();
         }
+        public async Task<IEnumerable<EndBranch>?> FilterEndBranchesByStartBranchDestinationIdAsync(int id)
+        {
+            return await _appDbContext.EndBranches.Where(x => x.DestinationId != id).ToListAsync();
+        }
     }
 }

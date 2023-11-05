@@ -71,19 +71,41 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         }
         #endregion
 
-
-        #region GetByIdWithDestinationNameAsync
-        public async Task<Response> GetByIdWithDestinationNameAsync(int id)
+        #region FilterStartBranchesByEndBranchDestinationIdAsync
+        public async Task<Response> FilterStartBranchesByEndBranchDestinationIdAsync(int id)
         {
-            StartBranch? startBranche = await _unitOfWork.StartBranchRepo.GetByIdWithDestinationNameAsync(id);
-            if (startBranche is not null)
+            IEnumerable<StartBranch>? startBranches = await _unitOfWork.StartBranchRepo.FilterStartBranchesByEndBranchDestinationIdAsync(id);
+            if (startBranches is not null)
+            {
+                var data = startBranches.Select(x => new StartBranchReadDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Address = x.Address,
+                    Phone = x.Phone,
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+
+            return _unitOfWork.Response(false, null, $"There is no Branches with destinationId ({id})");
+
+        }
+        #endregion
+
+
+        #region GetByIdAsync
+        public async Task<Response> GetByIdAsync(int id)
+        {
+            StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
+            if (startBranch is not null)
             {
                 var data = new StartBranchReadDto
                 {
-                    Id = startBranche.Id,
-                    Name = startBranche.Name,
-                    Address = startBranche.Address,
-                    Phone = startBranche.Phone,
+                    Id = startBranch.Id,
+                    Name = startBranch.Name,
+                    Address = startBranch.Address,
+                    Phone = startBranch.Phone,
                 };
                 return _unitOfWork.Response(true, data, null);
             }

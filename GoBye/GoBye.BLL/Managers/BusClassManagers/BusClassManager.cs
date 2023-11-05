@@ -35,6 +35,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    AveragePrice = x.AveragePrice
                 });
 
                 return _unitOfWork.Response(true, data, null);
@@ -55,6 +56,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    AveragePrice=x.AveragePrice,
                     BusesNumbers = x.Buses.Select(y => y.Number),
                     ClassImageURLs = x.ClassImages.Select(y => y.ImageURL),
                 });
@@ -78,6 +80,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
                 {
                     Id = busClass.Id,
                     Name = busClass.Name,
+                    AveragePrice = busClass.AveragePrice,
                 };
 
                 return _unitOfWork.Response(true, data, null);
@@ -99,6 +102,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
                 {
                     Id = busClass.Id,
                     Name = busClass.Name,
+                    AveragePrice = busClass.AveragePrice,
                     BusesNumbers = busClass.Buses.Select(y => y.Number),
                     ClassImageURLs = busClass.ClassImages.Select(y => y.ImageURL),
                 };
@@ -118,6 +122,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
             BusClass busClass = new BusClass
             {
                 Name = busClassAddDto.Name,
+                AveragePrice = busClassAddDto.AveragePrice
             };
             await _unitOfWork.BusClassRepo.AddAsync(busClass);
 
@@ -160,6 +165,7 @@ namespace GoBye.BLL.Managers.BusClassManagers
             if (busClass is not null)
             {
                 busClass.Name = busClassUpdateDto.Name;
+                busClass.AveragePrice = busClassUpdateDto.AveragePrice;
                 bool result = await _unitOfWork.SaveChangesAsync() > 0;
                 if (result)
                 {

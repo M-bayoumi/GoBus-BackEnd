@@ -12,7 +12,8 @@ namespace GoBye.BLL.Managers.StartBranchManagers
     {
         Task<Response> GetAllWithDestinationNameAsync();
         Task<Response> GetAllByDestinationIdAsync(int id);
-        Task<Response> GetByIdWithDestinationNameAsync(int id);
+        Task<Response> FilterStartBranchesByEndBranchDestinationIdAsync(int id);
+        Task<Response> GetByIdAsync(int id);
         Task<Response> AddAsync(StartBranchAddDto startBranchAddDto);
         Task<Response> UpdateAsync(int id, StartBranchUpdateDto startBranchUpdateDto);
         Task<Response> DeleteAsync(int id);

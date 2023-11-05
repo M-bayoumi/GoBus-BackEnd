@@ -1,5 +1,6 @@
 ﻿using GoBye.BLL.Dtos.BusDtos;
 using GoBye.BLL.Dtos.EndBranchDtos;
+using GoBye.BLL.Dtos.StartBranchDtos;
 using GoBye.DAL.Data.Models;
 using GoBye.DAL.Repos.BusRepo;
 using GoBye.DAL.Repos.EndBranchRepo;
@@ -71,19 +72,40 @@ namespace GoBye.BLL.Managers.EndBranchManagers
         }
         #endregion
 
-
-        #region GetByIdWithDestinationNameAsync
-        public async Task<Response> GetByIdWithDestinationNameAsync(int id)
+        #region FilterEndBranchesByStartBranchDestinationIdAsync
+        public async Task<Response> FilterEndBranchesByStartBranchDestinationIdAsync(int id)
         {
-            EndBranch? endBranche = await _unitOfWork.EndBranchRepo.GetByIdWithDestinationNameAsync(id);
-            if (endBranche is not null)
+            IEnumerable<EndBranch>? endBranches = await _unitOfWork.EndBranchRepo.FilterEndBranchesByStartBranchDestinationIdAsync(id);
+            if (endBranches is not null)
+            {
+                var data = endBranches.Select(x => new EndBranchReadDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Address = x.Address,
+                    Phone = x.Phone,
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+
+            return _unitOfWork.Response(false, null, $"There is no Branches with destinationId ({id})");
+
+        }
+        #endregion
+
+        #region GetByIdAsync
+        public async Task<Response> GetByIdAsync(int id)
+        {
+            EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
+            if (endBranch is not null)
             {
                 var data = new EndBranchReadDto
                 {
-                    Id = endBranche.Id,
-                    Name = endBranche.Name,
-                    Address = endBranche.Address,
-                    Phone = endBranche.Phone,
+                    Id = endBranch.Id,
+                    Name = endBranch.Name,
+                    Address = endBranch.Address,
+                    Phone = endBranch.Phone,
                 };
                 return _unitOfWork.Response(true, data, null);
             }

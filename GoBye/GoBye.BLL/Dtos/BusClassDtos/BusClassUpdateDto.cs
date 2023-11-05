@@ -3,5 +3,6 @@
     public class BusClassUpdateDto
     {
         public string Name { get; set; } = string.Empty;
+        public string AveragePrice { get; set; } = string.Empty;
     }
 }

@@ -11,5 +11,6 @@ namespace GoBye.BLL.Dtos.BusClassDtos
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string AveragePrice { get; set; } = string.Empty;
     }
 }

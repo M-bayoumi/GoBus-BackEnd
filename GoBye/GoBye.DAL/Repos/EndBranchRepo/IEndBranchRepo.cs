@@ -13,5 +13,7 @@ namespace GoBye.DAL.Repos.EndBranchRepo
         Task<IEnumerable<EndBranch>?> GetAllByDestinationIdAsync(int id);
         Task<IEnumerable<EndBranch>?> GetAllWithDestinationNameAsync();
         Task<EndBranch?> GetByIdWithDestinationNameAsync(int id);
+        Task<IEnumerable<EndBranch>?> FilterEndBranchesByStartBranchDestinationIdAsync(int id);
+
     }
 }

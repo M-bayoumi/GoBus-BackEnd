@@ -27,42 +27,57 @@ namespace GoBye.DAL.Data.Configurations
                 new BusClass
                 {
                     Id = 1,
-                    Name="Super Go D"
+                    Name="Super Go D",
+                    AveragePrice = "180 EGP - 265 EGP",
                 },
                 new BusClass
                 {
                     Id = 2,
-                    Name="Business Class DD"
+                    Name="Business Class DD",
+                    AveragePrice = "165 EGP - 445 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 3,
-                    Name="Elite Business Class M"
+                    Name="Elite Business Class M",
+                    AveragePrice = "385 EGP - 385 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 4,
-                    Name="GoMini"
+                    Name="GoMini",
+                    AveragePrice = "45 EGP - 230 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 5,
-                    Name="New Deluxe"
+                    Name="New Deluxe",
+                    AveragePrice = "225 EGP - 265 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 6,
-                    Name="Economy"
+                    Name="Economy",
+                    AveragePrice = "100 EGP - 180 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 7,
-                    Name="Elite Business Class V"
+                    Name="Elite Business Class V",
+                    AveragePrice = "130 EGP - 440 EGP",
+
                 },
                 new BusClass
                 {
                     Id = 8,
-                    Name="Aero First Class"
+                    Name="Aero First Class",
+                    AveragePrice = "500 EGP - 545 EGP",
+
                 },
                 #endregion
 

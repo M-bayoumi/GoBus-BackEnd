@@ -33,5 +33,10 @@ namespace GoBye.DAL.Repos.StartBranchRepo
         {
             return await _appDbContext.StartBranches.Where(x => x.DestinationId == id).ToListAsync();
         }
+
+        public async Task<IEnumerable<StartBranch>?> FilterStartBranchesByEndBranchDestinationIdAsync(int id)
+        {
+            return await _appDbContext.StartBranches.Where(x => x.DestinationId != id).ToListAsync();
+        }
     }
 }
