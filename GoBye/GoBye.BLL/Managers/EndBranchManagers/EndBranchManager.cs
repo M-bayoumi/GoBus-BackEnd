@@ -35,8 +35,9 @@ namespace GoBye.BLL.Managers.EndBranchManagers
                     Name = x.Name,
                     Address = x.Address,
                     Phone = x.Phone,
-                    DestinationName = x.Destination.Name
-                    
+                    DestinationName = x.Destination.Name,
+                    DestinationId = x.Destination.Id
+
                 });
                 return _unitOfWork.Response(true, data, null);
 

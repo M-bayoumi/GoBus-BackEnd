@@ -7,5 +7,7 @@
         public string Address { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string DestinationName { get; set; } = string.Empty;
+        public int DestinationId { get; set; }
+
     }
 }
