@@ -23,6 +23,8 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 
         Task<Response> AddAsync(RegisterDto registerDto);
         Task<Response> RegisterAsync(RegisterDto registerDto);
+        Task<Response> CheckUserNameAsync(string userName);
+        Task<Response> CheckEmailAsync(string email);
         Task<Response> LoginAsync(LoginDto loginDto);
         Task<Response> UpdateAsync(string id, UserUpdateDto userUpdateDto);
         Task<Response> DeleteAsync(string id);

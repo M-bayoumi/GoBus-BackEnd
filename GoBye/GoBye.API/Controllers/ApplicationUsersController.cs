@@ -154,7 +154,36 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        
+        #region CheckUserNameAsync
+        [HttpGet("userName/{username}")]
+        public async Task<IActionResult> CheckUserNameAsync(string userName)
+        {
+            Response response = await _applicationUserManager.CheckUserNameAsync(userName);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+        #endregion
+
+        #region CheckEmailAsync
+        [HttpGet("email/{email}")]
+        public async Task<IActionResult> CheckEmailAsync(string email)
+        {
+            Response response = await _applicationUserManager.CheckEmailAsync(email);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+
+        }
+        #endregion
+
+
         #region LoginAsync
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginDto loginDto)

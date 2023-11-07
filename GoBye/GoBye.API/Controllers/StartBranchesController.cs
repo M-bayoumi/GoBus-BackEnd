@@ -68,11 +68,11 @@ namespace GoBye.API.Controllers
         #endregion
 
 
-        #region GetByIdAsync
+        #region GetByIdWithDestinationNameAsync
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdWithDestinationNameAsync(int id)
         {
-            Response response = await _startBranchManager.GetByIdAsync(id);
+            Response response = await _startBranchManager.GetByIdWithDestinationNameAsync(id);
 
             if (response.Success)
             {

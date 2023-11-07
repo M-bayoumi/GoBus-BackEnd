@@ -343,6 +343,31 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+        #region CheckUserNameAsync
+        public async Task<Response> CheckUserNameAsync(string userName)
+        {
+            ApplicationUser? user = await _userManager.FindByNameAsync(userName);
+            if(user is not null)
+            {
+                return _unitOfWork.Response(false, null, $"UserName ({userName}) is already token");
+            }
+            return _unitOfWork.Response(true, null, $"UserName ({userName}) is valid");
+
+        }
+        #endregion
+
+        #region CheckEmailAsync
+        public async Task<Response> CheckEmailAsync(string email)
+        {
+            ApplicationUser? user = await _userManager.FindByEmailAsync(email);
+            if (user is not null)
+            {
+                return _unitOfWork.Response(false, null, $"Email ({email}) is already token");
+            }
+            return _unitOfWork.Response(true, null, $"Email ({email}) is valid");
+
+        }
+        #endregion
 
         #region LoginAsync
         public async Task<Response> LoginAsync(LoginDto loginDto)

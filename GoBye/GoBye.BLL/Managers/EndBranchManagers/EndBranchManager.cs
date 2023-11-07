@@ -94,18 +94,20 @@ namespace GoBye.BLL.Managers.EndBranchManagers
         }
         #endregion
 
-        #region GetByIdAsync
-        public async Task<Response> GetByIdAsync(int id)
+        #region GetByIdWithDestinationNameAsync
+        public async Task<Response> GetByIdWithDestinationNameAsync(int id)
         {
-            EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
+            EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdWithDestinationNameAsync(id);
             if (endBranch is not null)
             {
-                var data = new EndBranchReadDto
+                var data = new EndBranchWithDestinationNameDto
                 {
                     Id = endBranch.Id,
                     Name = endBranch.Name,
                     Address = endBranch.Address,
                     Phone = endBranch.Phone,
+                    DestinationId = endBranch.DestinationId,
+                    DestinationName = endBranch.Destination.Name
                 };
                 return _unitOfWork.Response(true, data, null);
             }

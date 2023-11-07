@@ -94,18 +94,20 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         #endregion
 
 
-        #region GetByIdAsync
-        public async Task<Response> GetByIdAsync(int id)
+        #region GetByIdWithDestinationNameAsync
+        public async Task<Response> GetByIdWithDestinationNameAsync(int id)
         {
-            StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
+            StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdWithDestinationNameAsync(id);
             if (startBranch is not null)
             {
-                var data = new StartBranchReadDto
+                var data = new StartBranchWithDestinationNameDto
                 {
                     Id = startBranch.Id,
                     Name = startBranch.Name,
                     Address = startBranch.Address,
                     Phone = startBranch.Phone,
+                    DestinationId = startBranch.DestinationId,
+                    DestinationName = startBranch.Destination.Name
                 };
                 return _unitOfWork.Response(true, data, null);
             }
