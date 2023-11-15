@@ -5,6 +5,7 @@ using GoBye.BLL.Dtos.ReportDtos;
 using GoBye.BLL.Managers.BusManagers;
 using GoBye.BLL.Managers.ReportManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -72,6 +73,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForUser")]
         public async Task<IActionResult> AddAsync(ReportAddDto reportAddDto)
         {
             if (ModelState.IsValid)

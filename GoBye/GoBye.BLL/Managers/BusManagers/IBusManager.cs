@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.BusDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace GoBye.BLL.Managers.BusManagers
 {
     public interface IBusManager
     {
-        Task<IEnumerable<BusReadDto>?> GetAllWithBusClassAsync();
-        Task<IEnumerable<BusReadDto>?> GetAllByBusClassIdAsync(int id);
-        Task<IEnumerable<BusAvailableDto>?> GetAllAvailableBusesAsync();
-        Task<BusReadDto?> GetByIdWithBusClassAsync(int id);
-        Task<bool> AddAsync(BusAddDto busAddDto);
-        Task<bool> UpdateAsync(int id, BusUpdateDto busUpdateDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllWithBusClassAsync();
+        Task<Response> GetAllByBusClassIdAsync(int id);
+        Task<Response> GetAllAvailableBusesAsync();
+        Task<Response> GetByIdWithBusClassAsync(int id);
+        Task<Response> AddAsync(BusAddDto busAddDto);
+        Task<Response> UpdateAsync(int id, BusUpdateDto busUpdateDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

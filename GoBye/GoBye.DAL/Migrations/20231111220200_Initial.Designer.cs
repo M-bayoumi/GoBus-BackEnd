@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoBye.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231107185250_Initial")]
+    [Migration("20231111220200_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -148,7 +148,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "f0fd67a7-a8f6-42d1-924b-4ef2cbfbe7dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8af209d9-fcd4-4c0d-81bf-78ad5f7feed2",
+                            ConcurrencyStamp = "45a7eb32-e0c5-4861-92fa-8e13cc152738",
                             Email = "Driver1@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -157,7 +157,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0a698d3d-6e3e-43d2-9fa6-058c826fffd2",
+                            SecurityStamp = "67d55e77-cf75-42ee-b296-4bfa7d53c609",
                             TwoFactorEnabled = false,
                             UserName = "Driver1"
                         },
@@ -165,7 +165,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "10ebb4a2-4078-4d38-9c1d-b71731e51813",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4cb9509f-4da6-4a2d-8d3a-3d5e0d1e8c15",
+                            ConcurrencyStamp = "6b0cd592-a11e-4dbf-9148-11d46798141a",
                             Email = "Driver2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -174,7 +174,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "21e144e8-c176-4f43-8c86-cb081dba0773",
+                            SecurityStamp = "621395ff-ea1f-4b66-af38-73b455506fe3",
                             TwoFactorEnabled = false,
                             UserName = "Driver2"
                         },
@@ -182,7 +182,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "a079a3f1-ddb0-4f6a-a3fb-952fa92c8951",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "86c128e8-03f4-499d-987f-d9d76cf7c4d3",
+                            ConcurrencyStamp = "ca1e0244-e302-43fe-9e30-0a4894ad1e2e",
                             Email = "Driver3@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -191,7 +191,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "13a78aba-40fc-419c-abf3-3c0bf9302ea2",
+                            SecurityStamp = "736d71bf-a241-472a-969c-58ce2abe852f",
                             TwoFactorEnabled = false,
                             UserName = "Driver3"
                         },
@@ -199,7 +199,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "69fab494-f64b-4e36-8202-43c8659d6942",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24f8f785-ade5-4da2-add6-1159ee2d3fd7",
+                            ConcurrencyStamp = "9b01d442-2be8-4acf-8a68-02c50e5a767a",
                             Email = "Driver4@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -208,7 +208,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce4c461d-cab9-4e68-a756-601777dabe3e",
+                            SecurityStamp = "fff115cf-4ff9-44d6-ba84-014ffed4c120",
                             TwoFactorEnabled = false,
                             UserName = "Driver4"
                         },
@@ -216,7 +216,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "8341a302-6b87-431b-a252-2ffcd90948a1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6546a42b-86ff-430c-a6c2-e500ab1ff76b",
+                            ConcurrencyStamp = "b7ba362d-a3f4-4df3-ad44-5cb3fa1e9b9d",
                             Email = "Driver5@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -225,7 +225,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9a77171d-dd6e-4d7c-9c0f-2e7c6ea0d64e",
+                            SecurityStamp = "7ef3a1e5-a2ad-4d03-bea4-b6dfb72adfe4",
                             TwoFactorEnabled = false,
                             UserName = "Driver5"
                         },
@@ -233,7 +233,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "f95361be-330d-4e79-b667-4981fd7503c7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "74722057-5841-474a-906d-e2b55891acb6",
+                            ConcurrencyStamp = "e7308a9b-e7f3-474d-8053-216fa79ffc39",
                             Email = "Driver6@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -242,7 +242,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0da28a75-8f22-4559-8dd3-2b6c8b04b9a9",
+                            SecurityStamp = "cf4c1bd0-3f4c-4291-b4c5-f92e12606fcd",
                             TwoFactorEnabled = false,
                             UserName = "Driver6"
                         },
@@ -250,7 +250,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "cc6c9526-f50c-4769-91b1-2b0b5bf73acf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bbb79818-d6f6-4209-86ae-4d56b3d6c738",
+                            ConcurrencyStamp = "2d8c8930-2b1d-4a42-acc1-0d1d550f723e",
                             Email = "Driver7@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -259,7 +259,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "185dab8c-8678-495f-b886-33fa2de5524c",
+                            SecurityStamp = "138c0e55-8454-416a-acc7-8359685d3032",
                             TwoFactorEnabled = false,
                             UserName = "Driver7"
                         },
@@ -267,7 +267,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "733ec01e-c84f-4c95-ab8f-d3f73d6b3661",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "06253658-2fc9-474a-b864-6ee093e17e1a",
+                            ConcurrencyStamp = "a0bf55ad-4a84-4b04-9143-0f88e6a8382a",
                             Email = "Driver8@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -276,7 +276,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "136040a8-1451-42eb-b611-2895ded7898d",
+                            SecurityStamp = "10c3fafa-e927-483b-aa11-c2e1b514a0e2",
                             TwoFactorEnabled = false,
                             UserName = "Driver8"
                         },
@@ -284,7 +284,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "b96da449-a77f-49b0-bc3e-01ce46dd991c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "96c28784-40f6-4edb-920d-fa493f71e261",
+                            ConcurrencyStamp = "f87c4f18-6476-498c-8b58-31cbb023fb8e",
                             Email = "Driver9@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -293,7 +293,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a05a3afc-a85b-44af-bf10-978d0e36fbb1",
+                            SecurityStamp = "4e24ef84-4ce4-4155-a2bb-b9afb1f695e2",
                             TwoFactorEnabled = false,
                             UserName = "Driver9"
                         },
@@ -301,7 +301,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "a0ee769b-5470-44a5-8529-2fa87d254f4a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ddb7d606-3ec7-4001-ae08-26d5b070dc49",
+                            ConcurrencyStamp = "8ebb81ce-319d-49dd-890e-455439a30ae6",
                             Email = "Driver10@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -310,7 +310,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c98cf535-7ba4-4812-b707-8aaa47db2b98",
+                            SecurityStamp = "f7b3b581-1a7b-43bc-9d5d-d59440e2ca8f",
                             TwoFactorEnabled = false,
                             UserName = "Driver10"
                         },
@@ -318,7 +318,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "db413fd2-ed42-4eb3-81cb-af1d0f5d34c1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "98e55d6e-df40-4586-b9a0-e7da83517f50",
+                            ConcurrencyStamp = "1b80729c-b58e-445f-8f2d-6991e5693e17",
                             Email = "Driver11@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -327,7 +327,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5fa345ef-b568-428a-8115-5132e64935b7",
+                            SecurityStamp = "f5708a8e-3e1b-4b07-8aa1-a4d4dda45a6b",
                             TwoFactorEnabled = false,
                             UserName = "Driver11"
                         },
@@ -335,7 +335,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "4b47560f-1a8e-451d-8088-e2d96df2deca",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "615e8a91-0c8c-493e-921a-112a77e5ca22",
+                            ConcurrencyStamp = "89512072-3fb5-4cca-8e4a-4e86cc36753a",
                             Email = "Driver12@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -344,7 +344,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a4181be4-1cc5-4990-b53f-b479a2fc912b",
+                            SecurityStamp = "7ecb0543-a121-4a3b-8bad-574fe21668b0",
                             TwoFactorEnabled = false,
                             UserName = "Driver12"
                         },
@@ -352,7 +352,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "c60ffa8f-57cb-4821-b0a0-5178d12bda71",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "41abe8bd-90fc-489d-bcb3-c07be9ff4d78",
+                            ConcurrencyStamp = "71bd2f16-3775-4c5a-97fc-767f32c91505",
                             Email = "Driver13@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -361,7 +361,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3cb1f5ba-10d5-4a15-9af0-a95e419d8b32",
+                            SecurityStamp = "21e1dc54-ed88-4c90-af11-eaffd0b12aaa",
                             TwoFactorEnabled = false,
                             UserName = "Driver13"
                         },
@@ -369,7 +369,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "9b915f3e-8ff0-40e1-af96-ed02561ba2b5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33b96833-6453-4248-966d-bc31af7a63c1",
+                            ConcurrencyStamp = "a7b0be59-a401-41bd-bb68-ca293bd6b3c9",
                             Email = "Driver14@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -378,7 +378,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e92d3f5-17db-40a1-b10e-7491c64b197e",
+                            SecurityStamp = "8084b3a9-0c11-401d-8211-ee4fe5c60aa6",
                             TwoFactorEnabled = false,
                             UserName = "Driver14"
                         },
@@ -386,7 +386,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "61db600d-6a31-4c49-9e4f-eff9621218d7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "418ff1cb-1013-4bf2-a9a2-73dbfa4cd877",
+                            ConcurrencyStamp = "1f97b319-2eda-4d21-943c-04e951033a91",
                             Email = "Driver15@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -395,7 +395,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "65f2d1c0-e19e-4a7d-aadb-d66b3ffa077f",
+                            SecurityStamp = "7faf3787-0518-4a49-8077-36ec39e279ae",
                             TwoFactorEnabled = false,
                             UserName = "Driver15"
                         },
@@ -403,7 +403,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "a31eabb3-ff8f-4d89-8750-d7d9a2431149",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79f00929-8f6d-4547-a748-6dc255b14511",
+                            ConcurrencyStamp = "13a2267f-ffa9-4b44-8963-74b80a89e410",
                             Email = "Driver16@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -412,7 +412,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "217c85e5-fc2c-4398-a534-c304b149ea7a",
+                            SecurityStamp = "773ac3f8-9b61-4714-abc9-90a68f6a90f2",
                             TwoFactorEnabled = false,
                             UserName = "Driver16"
                         },
@@ -420,7 +420,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "1947e428-e7f7-4b72-8333-259683d51737",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4b122e3b-a9d4-4676-9802-5a5645979fe3",
+                            ConcurrencyStamp = "43ce4f7d-8a38-4f4e-a716-7d4efc1fd5f2",
                             Email = "Driver17@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -429,7 +429,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6587efee-3af6-487e-88c7-cdd6a06531f9",
+                            SecurityStamp = "9b047a78-c99b-43c1-9d52-2a4980e7c471",
                             TwoFactorEnabled = false,
                             UserName = "Driver17"
                         },
@@ -437,7 +437,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "6ab33b1e-42a6-46c0-adf8-dc572a3a4d36",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d95b8be8-0859-445b-943a-dfa4950ef9cb",
+                            ConcurrencyStamp = "9c93f87c-42ab-4458-bb30-5c1fbcddcd3f",
                             Email = "Driver18@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -446,7 +446,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa285782-9dec-4bd9-95cc-c3cc5d8fcb87",
+                            SecurityStamp = "dba1f27d-4a50-4882-9e35-f87331aea476",
                             TwoFactorEnabled = false,
                             UserName = "Driver18"
                         },
@@ -454,7 +454,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "20260240-d81d-4eb5-9efa-6750cd5efd78",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63fe07ac-bf11-469e-80b4-e7f5e420f2a4",
+                            ConcurrencyStamp = "f742b2a6-efe7-49fd-a14a-9b17710e7ed6",
                             Email = "Driver19@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -463,7 +463,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64ea60e6-67dd-4bd5-ad0b-c60e51562ed3",
+                            SecurityStamp = "5dbe9a76-fb79-43d1-8c2b-c8366d649f6f",
                             TwoFactorEnabled = false,
                             UserName = "Driver19"
                         },
@@ -471,7 +471,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "c6cdde60-f783-4542-8f36-443c00cdf41f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f46aa40-3f90-40dd-911f-9131fa695c64",
+                            ConcurrencyStamp = "d7e502e7-e59e-4f77-9cd7-8a5f68bd3c04",
                             Email = "Driver20@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -480,7 +480,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "055d1837-3c4a-4bfa-b07d-3f360f8193d6",
+                            SecurityStamp = "a7860564-bcad-4c6c-b6c0-41b48ef13a1b",
                             TwoFactorEnabled = false,
                             UserName = "Driver20"
                         },
@@ -488,7 +488,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "1305c3a4-d78d-4698-9767-fb6f0be09c0b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08fa63df-cf15-4456-a261-a2da994abd87",
+                            ConcurrencyStamp = "d28ed7bf-534d-4ed5-987c-e0342aac36da",
                             Email = "Driver21@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -497,7 +497,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b75f4332-b550-4574-8af7-558eb451d20e",
+                            SecurityStamp = "b489b631-03e3-46f7-9944-303cfef9583d",
                             TwoFactorEnabled = false,
                             UserName = "Driver21"
                         },
@@ -505,7 +505,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "2ccb170d-598b-4202-86d0-2e30da515914",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30e9b597-6ba0-456c-a399-667853c364b1",
+                            ConcurrencyStamp = "f2eb1980-9df6-4f65-894c-3b9dc549ebee",
                             Email = "Driver22@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -514,7 +514,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "13cccd24-3cde-4b56-aeff-310c4a6b30c8",
+                            SecurityStamp = "5eb4c187-9a34-4edd-848a-e90d409d2bb1",
                             TwoFactorEnabled = false,
                             UserName = "Driver22"
                         },
@@ -522,7 +522,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "3ac4283c-46f2-412b-848d-abbef6f8f96d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "42b15026-69a1-47d0-b44b-e32e7bf41d68",
+                            ConcurrencyStamp = "9b87f436-2012-44ac-a6c2-c71df5732f05",
                             Email = "Driver23@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -531,7 +531,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "823860de-29c8-45e7-a37e-585254b3ea76",
+                            SecurityStamp = "d7ca5b4c-9eae-45c3-8a82-648d7738ac13",
                             TwoFactorEnabled = false,
                             UserName = "Driver23"
                         },
@@ -539,7 +539,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "2fcd9e91-89f7-48a9-8f0f-33c4af7e8d80",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "95dcfa29-c424-454c-818b-4ff4f9303569",
+                            ConcurrencyStamp = "94fc9266-4212-455f-a6ba-7c38cddcbde9",
                             Email = "Driver24@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -548,7 +548,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7045b62e-d13c-45d8-bccb-44ed0e5d93c4",
+                            SecurityStamp = "9eaf9e1c-a6f4-4e37-a56a-227019cdc0a9",
                             TwoFactorEnabled = false,
                             UserName = "Driver24"
                         },
@@ -556,7 +556,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "45289333-f686-4cc5-a2ed-20d3cb48901b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a60bc653-9911-4001-afed-7022beed3341",
+                            ConcurrencyStamp = "ffaee0a1-6c61-4077-b39d-22837b695f76",
                             Email = "Driver25@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -565,7 +565,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "08b7d9f5-fd81-4b06-b7e0-1cf4c28a4229",
+                            SecurityStamp = "6af5be54-c07d-406f-9293-a319426217df",
                             TwoFactorEnabled = false,
                             UserName = "Driver25"
                         },
@@ -573,7 +573,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "7119d1ad-6f54-421c-99ed-bd1ed7ff3a28",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c67678e-0345-4212-a434-6b0bc48e219d",
+                            ConcurrencyStamp = "6453a1b5-8825-4861-9c81-50969ad529c5",
                             Email = "Driver26@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -582,7 +582,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2bc45fc2-82c9-4888-bd07-b098aa055da7",
+                            SecurityStamp = "aabacca2-f752-4c54-8346-66b7f890c5eb",
                             TwoFactorEnabled = false,
                             UserName = "Driver26"
                         },
@@ -590,7 +590,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "e6d0209c-c4f2-4e25-891c-a653e14a21dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9abc9b36-785d-45bd-b7ed-d438db68c7aa",
+                            ConcurrencyStamp = "869b03e2-c303-4a47-836d-c848e0d1fcea",
                             Email = "Driver27@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -599,7 +599,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5592fdd5-66e9-450e-a307-7e1711f0a98a",
+                            SecurityStamp = "ccba95a9-896a-4f3a-8f54-2179cdea2af8",
                             TwoFactorEnabled = false,
                             UserName = "Driver27"
                         },
@@ -607,7 +607,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "8361dfdf-f686-45f4-a45c-7d83a347792d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36b9c0c4-dba4-4da1-9954-ad4b605943e8",
+                            ConcurrencyStamp = "4eb29ad4-e36e-4f81-91f4-29008900d119",
                             Email = "Driver28@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -616,7 +616,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1750af28-3acc-4cd2-ad50-263e989969c8",
+                            SecurityStamp = "343f1ff8-7692-45a1-ab4f-ea6ce523a995",
                             TwoFactorEnabled = false,
                             UserName = "Driver28"
                         },
@@ -624,7 +624,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "58efc192-1af9-4b71-ab9c-165c96593240",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0cdefc02-e9cd-4d02-b6c9-c3b9cc7d2c41",
+                            ConcurrencyStamp = "d87efa73-22c5-4892-a47b-7417d5406175",
                             Email = "Driver29@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -633,7 +633,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1fd03e95-7631-473f-8c64-5e3d9c25df95",
+                            SecurityStamp = "7f7f6eef-169d-4fa7-a3c7-75e60750fb98",
                             TwoFactorEnabled = false,
                             UserName = "Driver29"
                         },
@@ -641,7 +641,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "ed62cea4-f01a-4283-b098-642299b04776",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "183ec94d-784e-4027-bb1c-bad6c30752cb",
+                            ConcurrencyStamp = "c8766a33-5bbf-4eba-ae62-c91620c7f007",
                             Email = "Driver30@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -650,7 +650,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a4027bd9-6385-4202-8056-3285463eaa3f",
+                            SecurityStamp = "94ec17bc-b82e-47a0-8e19-4bd55091dbe1",
                             TwoFactorEnabled = false,
                             UserName = "Driver30"
                         },
@@ -658,7 +658,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "8e449921-33a6-494a-ae62-3de5b2d1f41c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "87b7dcae-b660-45c2-8318-198227e621aa",
+                            ConcurrencyStamp = "e830483d-8a52-497a-96f8-474b3d1e20da",
                             Email = "Driver31@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -667,7 +667,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "977efa46-da28-4525-94c6-e0f07806f885",
+                            SecurityStamp = "40beb29f-d85e-4a92-b6c4-1b10bec90803",
                             TwoFactorEnabled = false,
                             UserName = "Driver31"
                         },
@@ -675,7 +675,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "a83eeaef-cacf-4848-81c2-a1d5746dc2c8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4219c29b-0ac4-4cd3-a11a-4e58336073b8",
+                            ConcurrencyStamp = "83465586-96ff-4afa-a23b-1b4ac19a5b79",
                             Email = "Driver32@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -684,7 +684,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b59f449-23a8-433a-aea2-9dfd4f809631",
+                            SecurityStamp = "cd2bffb3-2ac1-4953-a998-95e4b9716c4b",
                             TwoFactorEnabled = false,
                             UserName = "Driver32"
                         },
@@ -692,7 +692,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "6304764a-9691-4fc9-8070-4b5f464c16dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8c58af84-77a2-4bf0-b605-f7d35874f905",
+                            ConcurrencyStamp = "64e10d7a-0939-4708-a395-f2bdcc8e329c",
                             Email = "Driver33@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -701,7 +701,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b6fb0f9a-a8b9-41d3-a256-91661e0814e1",
+                            SecurityStamp = "8d2391a3-d8af-435c-bf4e-ad51f3f02c1c",
                             TwoFactorEnabled = false,
                             UserName = "Driver33"
                         },
@@ -709,7 +709,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "bcd0a627-1e73-4d60-99bb-5fa4359d1c0d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff463637-82f0-44af-9420-a967b326932a",
+                            ConcurrencyStamp = "ea0a48aa-fa32-4c16-9849-0d271c212543",
                             Email = "Driver34@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -718,7 +718,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "465d9d2d-0905-47af-b303-3416a11bcd1f",
+                            SecurityStamp = "4f44992d-16c8-4144-96b7-3a28c5af56aa",
                             TwoFactorEnabled = false,
                             UserName = "Driver34"
                         },
@@ -726,7 +726,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "43f816d6-81e7-4ec8-9e7e-a90eb27c60c6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b4415093-8bf9-48e6-923b-e6f083ce396c",
+                            ConcurrencyStamp = "bd797435-f158-4f9a-bcaa-725047fec601",
                             Email = "Driver35@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -735,7 +735,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1fb3dea-6839-4c07-b9e4-8ce36d567f7d",
+                            SecurityStamp = "dcb28267-2e12-4f5f-9b10-e39089ea3a3b",
                             TwoFactorEnabled = false,
                             UserName = "Driver35"
                         },
@@ -743,7 +743,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "829c0f3d-5cc9-470e-a7da-e6f1186a7216",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c4b3b6e-635a-4100-afc8-67289e79d87c",
+                            ConcurrencyStamp = "285715d1-5aea-4796-bef3-b138a7d50916",
                             Email = "Driver36@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -752,7 +752,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b8fe6b44-e6a9-4ba1-93a2-ab3ab618fde4",
+                            SecurityStamp = "22fd6248-7e70-4ac2-bd86-fc5fb2f7c79b",
                             TwoFactorEnabled = false,
                             UserName = "Driver36"
                         },
@@ -760,7 +760,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "9a0f9ad5-2f92-4955-9275-d136728b51a7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba4e1a8b-469a-4b3b-90a0-e76b7f7e494a",
+                            ConcurrencyStamp = "a5c668ab-72b0-4ef9-baa5-0acad069fa2b",
                             Email = "Driver37@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -769,7 +769,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c7afa57-d2b5-4c07-aaa3-61a744cc9a4b",
+                            SecurityStamp = "d0f62916-5707-4915-80dd-4f31ba6e8b6b",
                             TwoFactorEnabled = false,
                             UserName = "Driver37"
                         },
@@ -777,7 +777,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "74a47e09-f97c-4e4b-ad51-3eed7fd6ea0d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "69f21cb8-6726-4bed-b387-2fd518a13860",
+                            ConcurrencyStamp = "65a7baf4-a6bb-408b-af2a-d5a32af66397",
                             Email = "Driver38@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -786,7 +786,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b08e89bb-2914-4940-babc-e7a936e94b61",
+                            SecurityStamp = "b6d438e5-aebf-4b95-b87e-62723d16b8e8",
                             TwoFactorEnabled = false,
                             UserName = "Driver38"
                         },
@@ -794,7 +794,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "5aa2d999-f820-46f7-a9bc-d16da40263f9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b5d2998-0a95-4be2-838c-9edd14d47a3a",
+                            ConcurrencyStamp = "be943250-efa8-4404-a63a-23298e86c2e6",
                             Email = "Driver39@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -803,7 +803,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b932ae7a-422a-4fc8-976f-049b2590c965",
+                            SecurityStamp = "0d86876c-17c4-4351-9711-634ef4da2ea0",
                             TwoFactorEnabled = false,
                             UserName = "Driver39"
                         },
@@ -811,7 +811,7 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = "06c4fa4f-f281-4375-a5a5-25f4aaa5fa09",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5839e5b-5741-41fe-ad19-a91085c92d15",
+                            ConcurrencyStamp = "087c2f8a-ce26-433f-a098-ab32572985a5",
                             Email = "Driver40@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
@@ -820,7 +820,7 @@ namespace GoBye.DAL.Migrations
                             PasswordHash = "Sm612147?",
                             PhoneNumber = "01093996245",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8b62e992-20c7-4dc6-a5c1-40d27259a8ad",
+                            SecurityStamp = "8b82a914-6a46-4c26-880d-b5d7fa6f1b23",
                             TwoFactorEnabled = false,
                             UserName = "Driver40"
                         });
@@ -876,7 +876,7 @@ namespace GoBye.DAL.Migrations
                             Id = 1,
                             Available = true,
                             BusClassId = 1,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "f0fd67a7-a8f6-42d1-924b-4ef2cbfbe7dd",
                             Model = "Mercedes",
@@ -888,7 +888,7 @@ namespace GoBye.DAL.Migrations
                             Id = 2,
                             Available = true,
                             BusClassId = 1,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "10ebb4a2-4078-4d38-9c1d-b71731e51813",
                             Model = "Mercedes",
@@ -900,7 +900,7 @@ namespace GoBye.DAL.Migrations
                             Id = 3,
                             Available = true,
                             BusClassId = 1,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "a079a3f1-ddb0-4f6a-a3fb-952fa92c8951",
                             Model = "Mercedes",
@@ -912,7 +912,7 @@ namespace GoBye.DAL.Migrations
                             Id = 4,
                             Available = true,
                             BusClassId = 1,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "69fab494-f64b-4e36-8202-43c8659d6942",
                             Model = "Mercedes",
@@ -924,7 +924,7 @@ namespace GoBye.DAL.Migrations
                             Id = 5,
                             Available = true,
                             BusClassId = 1,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "8341a302-6b87-431b-a252-2ffcd90948a1",
                             Model = "Mercedes",
@@ -936,7 +936,7 @@ namespace GoBye.DAL.Migrations
                             Id = 6,
                             Available = true,
                             BusClassId = 2,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "f95361be-330d-4e79-b667-4981fd7503c7",
                             Model = "Mercedes",
@@ -948,7 +948,7 @@ namespace GoBye.DAL.Migrations
                             Id = 7,
                             Available = true,
                             BusClassId = 2,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "cc6c9526-f50c-4769-91b1-2b0b5bf73acf",
                             Model = "Mercedes",
@@ -960,7 +960,7 @@ namespace GoBye.DAL.Migrations
                             Id = 8,
                             Available = true,
                             BusClassId = 2,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "733ec01e-c84f-4c95-ab8f-d3f73d6b3661",
                             Model = "Mercedes",
@@ -972,7 +972,7 @@ namespace GoBye.DAL.Migrations
                             Id = 9,
                             Available = true,
                             BusClassId = 2,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "b96da449-a77f-49b0-bc3e-01ce46dd991c",
                             Model = "Mercedes",
@@ -984,7 +984,7 @@ namespace GoBye.DAL.Migrations
                             Id = 10,
                             Available = true,
                             BusClassId = 2,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "a0ee769b-5470-44a5-8529-2fa87d254f4a",
                             Model = "Mercedes",
@@ -996,7 +996,7 @@ namespace GoBye.DAL.Migrations
                             Id = 11,
                             Available = true,
                             BusClassId = 3,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "db413fd2-ed42-4eb3-81cb-af1d0f5d34c1",
                             Model = "Mercedes",
@@ -1008,7 +1008,7 @@ namespace GoBye.DAL.Migrations
                             Id = 12,
                             Available = true,
                             BusClassId = 3,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "4b47560f-1a8e-451d-8088-e2d96df2deca",
                             Model = "Mercedes",
@@ -1020,7 +1020,7 @@ namespace GoBye.DAL.Migrations
                             Id = 13,
                             Available = true,
                             BusClassId = 3,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "c60ffa8f-57cb-4821-b0a0-5178d12bda71",
                             Model = "Mercedes",
@@ -1032,7 +1032,7 @@ namespace GoBye.DAL.Migrations
                             Id = 14,
                             Available = true,
                             BusClassId = 3,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "9b915f3e-8ff0-40e1-af96-ed02561ba2b5",
                             Model = "Mercedes",
@@ -1044,7 +1044,7 @@ namespace GoBye.DAL.Migrations
                             Id = 15,
                             Available = true,
                             BusClassId = 3,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "61db600d-6a31-4c49-9e4f-eff9621218d7",
                             Model = "Mercedes",
@@ -1056,67 +1056,7 @@ namespace GoBye.DAL.Migrations
                             Id = 16,
                             Available = true,
                             BusClassId = 4,
-                            Capacity = 14,
-                            CurrentBranch = "",
-                            DriverId = "a31eabb3-ff8f-4d89-8750-d7d9a2431149",
-                            Model = "Toyota",
-                            Number = 401,
-                            Year = "2023"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Available = true,
-                            BusClassId = 4,
-                            Capacity = 14,
-                            CurrentBranch = "",
-                            DriverId = "1947e428-e7f7-4b72-8333-259683d51737",
-                            Model = "Toyota",
-                            Number = 402,
-                            Year = "2023"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Available = true,
-                            BusClassId = 4,
-                            Capacity = 14,
-                            CurrentBranch = "",
-                            DriverId = "6ab33b1e-42a6-46c0-adf8-dc572a3a4d36",
-                            Model = "Toyota",
-                            Number = 403,
-                            Year = "2023"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Available = true,
-                            BusClassId = 4,
-                            Capacity = 14,
-                            CurrentBranch = "",
-                            DriverId = "20260240-d81d-4eb5-9efa-6750cd5efd78",
-                            Model = "Toyota",
-                            Number = 404,
-                            Year = "2023"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Available = true,
-                            BusClassId = 4,
-                            Capacity = 14,
-                            CurrentBranch = "",
-                            DriverId = "c6cdde60-f783-4542-8f36-443c00cdf41f",
-                            Model = "Toyota",
-                            Number = 405,
-                            Year = "2023"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Available = true,
-                            BusClassId = 5,
-                            Capacity = 50,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "1305c3a4-d78d-4698-9767-fb6f0be09c0b",
                             Model = "Mercedes",
@@ -1125,10 +1065,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 22,
+                            Id = 17,
                             Available = true,
-                            BusClassId = 5,
-                            Capacity = 50,
+                            BusClassId = 4,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "2ccb170d-598b-4202-86d0-2e30da515914",
                             Model = "Mercedes",
@@ -1137,10 +1077,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 23,
+                            Id = 18,
                             Available = true,
-                            BusClassId = 5,
-                            Capacity = 50,
+                            BusClassId = 4,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "3ac4283c-46f2-412b-848d-abbef6f8f96d",
                             Model = "Mercedes",
@@ -1149,10 +1089,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 24,
+                            Id = 19,
                             Available = true,
-                            BusClassId = 5,
-                            Capacity = 50,
+                            BusClassId = 4,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "2fcd9e91-89f7-48a9-8f0f-33c4af7e8d80",
                             Model = "Mercedes",
@@ -1161,10 +1101,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 25,
+                            Id = 20,
                             Available = true,
-                            BusClassId = 5,
-                            Capacity = 50,
+                            BusClassId = 4,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "45289333-f686-4cc5-a2ed-20d3cb48901b",
                             Model = "Mercedes",
@@ -1173,10 +1113,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 26,
+                            Id = 21,
                             Available = true,
-                            BusClassId = 6,
-                            Capacity = 50,
+                            BusClassId = 5,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "7119d1ad-6f54-421c-99ed-bd1ed7ff3a28",
                             Model = "Mercedes",
@@ -1185,10 +1125,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 27,
+                            Id = 22,
                             Available = true,
-                            BusClassId = 6,
-                            Capacity = 50,
+                            BusClassId = 5,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "e6d0209c-c4f2-4e25-891c-a653e14a21dd",
                             Model = "Mercedes",
@@ -1197,10 +1137,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 28,
+                            Id = 23,
                             Available = true,
-                            BusClassId = 6,
-                            Capacity = 50,
+                            BusClassId = 5,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "8361dfdf-f686-45f4-a45c-7d83a347792d",
                             Model = "Mercedes",
@@ -1209,10 +1149,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 29,
+                            Id = 24,
                             Available = true,
-                            BusClassId = 6,
-                            Capacity = 50,
+                            BusClassId = 5,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "58efc192-1af9-4b71-ab9c-165c96593240",
                             Model = "Mercedes",
@@ -1221,10 +1161,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 30,
+                            Id = 25,
                             Available = true,
-                            BusClassId = 6,
-                            Capacity = 50,
+                            BusClassId = 5,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "ed62cea4-f01a-4283-b098-642299b04776",
                             Model = "Mercedes",
@@ -1233,10 +1173,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 31,
+                            Id = 26,
                             Available = true,
-                            BusClassId = 7,
-                            Capacity = 50,
+                            BusClassId = 6,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "8e449921-33a6-494a-ae62-3de5b2d1f41c",
                             Model = "Mercedes",
@@ -1245,10 +1185,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 32,
+                            Id = 27,
                             Available = true,
-                            BusClassId = 7,
-                            Capacity = 50,
+                            BusClassId = 6,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "a83eeaef-cacf-4848-81c2-a1d5746dc2c8",
                             Model = "Mercedes",
@@ -1257,10 +1197,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 33,
+                            Id = 28,
                             Available = true,
-                            BusClassId = 7,
-                            Capacity = 50,
+                            BusClassId = 6,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "6304764a-9691-4fc9-8070-4b5f464c16dd",
                             Model = "Mercedes",
@@ -1269,10 +1209,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 34,
+                            Id = 29,
                             Available = true,
-                            BusClassId = 7,
-                            Capacity = 50,
+                            BusClassId = 6,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "bcd0a627-1e73-4d60-99bb-5fa4359d1c0d",
                             Model = "Mercedes",
@@ -1281,10 +1221,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 35,
+                            Id = 30,
                             Available = true,
-                            BusClassId = 7,
-                            Capacity = 50,
+                            BusClassId = 6,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "43f816d6-81e7-4ec8-9e7e-a90eb27c60c6",
                             Model = "Mercedes",
@@ -1293,10 +1233,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 36,
+                            Id = 31,
                             Available = true,
-                            BusClassId = 8,
-                            Capacity = 50,
+                            BusClassId = 7,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "829c0f3d-5cc9-470e-a7da-e6f1186a7216",
                             Model = "Mercedes",
@@ -1305,10 +1245,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 37,
+                            Id = 32,
                             Available = true,
-                            BusClassId = 8,
-                            Capacity = 50,
+                            BusClassId = 7,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "9a0f9ad5-2f92-4955-9275-d136728b51a7",
                             Model = "Mercedes",
@@ -1317,10 +1257,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 38,
+                            Id = 33,
                             Available = true,
-                            BusClassId = 8,
-                            Capacity = 50,
+                            BusClassId = 7,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "74a47e09-f97c-4e4b-ad51-3eed7fd6ea0d",
                             Model = "Mercedes",
@@ -1329,10 +1269,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 39,
+                            Id = 34,
                             Available = true,
-                            BusClassId = 8,
-                            Capacity = 50,
+                            BusClassId = 7,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "5aa2d999-f820-46f7-a9bc-d16da40263f9",
                             Model = "Mercedes",
@@ -1341,10 +1281,10 @@ namespace GoBye.DAL.Migrations
                         },
                         new
                         {
-                            Id = 40,
+                            Id = 35,
                             Available = true,
-                            BusClassId = 8,
-                            Capacity = 50,
+                            BusClassId = 7,
+                            Capacity = 49,
                             CurrentBranch = "",
                             DriverId = "06c4fa4f-f281-4375-a5a5-25f4aaa5fa09",
                             Model = "Mercedes",
@@ -1395,30 +1335,24 @@ namespace GoBye.DAL.Migrations
                         new
                         {
                             Id = 4,
-                            AveragePrice = "45 EGP - 230 EGP",
-                            Name = "GoMini"
-                        },
-                        new
-                        {
-                            Id = 5,
                             AveragePrice = "225 EGP - 265 EGP",
                             Name = "New Deluxe"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 5,
                             AveragePrice = "100 EGP - 180 EGP",
                             Name = "Economy"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 6,
                             AveragePrice = "130 EGP - 440 EGP",
                             Name = "Elite Business Class V"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 7,
                             AveragePrice = "500 EGP - 545 EGP",
                             Name = "Aero First Class"
                         });
@@ -1504,78 +1438,72 @@ namespace GoBye.DAL.Migrations
                         {
                             Id = 10,
                             BusClassId = 4,
-                            ImageURL = "https://go-bus.com/images/new-bus-classes/go-mini/2.jpg"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            BusClassId = 5,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/4.png"
                         },
                         new
                         {
-                            Id = 12,
-                            BusClassId = 5,
+                            Id = 11,
+                            BusClassId = 4,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/3.jpg"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BusClassId = 4,
+                            ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/2.jpg"
                         },
                         new
                         {
                             Id = 13,
                             BusClassId = 5,
-                            ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/2.jpg"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            BusClassId = 6,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/economic/4.png"
                         },
                         new
                         {
-                            Id = 15,
-                            BusClassId = 6,
+                            Id = 14,
+                            BusClassId = 5,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/economic/3.jpg"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BusClassId = 5,
+                            ImageURL = "https://go-bus.com/images/new-bus-classes/economic/2.jpg"
                         },
                         new
                         {
                             Id = 16,
                             BusClassId = 6,
-                            ImageURL = "https://go-bus.com/images/new-bus-classes/economic/2.jpg"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            BusClassId = 7,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/4.png"
                         },
                         new
                         {
-                            Id = 18,
-                            BusClassId = 7,
+                            Id = 17,
+                            BusClassId = 6,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/3.jpg"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BusClassId = 6,
+                            ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/2.jpg"
                         },
                         new
                         {
                             Id = 19,
                             BusClassId = 7,
-                            ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/2.jpg"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            BusClassId = 8,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/4.png"
                         },
                         new
                         {
-                            Id = 21,
-                            BusClassId = 8,
+                            Id = 20,
+                            BusClassId = 7,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/3.jpg"
                         },
                         new
                         {
-                            Id = 22,
-                            BusClassId = 8,
+                            Id = 21,
+                            BusClassId = 7,
                             ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/2.jpg"
                         });
                 });
@@ -2495,11 +2423,16 @@ namespace GoBye.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal");

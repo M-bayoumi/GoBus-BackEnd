@@ -20,6 +20,12 @@ namespace GoBye.DAL.Repos.ApplicationUserRepo
             _appDbContext = appDbContext;
             _userManager = userManager;
         }
+        public async Task<IEnumerable<ApplicationUser>?> GetAllAsync()
+        {
+            return await _appDbContext
+                .ApplicationUsers
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<ApplicationUser>?> GetAllUsersWithDetailsAsync()
         {

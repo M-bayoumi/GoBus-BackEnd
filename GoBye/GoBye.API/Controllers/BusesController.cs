@@ -1,4 +1,5 @@
-﻿using GoBye.BLL.Dtos.BusDtos;
+﻿using GoBye.BLL.Dtos.BusClassDtos;
+using GoBye.BLL.Dtos.BusDtos;
 using GoBye.BLL.Managers.BusManagers;
 using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,14 +23,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithBusClassAsync()
         {
-            IEnumerable<BusReadDto>? busReadDtos = await _busManager.GetAllWithBusClassAsync();
+            Response response = await _busManager.GetAllWithBusClassAsync();
 
-            if (busReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(busReadDtos);
+                return Ok(response);
             }
 
-            return NotFound("There is no Buses");
+            return NotFound(response);
         }
         #endregion
 
@@ -38,14 +39,14 @@ namespace GoBye.API.Controllers
         [HttpGet("ClassId/{id:int}")]
         public async Task<IActionResult> GetAllByBusClassIdAsync(int id)
         {
-            IEnumerable<BusReadDto>? busReadDtos = await _busManager.GetAllByBusClassIdAsync(id);
+            Response response = await _busManager.GetAllByBusClassIdAsync(id);
 
-            if (busReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(busReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"Buses with BusClassId ({id}) are not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -54,14 +55,14 @@ namespace GoBye.API.Controllers
         [HttpGet("Available")]
         public async Task<IActionResult> GetAllAvailableBusesAsync()
         {
-            IEnumerable<BusAvailableDto>? busAvailableDtos = await _busManager.GetAllAvailableBusesAsync();
+            Response response = await _busManager.GetAllAvailableBusesAsync();
 
-            if (busAvailableDtos is not null)
+            if (response.Success)
             {
-                return Ok(busAvailableDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Available Buses are found");
+            return NotFound(response);
         }
         #endregion
 
@@ -70,14 +71,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdWithBusClassAsync(int id)
         {
-            BusReadDto? busReadDtos = await _busManager.GetByIdWithBusClassAsync(id);
+            Response response = await _busManager.GetByIdWithBusClassAsync(id);
 
-            if (busReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(busReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"Bus with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -88,15 +89,16 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _busManager.AddAsync(busAddDto);
+                Response response = await _busManager.AddAsync(busAddDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Created");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
-            
-            return BadRequest(busAddDto); 
+            return BadRequest(busAddDto);
         }
         #endregion
 
@@ -107,14 +109,16 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _busManager.UpdateAsync(id, busUpdateDto);
+                Response response = await _busManager.UpdateAsync(id, busUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
+                return BadRequest(response);
+
             }
-           
+
             return BadRequest(busUpdateDto);
         }
         #endregion
@@ -124,14 +128,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _busManager.DeleteAsync(id);
+            Response response = await _busManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"BusClass with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 

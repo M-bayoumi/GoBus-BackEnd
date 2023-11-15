@@ -11,6 +11,6 @@ namespace GoBye.BLL.Dtos.TicketDtos
     {
         public int Id { get; set; }
         public int SeatNumber { get; set; }
-        public int ReservationNumber { get; set; }
+        public int ReservationId { get; set; }
     }
 }

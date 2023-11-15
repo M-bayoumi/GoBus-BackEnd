@@ -62,6 +62,7 @@ namespace GoBye.BLL.Managers.EndBranchManagers
                     Name = x.Name,
                     Address = x.Address,
                     Phone = x.Phone,
+                    DestinationName =x.Destination.Name
                 });
                 return _unitOfWork.Response(true, data, null);
 
@@ -127,7 +128,15 @@ namespace GoBye.BLL.Managers.EndBranchManagers
                 Phone = endBranchAddDto.Phone,
                 DestinationId = endBranchAddDto.DestinationId,
             };
+            StartBranch startBranch = new StartBranch
+            {
+                Name = endBranchAddDto.Name,
+                Address = endBranchAddDto.Address,
+                Phone = endBranchAddDto.Phone,
+                DestinationId = endBranchAddDto.DestinationId,
+            };
             await _unitOfWork.EndBranchRepo.AddAsync(endBranch);
+            await _unitOfWork.StartBranchRepo.AddAsync(startBranch);
             bool result = await _unitOfWork.SaveChangesAsync() > 0;
             if (result)
             {
@@ -141,9 +150,15 @@ namespace GoBye.BLL.Managers.EndBranchManagers
         #region UpdateAsync
         public async Task<Response> UpdateAsync(int id, EndBranchUpdateDto endBranchUpdateDto)
         {
+            StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
             EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
-            if (endBranch is not null)
+            if (startBranch is not null && endBranch is not null)
             {
+                startBranch.Name = endBranchUpdateDto.Name;
+                startBranch.Address = endBranchUpdateDto.Address;
+                startBranch.Phone = endBranchUpdateDto.Phone;
+                startBranch.DestinationId = endBranchUpdateDto.DestinationId;
+
                 endBranch.Name = endBranchUpdateDto.Name;
                 endBranch.Address = endBranchUpdateDto.Address;
                 endBranch.Phone = endBranchUpdateDto.Phone;
@@ -163,9 +178,11 @@ namespace GoBye.BLL.Managers.EndBranchManagers
         public async Task<Response> DeleteAsync(int id)
         {
             EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
-            if (endBranch is not null)
+            StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
+            if (endBranch is not null && startBranch is not null)
             {
                 _unitOfWork.EndBranchRepo.Delete(endBranch);
+                _unitOfWork.StartBranchRepo.Delete(startBranch);
                 bool result = await _unitOfWork.SaveChangesAsync() > 0;
                 if (result)
                 {

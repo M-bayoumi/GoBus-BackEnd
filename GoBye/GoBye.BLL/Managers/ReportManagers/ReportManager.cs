@@ -54,19 +54,23 @@ namespace GoBye.BLL.Managers.ReportManagers
         #region GetAllByUserIdAsync
         public async Task<Response> GetAllByUserIdAsync(string id)
         {
-            IEnumerable<Report>? reports = await _unitOfWork.ReportRepo.GetAllAsync();
+            IEnumerable<Report>? reports = await _unitOfWork.ReportRepo.GetAllWithUserInfoAsync();
 
             if (reports is not null)
             {
                 IEnumerable<Report>? userReports = reports.Where(x=>x.UserId == id).ToList();
                 if (userReports is not null)
                 {
-                    var data = userReports.Select(x => new ReportUserDto
+                    var data = userReports.Select(x => new ReportDetailsDto
                     {
                         Id = x.Id,
                         ReservationNumber = x.ReservationNumber,
                         MessageTitle = x.MessageTitle,
                         MessageContent = x.MessageContent,
+                        UserId= x.User.Id!,
+                        UserName = x.User.UserName!,
+                        UserEmail = x.User.Email!,
+                        UserPhone = x.User?.PhoneNumber!,
                     });
                     return _unitOfWork.Response(true, data, null);
                 }

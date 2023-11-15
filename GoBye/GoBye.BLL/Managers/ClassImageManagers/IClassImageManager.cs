@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.ClassImageDto;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace GoBye.BLL.Managers.ClassImageManagers
 {
     public interface IClassImageManager
     {
-        Task<IEnumerable<ClassImageReadDto>?> GetAllAsync();
-        Task<IEnumerable<ClassImageReadDto>?> GetAllByBusClassIdAsync(int id);
-        Task<ClassImageReadDto?> GetByIdAsync(int id);
-        Task<bool> AddAsync(ClassImageAddDto classImageAddDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllAsync();
+        Task<Response> GetAllByBusClassIdAsync(int id);
+        Task<Response> GetByIdAsync(int id);
+        Task<Response> AddAsync(ClassImageAddDto classImageAddDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

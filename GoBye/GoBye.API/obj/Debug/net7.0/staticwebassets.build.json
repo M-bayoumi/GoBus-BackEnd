@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "zHfOppsqGebyZXe/NKa4LtDK37TRIBlg3F8+nxAr1Xo=",
+  "Hash": "jzOUCaZKF9fbkIPEA7FWlx2kY3yptFfWhhbw81q+mbE=",
   "Source": "GoBye.API",
   "BasePath": "_content/GoBye.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "GoBye.API\\wwwroot",
+      "Source": "GoBye.API",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\2c3af5da-fd3c-4e10-a975-b309a42d271f_Photo.jpeg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/2c3af5da-fd3c-4e10-a975-b309a42d271f_Photo.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\2c3af5da-fd3c-4e10-a975-b309a42d271f_Photo.jpeg"
+    }
+  ]
 }

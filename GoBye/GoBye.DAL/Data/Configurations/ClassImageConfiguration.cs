@@ -87,32 +87,24 @@ namespace GoBye.DAL.Data.Configurations
                 },
                 #endregion
 
-                #region GoMini Images
-                new ClassImage
-                {
-                    Id = 10,
-                    BusClassId =4,
-                    ImageURL = "https://go-bus.com/images/new-bus-classes/go-mini/2.jpg",
-                },
-                #endregion
 
                 #region New Deluxe Images
                 new ClassImage
                 {
-                    Id = 11,
-                    BusClassId =5,
+                    Id = 10,
+                    BusClassId =4,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/4.png",
                 },
                 new ClassImage
                 {
-                    Id = 12,
-                    BusClassId =5,
+                    Id = 11,
+                    BusClassId =4,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/3.jpg",
                 },
                 new ClassImage
                 {
-                    Id = 13,
-                    BusClassId =5,
+                    Id = 12,
+                    BusClassId =4,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/new-deluxe/2.jpg",
                 },
                 #endregion
@@ -120,20 +112,20 @@ namespace GoBye.DAL.Data.Configurations
                 #region Economy Images
                 new ClassImage
                 {
-                    Id = 14,
-                    BusClassId =6,
+                    Id = 13,
+                    BusClassId =5,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/economic/4.png",
                 },
                 new ClassImage
                 {
-                    Id = 15,
-                    BusClassId =6,
+                    Id = 14,
+                    BusClassId =5,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/economic/3.jpg",
                 },
                 new ClassImage
                 {
-                    Id = 16,
-                    BusClassId =6,
+                    Id = 15,
+                    BusClassId =5,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/economic/2.jpg",
                 },
                 #endregion
@@ -141,20 +133,20 @@ namespace GoBye.DAL.Data.Configurations
                 #region Elite Business Class V Images
                 new ClassImage
                 {
-                    Id = 17,
-                    BusClassId =7,
+                    Id = 16,
+                    BusClassId =6,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/4.png",
                 },
                 new ClassImage
                 {
-                    Id = 18,
-                    BusClassId =7,
+                    Id = 17,
+                    BusClassId =6,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/3.jpg",
                 },
                 new ClassImage
                 {
-                    Id = 19,
-                    BusClassId =7,
+                    Id = 18,
+                    BusClassId =6,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/elite-plus-plus/2.jpg",
                 },
                 #endregion
@@ -162,20 +154,20 @@ namespace GoBye.DAL.Data.Configurations
                 #region Aero First Class Images
                 new ClassImage
                 {
-                    Id = 20,
-                    BusClassId =8,
+                    Id = 19,
+                    BusClassId =7,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/4.png",
                 },
                 new ClassImage
                 {
-                    Id = 21,
-                    BusClassId =8,
+                    Id = 20,
+                    BusClassId =7,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/3.jpg",
                 },
                 new ClassImage
                 {
-                    Id = 22,
-                    BusClassId =8,
+                    Id = 21,
+                    BusClassId =7,
                     ImageURL = "https://go-bus.com/images/new-bus-classes/aero-class/2.jpg",
                 },
                 #endregion

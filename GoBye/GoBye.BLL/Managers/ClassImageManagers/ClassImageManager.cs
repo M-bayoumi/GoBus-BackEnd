@@ -21,62 +21,67 @@ namespace GoBye.BLL.Managers.ClassImageManagers
 
 
         #region GetAllAsync
-        public async Task<IEnumerable<ClassImageReadDto>?> GetAllAsync()
+        public async Task<Response> GetAllAsync()
         {
             IEnumerable<ClassImage>? classImages = await _unitOfWork.ClassImageRepo.GetAllAsync();
             if(classImages is not null)
             {
-                return classImages.Select(x => new ClassImageReadDto
+                var data =  classImages.Select(x => new ClassImageReadDto
                 {
                     Id = x.Id,
                     ImageURL = x.ImageURL,
                     BusClassId = x.BusClassId
                 });
+                return _unitOfWork.Response(true, data, null);
             }
-            return null;
+
+            return _unitOfWork.Response(false, null, "There is no ClassImages");
         }
         #endregion
 
 
         #region GetAllByBusClassIdAsync
-        public async Task<IEnumerable<ClassImageReadDto>?> GetAllByBusClassIdAsync(int id)
+        public async Task<Response> GetAllByBusClassIdAsync(int id)
         {
             IEnumerable<ClassImage>? classImages = await _unitOfWork.ClassImageRepo.GetAllByBusClassIdAsync(id);
             if (classImages is not null)
             {
-                return classImages.Select(x => new ClassImageReadDto
+                var data = classImages.Select(x => new ClassImageReadDto
                 {
                     Id = x.Id,
                     ImageURL = x.ImageURL,
                     BusClassId = x.BusClassId
                 });
+                return _unitOfWork.Response(true, data, null);
             }
-            return null;
+
+            return _unitOfWork.Response(false, null, "There is no ClassImages");
         }
         #endregion
 
 
         #region GetByIdAsync
-        public async Task<ClassImageReadDto?> GetByIdAsync(int id)
+        public async Task<Response> GetByIdAsync(int id)
         {
             ClassImage? classImage = await _unitOfWork.ClassImageRepo.GetByIdAsync(id);
             if (classImage is not null)
             {
-                ClassImageReadDto classImageReadDto = new ClassImageReadDto
+                var data = new ClassImageReadDto
                 {
                     Id = classImage.Id,
                     ImageURL = classImage.ImageURL,
                     BusClassId = classImage.BusClassId
                 };
-                return classImageReadDto;
+                return _unitOfWork.Response(true, data, null);
             }
-            return null;
+
+            return _unitOfWork.Response(false, null, $"ClassImages is not found");
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(ClassImageAddDto classImageAddDto)
+        public async Task<Response> AddAsync(ClassImageAddDto classImageAddDto)
         {
             ClassImage classImage = new ClassImage
             {
@@ -84,21 +89,32 @@ namespace GoBye.BLL.Managers.ClassImageManagers
                 ImageURL = classImageAddDto.ImageURL
             };
             await _unitOfWork.ClassImageRepo.AddAsync(classImage);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The ClassImage has been added successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to add ClassImage");
         }
         #endregion
 
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             ClassImage? classImage = await _unitOfWork.ClassImageRepo.GetByIdAsync(id);
-            if(classImage is not null)
+            if (classImage is not null)
             {
                 _unitOfWork.ClassImageRepo.Delete(classImage);
-
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The classImage has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete classImage");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"classImage is not found");
         }
         #endregion
     }

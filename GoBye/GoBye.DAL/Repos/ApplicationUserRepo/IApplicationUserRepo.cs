@@ -10,6 +10,7 @@ namespace GoBye.DAL.Repos.ApplicationUserRepo
 {
     public interface IApplicationUserRepo
     {
+        Task<IEnumerable<ApplicationUser>?> GetAllAsync();
         Task<IEnumerable<ApplicationUser>?> GetAllUsersWithDetailsAsync();
         Task<IEnumerable<ApplicationUser>?> GetAllDriversWithDetailsAsync();
         Task<IEnumerable<ApplicationUser>?> GetAllByRoleAsync(string roleId);

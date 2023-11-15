@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.ReservationDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace GoBye.BLL.Managers.ReservationManagers
 {
     public interface IReservationManager
     {
-        Task<IEnumerable<ReservationDetailsDto>?> GetAllWithTripDetailsAsync();
-        Task<IEnumerable<ReservationReadDto>?> GetAllByTripIdAsync(int id);
-        Task<IEnumerable<ReservationDetailsDto>?> GetAllWithTripDetailsByUserIdAsync(string id);
-        Task<ReservationDetailsDto?> GetByIdWithTripDetailsAsync(int id);
-        Task<bool> AddAsync(ReservationAddDto reservationAddDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllWithTripDetailsAsync();
+        Task<Response> GetAllByTripIdAsync(int id);
+        Task<Response> GetAllWithTripDetailsByUserIdAsync(string id);
+        Task<Response> GetByIdWithTripDetailsAsync(int id);
+        Task<Response> AddAsync(ReservationAddDto reservationAddDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

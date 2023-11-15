@@ -36,6 +36,31 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
             _configuration = configuration;
         }
 
+        #region GetAllUsersAsync
+        public async Task<Response> GetAllUsersAsync()
+        {
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllUsersWithDetailsAsync();
+            if (applicationUsers is not null)
+            {
+                var data = applicationUsers.Select(x => new UserReadDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserName = x.UserName!,
+                    Email = x.Email!,
+                    PhoneNumber = x.PhoneNumber!,
+   
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+            return _unitOfWork.Response(false, null, "There is no Users found");
+
+        }
+        #endregion
+
+
         #region GetAllUsersWithDetailsAsync
         public async Task<Response> GetAllUsersWithDetailsAsync()
         {
@@ -52,7 +77,6 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     ReservationUserDtos = x.Reservations.Select(y => new ReservationUserDto
                     {
                         Id = y.Id,
-                        Number = y.Number,
                         Quantity = y.Quantity,
                         TotalPrice = y.TotalPrice,
                         Date = y.Date,
@@ -115,7 +139,6 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                             ReservationReadDtos = y.Reservations.Select(z => new ReservationReadDto
                             {
                                 Id = z.Id,
-                                Number = z.Number,
                                 Quantity = z.Quantity,
                                 UserName = z.User.UserName!,
                                 PhoneNumber = z.User.PhoneNumber!,
@@ -140,6 +163,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         public async Task<Response> GetAllByRoleAsync(string roleId)
         {
             IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllByRoleAsync(roleId);
+            var role = await _unitOfWork.ApplicationRoleRepo.GetByIdAsync(roleId);
             if (applicationUsers is not null)
             {
                 var data = applicationUsers.Select(x => new UserReadDto
@@ -153,7 +177,11 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 return _unitOfWork.Response(true, data, null);
 
             }
-            return _unitOfWork.Response(false, null, $"There is no Users found With RoleId ({roleId})");
+            if(role is not null)
+            {
+                return _unitOfWork.Response(false, null, $"There is no Users found With Role ({role.Name})");
+            }
+            return _unitOfWork.Response(false, null, "InValid Role");
 
         }
         #endregion
@@ -175,7 +203,6 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     ReservationUserDtos = applicationUser.Reservations.Select(y => new ReservationUserDto
                     {
                         Id = y.Id,
-                        Number = y.Number,
                         Quantity = y.Quantity,
                         TotalPrice = y.TotalPrice,
                         Date = y.Date,
@@ -197,7 +224,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 return _unitOfWork.Response(true, data, null);
 
             }
-            return _unitOfWork.Response(false, null, $"User with Id ({id}) not found");
+            return _unitOfWork.Response(false, null, $"User not found");
 
         }
         #endregion
@@ -238,7 +265,6 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                             ReservationReadDtos = y.Reservations.Select(z=> new ReservationReadDto
                             {
                                 Id= z.Id,
-                                Number =z.Number,
                                 Quantity =z.Quantity,
                                 UserName = z.User.UserName!,
                                 PhoneNumber = z.User.PhoneNumber!
@@ -251,13 +277,13 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 return _unitOfWork.Response(true, data, null);
 
             }
-            return _unitOfWork.Response(false, null, $"Driver with Id ({id}) not found");
+            return _unitOfWork.Response(false, null, $"Driver not found");
 
         }
         #endregion
 
 
-        #region GetByIdAsync xxx
+        #region GetByIdAsync
         public async Task<Response> GetByIdAsync(string id)
         {
             ApplicationUser? applicationUser = await _unitOfWork.ApplicationUserRepo.GetByIdAsync(id);
@@ -265,6 +291,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
             {
                 var data = new UserReadDto
                 {
+                    Id = applicationUser.Id,
                     FirstName = applicationUser.FirstName,
                     LastName = applicationUser.LastName,
                     UserName = applicationUser.UserName!,
@@ -275,7 +302,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 return _unitOfWork.Response(true, data, null);
 
             }
-            return _unitOfWork.Response(false, null, $"User with Id ({id}) not found");
+            return _unitOfWork.Response(false, null, $"User not found");
 
         }
         #endregion
@@ -339,32 +366,36 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 }
 
             }
-            return _unitOfWork.Response(false, null, $"UserName with Id ({applicationUser!.Id}) failed to Added");
+            return _unitOfWork.Response(false, null, $"User failed to Added");
         }
         #endregion
 
-        #region CheckUserNameAsync
-        public async Task<Response> CheckUserNameAsync(string userName)
+        #region GetAllUserNamesAsync
+        public async Task<Response> GetAllUserNamesAsync()
         {
-            ApplicationUser? user = await _userManager.FindByNameAsync(userName);
-            if(user is not null)
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllAsync();
+
+            if(applicationUsers is not null)
             {
-                return _unitOfWork.Response(false, null, $"UserName ({userName}) is already token");
+                var data = applicationUsers.Select(x=>x.UserName).ToList();
+                return _unitOfWork.Response(true, data, null);
             }
-            return _unitOfWork.Response(true, null, $"UserName ({userName}) is valid");
+            return _unitOfWork.Response(false, null, $"there is no usernames");
 
         }
         #endregion
 
-        #region CheckEmailAsync
-        public async Task<Response> CheckEmailAsync(string email)
+        #region GetAllEmailsAsync
+        public async Task<Response> GetAllEmailsAsync()
         {
-            ApplicationUser? user = await _userManager.FindByEmailAsync(email);
-            if (user is not null)
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllAsync();
+
+            if (applicationUsers is not null)
             {
-                return _unitOfWork.Response(false, null, $"Email ({email}) is already token");
+                var data = applicationUsers.Select(x => x.Email).ToList();
+                return _unitOfWork.Response(true, data, null);
             }
-            return _unitOfWork.Response(true, null, $"Email ({email}) is valid");
+            return _unitOfWork.Response(false, null, $"there is no emails");
 
         }
         #endregion
@@ -372,19 +403,19 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         #region LoginAsync
         public async Task<Response> LoginAsync(LoginDto loginDto)
         {
-            ApplicationUser? user = await _userManager.FindByNameAsync(loginDto.UserName);
+            ApplicationUser? user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user is not null)
             {
+                var roles = await _userManager.GetRolesAsync(user);
                 bool found = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-                if (found)
+                if (found && roles.Contains(loginDto.Role))
                 {
                     var claims = new List<Claim>();
 
                     claims.Add(new Claim(ClaimTypes.Name, user.UserName!));
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                     claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-                    var roles = await _userManager.GetRolesAsync(user);
                     foreach (var role in roles)
                     {
                         claims.Add(new Claim(ClaimTypes.Role, role));
@@ -401,23 +432,25 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                         issuer: _configuration["JWT:Issuer"],
                         audience: _configuration["JWT:Audience"],
                         claims: claims,
-                        expires: DateTime.Now.AddHours(1),
+                        expires: loginDto.RememberMe? DateTime.Now.AddDays(15):DateTime.Now.AddMinutes(20),
                         signingCredentials: signingCred
                         );
 
                     return _unitOfWork.Response(true, new
                         {
                             token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                            expiration = jwtSecurityToken.ValidTo
+                            expiration = jwtSecurityToken.ValidTo,
+                            roles = roles
                         },
-                        $"{user.UserName} is authorized");
+                        $"{user.Email} is authorized");
 
                 }
             }
-            return _unitOfWork.Response(false, null, $"{user!.UserName} is not authorized");
+            return _unitOfWork.Response(false, null, $"Email or password is not valid");
 
         }
         #endregion
+
 
 
         #region UpdateAsync
@@ -439,7 +472,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 }
 
             }
-            return _unitOfWork.Response(false, null, $"{applicationUser!.UserName} with Id ({id}) not found");
+            return _unitOfWork.Response(false, null, $"User not found");
         }
         #endregion
 
@@ -458,7 +491,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 }
                 return _unitOfWork.Response(false, null, $"Failed to delete User with id ({id})");
             }
-            return _unitOfWork.Response(false, null, $"User with id ({id}) is not found");
+            return _unitOfWork.Response(false, null, $"User not found");
         }
         #endregion
     }

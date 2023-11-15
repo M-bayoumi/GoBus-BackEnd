@@ -2,6 +2,7 @@
 using GoBye.BLL.Managers.ApplicationRoleManagers;
 using GoBye.DAL.Data.Models;
 using GoBye.DAL.Repos.ApplicationRoleRepo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllAsync
         [HttpGet]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllAsync()
         {
             Response response  = await _applicationRoleManager.GetAllAsync();
@@ -39,6 +41,7 @@ namespace GoBye.API.Controllers
 
         #region GetByIdAsync
         [HttpGet("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetByIdAsync(string id)
         {
             Response response = await _applicationRoleManager.GetByIdAsync(id);
@@ -56,6 +59,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync(ApplicationRoleAddDto applicationRoleAddDto)
         {
             if (ModelState.IsValid)
@@ -77,6 +81,7 @@ namespace GoBye.API.Controllers
 
         #region UpdateAsync
         [HttpPut("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync(string id, ApplicationRoleUpdateDto applicationRoleUpdateDto)
         {
             if (ModelState.IsValid)
@@ -98,6 +103,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(string id)
         {
             Response response = await _applicationRoleManager.DeleteAsync(id);

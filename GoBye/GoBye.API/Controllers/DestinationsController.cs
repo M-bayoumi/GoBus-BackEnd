@@ -5,6 +5,9 @@ using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace GoBye.API.Controllers
 {
@@ -13,14 +16,16 @@ namespace GoBye.API.Controllers
     public class DestinationsController : ControllerBase
     {
         private readonly IDestinationManager _destinationManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DestinationsController(IDestinationManager destinationManager)
+        public DestinationsController(IDestinationManager destinationManager, IWebHostEnvironment webHostEnvironment)
         {
             _destinationManager = destinationManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
-        
+
 
         #region GetAllAsync
         [HttpGet]
@@ -69,7 +74,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
+        /*
         #region AddAsync
         [HttpPost]
         public async Task<IActionResult> AddAsync(DestinationAddDto destinationAddDto)
@@ -85,9 +90,60 @@ namespace GoBye.API.Controllers
 
             return BadRequest(destinationAddDto);
         }
-    
-        #endregion
 
+        #endregion
+        */
+
+
+      
+        [HttpPost]
+        public async Task<IActionResult> AddAsync([FromForm] IFormFile file, [FromForm] string name)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file");
+            }
+
+            string folderPath;
+
+            if (!Directory.Exists(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images")))
+            {
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images"));
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+
+
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            string filePath = Path.Combine(folderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            var imageUrl = "https://localhost:44331/Images/" + uniqueFileName;
+
+            var destinationAddDto = new DestinationAddDto
+            {
+                Name = name,
+                ImageURL = imageUrl
+            };
+
+
+            Response response = await _destinationManager.AddAsync(destinationAddDto);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+        
+            return BadRequest(response);
+
+        }
+        
 
         #region UpdateAsync
         [HttpPut("{id:int}")]

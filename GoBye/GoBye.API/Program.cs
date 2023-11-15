@@ -42,6 +42,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.FileProviders;
+using System.Security.Claims;
+using GoBye.BLL.Managers.PaymentManagers;
+using Microsoft.AspNetCore.Http.Features;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +62,13 @@ builder.Services.AddHangfireServer();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#endregion
+
+#region Files Service
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = long.MaxValue;
+});
 #endregion
 
 
@@ -113,6 +124,7 @@ builder.Services.AddScoped<IStartBranchManager, StartBranchManager>();
 builder.Services.AddScoped<ITermManager, TermManager>();
 builder.Services.AddScoped<ITicketManager, TicketManager>();
 builder.Services.AddScoped<ITripManager, TripManager>();
+builder.Services.AddScoped<IPaymentManager, PaymentManager>();
 #endregion
 
 
@@ -155,8 +167,31 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)),
     };
+});
+
+
+#endregion
+
+#region Authorization
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ForUser", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "User");
+    });
+
+    options.AddPolicy("ForAdmin", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "Admin");
+    });
+
+    options.AddPolicy("ForDriver", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "Driver");
+    });
 });
 
 
@@ -177,6 +212,7 @@ app.UseHangfireDashboard();
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAllDomains");
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();

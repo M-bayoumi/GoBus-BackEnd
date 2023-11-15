@@ -2,11 +2,14 @@
 using GoBye.BLL.Dtos.ApplicationUserDtos;
 using GoBye.BLL.Managers.ApplicationUserManager;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Data;
+using System.Security.Claims;
 using System.Text;
 
 namespace GoBye.API.Controllers
@@ -22,10 +25,27 @@ namespace GoBye.API.Controllers
             _applicationUserManager = applicationUserManager;
         }
 
+        #region GetAllUsersAsync
+        [HttpGet]
+        [Route("/api/users")]
+        public async Task<IActionResult> GetAllUsersAsync()
+        {
+            Response response = await _applicationUserManager.GetAllUsersAsync();
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+
+        }
+
+        #endregion
 
         #region GetAllUsersWithDetailsAsync
         [HttpGet]
-        [Route("/api/users")]
+        [Route("/api/users/details")]
         public async Task<IActionResult> GetAllUsersWithDetailsAsync()
         {
             Response response = await _applicationUserManager.GetAllUsersWithDetailsAsync();
@@ -43,7 +63,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllDriversWithDetailsAsync
         [HttpGet]
-        [Route("/api/drivers")]
+        [Route("/api/drivers/details")]
         public async Task<IActionResult> GetAllDriversWithDetailsAsync()
         {
             Response response = await _applicationUserManager.GetAllDriversWithDetailsAsync();
@@ -155,10 +175,11 @@ namespace GoBye.API.Controllers
         #endregion
 
         #region CheckUserNameAsync
-        [HttpGet("userName/{username}")]
-        public async Task<IActionResult> CheckUserNameAsync(string userName)
+        [HttpGet]
+        [Route("/api/users/usernames")]
+        public async Task<IActionResult> GetAllUserNamesAsync()
         {
-            Response response = await _applicationUserManager.CheckUserNameAsync(userName);
+            Response response = await _applicationUserManager.GetAllUserNamesAsync();
 
             if (response.Success)
             {
@@ -169,10 +190,11 @@ namespace GoBye.API.Controllers
         #endregion
 
         #region CheckEmailAsync
-        [HttpGet("email/{email}")]
-        public async Task<IActionResult> CheckEmailAsync(string email)
+        [HttpGet]
+        [Route("/api/users/emails")]
+        public async Task<IActionResult> GetAllEmailsAsync()
         {
-            Response response = await _applicationUserManager.CheckEmailAsync(email);
+            Response response = await _applicationUserManager.GetAllEmailsAsync();
 
             if (response.Success)
             {
@@ -196,13 +218,14 @@ namespace GoBye.API.Controllers
                 {
                     return Ok(response);
                 }
-                return Unauthorized(response);
+                return BadRequest(response);
 
             }
             return BadRequest(loginDto);
 
         }
         #endregion
+
 
 
         #region UpdateAsync
@@ -218,7 +241,7 @@ namespace GoBye.API.Controllers
                 {
                     return Ok(response);
                 }
-                return BadRequest(response);
+                return NotFound(response);
 
             }
             return BadRequest(userUpdateDto);
@@ -240,5 +263,19 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
+
+        [HttpGet("getUser")]
+        [Authorize(Policy = "ForUser")]
+        public async Task<IActionResult> GetUser()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            Response response = await _applicationUserManager.GetByIdAsync(userId);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 {
     public interface IApplicationUserManager
     {
+        Task<Response> GetAllUsersAsync();
         Task<Response> GetAllUsersWithDetailsAsync();
         Task<Response> GetAllDriversWithDetailsAsync();
 
@@ -23,8 +24,8 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 
         Task<Response> AddAsync(RegisterDto registerDto);
         Task<Response> RegisterAsync(RegisterDto registerDto);
-        Task<Response> CheckUserNameAsync(string userName);
-        Task<Response> CheckEmailAsync(string email);
+        Task<Response> GetAllEmailsAsync();
+        Task<Response> GetAllUserNamesAsync();
         Task<Response> LoginAsync(LoginDto loginDto);
         Task<Response> UpdateAsync(string id, UserUpdateDto userUpdateDto);
         Task<Response> DeleteAsync(string id);

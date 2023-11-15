@@ -21,15 +21,14 @@ namespace GoBye.BLL.Managers.ReservationManagers
 
 
         #region GetAllWithTripDetailsAsync
-        public async Task<IEnumerable<ReservationDetailsDto>?> GetAllWithTripDetailsAsync()
+        public async Task<Response> GetAllWithTripDetailsAsync()
         {
             IEnumerable<Reservation>? reservations = await _unitOfWork.ReservationRepo.GetAllWithTripDetailsAsync();
             if (reservations is not null)
             {
-                return reservations.Select(x => new ReservationDetailsDto
+                var data = reservations.Select(x => new ReservationDetailsDto
                 {
                     Id = x.Id,
-                    Number = x.Number,
                     Price = x.Trip.Price,
                     Quantity = x.Quantity,
                     TotalPrice = x.Quantity * x.Trip.Price,
@@ -43,23 +42,25 @@ namespace GoBye.BLL.Managers.ReservationManagers
                     StartBranchName = x.Trip.StartBranch.Name,
                     EndBranchName = x.Trip.EndBranch.Name,
                 }).ToList();
+
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Reservations");
         }
         #endregion
 
 
         #region GetAllByTripIdAsync
-        public async Task<IEnumerable<ReservationReadDto>?> GetAllByTripIdAsync(int id)
+        public async Task<Response> GetAllByTripIdAsync(int id)
         {
             IEnumerable<Reservation>? reservations = await _unitOfWork.ReservationRepo.GetAllByTripIdAsync(id);
             if (reservations is not null)
             {
-                IEnumerable<ReservationReadDto>? reservationReadDtos = reservations.Select(x => new ReservationReadDto
+                var data = reservations.Select(x => new ReservationReadDto
                 {
                     Id = x.Id,
-                    Number = x.Number,
                     Price = x.Trip.Price,
                     Quantity = x.Quantity,
                     TotalPrice = x.TotalPrice,
@@ -70,24 +71,24 @@ namespace GoBye.BLL.Managers.ReservationManagers
                     SeatNumbers = x.Tickets.Select(x => x.SeatNumber).ToList(),
                 }).ToList();
 
-                return reservationReadDtos;
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Reservations");
         }
         #endregion
 
 
         #region GetAllWithTripDetailsByUserIdAsync
-        public async Task<IEnumerable<ReservationDetailsDto>?> GetAllWithTripDetailsByUserIdAsync(string id)
+        public async Task<Response> GetAllWithTripDetailsByUserIdAsync(string id)
         {
             IEnumerable<Reservation>? reservations = await _unitOfWork.ReservationRepo.GetAllWithTripDetailsByUserIdAsync(id);
             if (reservations is not null)
             {
-                return reservations.Select(x => new ReservationDetailsDto
+                var data = reservations.Select(x => new ReservationDetailsDto
                 {
                     Id = x.Id,
-                    Number = x.Number,
                     Price = x.Trip.Price,
                     Quantity = x.Quantity,
                     TotalPrice = x.TotalPrice,
@@ -101,51 +102,55 @@ namespace GoBye.BLL.Managers.ReservationManagers
                     StartBranchName = x.Trip.StartBranch.Name,
                     EndBranchName = x.Trip.EndBranch.Name,
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Reservations");
         }
         #endregion
 
 
         #region GetByIdWithTripDetailsAsync
-        public async Task<ReservationDetailsDto?> GetByIdWithTripDetailsAsync(int id)
+        public async Task<Response> GetByIdWithTripDetailsAsync(int id)
         {
             Reservation? reservation = await _unitOfWork.ReservationRepo.GetByIdWithTripDetailsAsync(id);
             if (reservation is not null)
             {
-                ReservationDetailsDto reservationDetailsDto = new ReservationDetailsDto
+                var data = new ReservationDetailsDto
                 {
                     Id = reservation.Id,
-                    Number = reservation.Number,
+                    Price = reservation.Price,
                     Quantity = reservation.Quantity,
                     TotalPrice = reservation.TotalPrice,
                     Date = reservation.Date,
                     UserId = reservation.UserId,
                     UserName = reservation.User.UserName!,
+                    FirstName = reservation.User.FirstName!,
+                    LastName = reservation.User.LastName!,
+                    Email = reservation.User.Email!,
                     SeatNumbers = reservation.Tickets.Select(x => x.SeatNumber).ToList(),
                     DepartureDate = reservation.Trip.DepartureDate,
                     ArrivalDate = reservation.Trip.ArrivalDate,
                     BusClassName = reservation.Trip.Bus.BusClass.Name,
+                    BusNumber = reservation.Trip.Bus.Number,
                     StartBranchName = reservation.Trip.StartBranch.Name,
                     EndBranchName = reservation.Trip.EndBranch.Name,
                 };
-                return reservationDetailsDto;
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, $"Reservation is not found");
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(ReservationAddDto reservationAddDto)
+        public async Task<Response> AddAsync(ReservationAddDto reservationAddDto)
         {
             Reservation reservation = new Reservation
             {
-                Number = reservationAddDto.Number,
                 Quantity = reservationAddDto.Quantity,
-                Date = reservationAddDto.Date,
                 UserId = reservationAddDto.UserId,
                 TripId = reservationAddDto.TripId,
             };
@@ -164,37 +169,50 @@ namespace GoBye.BLL.Managers.ReservationManagers
 
                 if (result && reservationAddDto.Quantity == reservationAddDto.SeatNumbers.Count())
                 {
+                    IEnumerable<Ticket>? tickets = await _unitOfWork.TicketRepo.GetAllByTripIdAsync(trip.Id);
+                    IEnumerable<int>? seatNumbers = tickets?.Select(x=>x.SeatNumber).ToList();
+
                     foreach (int seatNumber in reservationAddDto.SeatNumbers)
                     {
-                        IEnumerable<Ticket>? tickets = await _unitOfWork.TicketRepo.GetAllByTripIdAsync(trip.Id);
-
-                        if (tickets is not null && tickets.Any(x=>x.SeatNumber != seatNumber))
+                        if (seatNumbers is not null && !seatNumbers.Any(x => x == seatNumber))
                         {
                             await _unitOfWork.TicketRepo.AddAsync(new Ticket { SeatNumber = seatNumber, ReservationId = reservation.Id });
 
                             trip.AvailableSeats--;
                         }
                     }
-                    return await _unitOfWork.SaveChangesAsync() > 0;
+                    bool addTickets = await _unitOfWork.SaveChangesAsync() > 0;
+                    if (addTickets)
+                    {
+                        return _unitOfWork.Response(true, reservation.Id, "The Reservation has been added successfully");
+                    }
                 }
             }
             
             _unitOfWork.ReservationRepo.Delete(reservation);
             await _unitOfWork.SaveChangesAsync();
-            return false;
+
+            return _unitOfWork.Response(false, null, "Failed to add Reservation");
+
         }
         #endregion
 
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             Reservation? reservation = await _unitOfWork.ReservationRepo.GetByIdAsync(id);
             if (reservation is not null)
             {
                 _unitOfWork.ReservationRepo.Delete(reservation);
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The Reservation has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete Reservation");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"Reservation is not found");
         }
         #endregion
     }

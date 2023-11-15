@@ -1,7 +1,9 @@
 ﻿using GoBye.BLL.Dtos.BusClassDtos;
+using GoBye.BLL.Dtos.BusDtos;
 using GoBye.BLL.Dtos.ClassImageDto;
 using GoBye.BLL.Managers.BusClassManagers;
 using GoBye.BLL.Managers.ClassImageManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,14 +25,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            IEnumerable<ClassImageReadDto>? classImageReadDtos = await _classImageManager.GetAllAsync();
+            Response response = await _classImageManager.GetAllAsync();
 
-            if (classImageReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(classImageReadDtos);
+                return Ok(response);
             }
 
-            return NotFound("There is no ClassImages");
+            return NotFound(response);
         }
         #endregion
 
@@ -39,14 +41,14 @@ namespace GoBye.API.Controllers
         [HttpGet("busClassId/{id:int}")]
         public async Task<IActionResult> GetAllByBusClassIdAsync(int id)
         {
-            IEnumerable<ClassImageReadDto>? classImageReadDtos = await _classImageManager.GetAllByBusClassIdAsync(id);
+            Response response = await _classImageManager.GetAllByBusClassIdAsync(id);
 
-            if (classImageReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(classImageReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"ClassImage with BusClassId ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -55,14 +57,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            ClassImageReadDto? classImageReadDto = await _classImageManager.GetByIdAsync(id);
+        Response response = await _classImageManager.GetByIdAsync(id);
 
-            if (classImageReadDto is not null)
-            {
-                return Ok(classImageReadDto);
-            }
+        if (response.Success)
+        {
+            return Ok(response);
+        }
 
-            return NotFound($"ClassImage with id ({id}) is not found");
+        return NotFound(response);
         }
         #endregion
 
@@ -73,14 +75,15 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _classImageManager.AddAsync(classImageAddDto);
+                Response response = await _classImageManager.AddAsync(classImageAddDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Created");
+                    return Ok(response);
                 }
-            }
+                return BadRequest(response);
 
+            }
             return BadRequest(classImageAddDto);
         }
         #endregion
@@ -90,14 +93,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _classImageManager.DeleteAsync(id);
+            Response response = await _classImageManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"ClassImage with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

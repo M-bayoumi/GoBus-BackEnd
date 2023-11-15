@@ -47,34 +47,27 @@ namespace GoBye.DAL.Data.Configurations
                 new BusClass
                 {
                     Id = 4,
-                    Name="GoMini",
-                    AveragePrice = "45 EGP - 230 EGP",
-
-                },
-                new BusClass
-                {
-                    Id = 5,
                     Name="New Deluxe",
                     AveragePrice = "225 EGP - 265 EGP",
 
                 },
                 new BusClass
                 {
-                    Id = 6,
+                    Id = 5,
                     Name="Economy",
                     AveragePrice = "100 EGP - 180 EGP",
 
                 },
                 new BusClass
                 {
-                    Id = 7,
+                    Id = 6,
                     Name="Elite Business Class V",
                     AveragePrice = "130 EGP - 440 EGP",
 
                 },
                 new BusClass
                 {
-                    Id = 8,
+                    Id = 7,
                     Name="Aero First Class",
                     AveragePrice = "500 EGP - 545 EGP",
 

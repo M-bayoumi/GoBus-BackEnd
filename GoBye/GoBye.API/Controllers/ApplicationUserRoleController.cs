@@ -3,6 +3,7 @@ using GoBye.BLL.Dtos.ApplicationUserRoleDto;
 using GoBye.BLL.Managers.ApplicationUserManager;
 using GoBye.BLL.Managers.ApplicationUserRoleManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace GoBye.API.Controllers
 
         #region AddUserToRoleAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddUserToRoleAsync(ApplicationUserRoleAddDto applicationUserRoleAddDto)
         {
             Response response = await _applicationUserRoleManager.AddAsync(applicationUserRoleAddDto);

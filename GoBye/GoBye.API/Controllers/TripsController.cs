@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.ApplicationUserDtos;
+using GoBye.BLL.Dtos.DestinationDtos;
 using GoBye.BLL.Dtos.ReservationDtos;
 using GoBye.BLL.Dtos.TripDtos;
 using GoBye.BLL.Managers.BusManagers;
@@ -29,14 +30,14 @@ namespace GoBye.API.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> FilterAllAsync(TripSearchDto tripSearchDto)
         {
-            IEnumerable<TripReadDto>? tripReadDtos = await _tripManager.FilterAllAsync(tripSearchDto);
+            Response response = await _tripManager.FilterAllAsync(tripSearchDto);
 
-            if (tripReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(tripReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Trips found");
+            return NotFound(response);
         }
         #endregion
 
@@ -45,14 +46,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithDetailsAsync()
         {
-            IEnumerable<TripDetailsDto>? tripDetailsDtos = await _tripManager.GetAllWithDetailsAsync();
+            Response response = await _tripManager.GetAllWithDetailsAsync();
 
-            if (tripDetailsDtos is not null)
+            if (response.Success)
             {
-                return Ok(tripDetailsDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Trips found");
+            return NotFound(response);
         }
         #endregion
 
@@ -61,14 +62,14 @@ namespace GoBye.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdWithBusClassNameAsync(int id)
         {
-            TripUserDto? tripUserDto = await _tripManager.GetByIdWithBusClassNameAsync(id);
+            Response response = await _tripManager.GetByIdWithBusClassNameAsync(id);
 
-            if (tripUserDto is not null)
+            if (response.Success)
             {
-                return Ok(tripUserDto);
+                return Ok(response);
             }
 
-            return NotFound($"Trip with Id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
 
@@ -79,12 +80,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _tripManager.AddAsync(tripAddDto);
+                Response response = await _tripManager.AddAsync(tripAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(tripAddDto);
@@ -97,13 +97,14 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _tripManager.UpdateAsync(id, tripUpdateDto);
+                Response response = await _tripManager.UpdateAsync(id, tripUpdateDto);
 
-                if (result)
+                if (response.Success)
                 {
-                    return Ok("Updated");
+                    return Ok(response);
                 }
-                return NotFound($"Trip with Id ({id}) not found");
+                return BadRequest(response);
+
             }
 
             return BadRequest(tripUpdateDto);
@@ -115,14 +116,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _tripManager.DeleteAsync(id);
+            Response response = await _tripManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"Trip with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

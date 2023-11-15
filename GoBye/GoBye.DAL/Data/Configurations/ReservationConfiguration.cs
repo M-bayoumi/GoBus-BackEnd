@@ -10,10 +10,6 @@ namespace GoBye.DAL.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Number)
-               .HasColumnType("int")
-               .IsRequired();
-
             builder.Property(x => x.Quantity)
                .HasColumnType("int")
                .IsRequired();
@@ -27,7 +23,14 @@ namespace GoBye.DAL.Data.Configurations
                .IsRequired();
 
             builder.Property(x => x.Date)
-               .HasColumnType("datetime")
+               .HasColumnType("datetime");
+
+            builder.Property(x => x.ClientSecret)
+               .HasColumnType("varchar(max)")
+               .IsRequired();
+
+            builder.Property(x => x.PaymentIntentId)
+               .HasColumnType("varchar(max)")
                .IsRequired();
 
             builder.HasOne(x => x.User)

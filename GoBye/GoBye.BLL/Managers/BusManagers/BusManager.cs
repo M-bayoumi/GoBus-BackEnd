@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GoBye.BLL.Managers.BusManagers
 {
@@ -21,12 +22,12 @@ namespace GoBye.BLL.Managers.BusManagers
 
 
         #region GetAllWithBusClassAsync
-        public async Task<IEnumerable<BusReadDto>?> GetAllWithBusClassAsync()
+        public async Task<Response> GetAllWithBusClassAsync()
         {
             IEnumerable<Bus>? buses = await _unitOfWork.BusRepo.GetAllWithBusClassAsync();
             if (buses is not null)
             {
-                return buses.Select(x => new BusReadDto
+                var data = buses.Select(x => new BusReadDto
                 {
                     Id = x.Id,
                     Number = x.Number,
@@ -39,20 +40,21 @@ namespace GoBye.BLL.Managers.BusManagers
                     DriverId = x.DriverId,
                     NoOfTrips = x.Trips.Count()
                 });
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Buses");
         }
         #endregion
 
 
         #region GetAllByBusClassIdAsync
-        public async Task<IEnumerable<BusReadDto>?> GetAllByBusClassIdAsync(int id)
+        public async Task<Response> GetAllByBusClassIdAsync(int id)
         {
             IEnumerable<Bus>? buses = await _unitOfWork.BusRepo.GetAllByBusClassIdAsync(id);
             if (buses is not null)
             {
-                return buses.Select(x => new BusReadDto
+                var data = buses.Select(x => new BusReadDto
                 {
                     Id = x.Id,
                     Number = x.Number,
@@ -65,20 +67,21 @@ namespace GoBye.BLL.Managers.BusManagers
                     DriverId = x.DriverId,
                     NoOfTrips = x.Trips.Count()
                 });
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Buses");
         }
         #endregion
 
 
         #region GetAllAvailableBusesAsync
-        public async Task<IEnumerable<BusAvailableDto>?> GetAllAvailableBusesAsync()
+        public async Task<Response> GetAllAvailableBusesAsync()
         {
-            IEnumerable<Bus>? buses = await _unitOfWork.BusRepo.GetAllWithBusClassAsync();
+            IEnumerable<Bus>? buses = await _unitOfWork.BusRepo.GetAllAvailableBusesAsync();
             if (buses is not null)
             {
-                return buses.Select(x => new BusAvailableDto
+                var data = buses.Select(x => new BusAvailableDto
                 {
                     Id = x.Id,
                     Number = x.Number,
@@ -86,20 +89,21 @@ namespace GoBye.BLL.Managers.BusManagers
                     CurrentBranch = x.CurrentBranch,
                     ClassBusName = x.BusClass.Name,
                 });
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Available Buses");
         }
         #endregion
 
 
         #region GetByIdWithBusClassAsync
-        public async Task<BusReadDto?> GetByIdWithBusClassAsync(int id)
+        public async Task<Response> GetByIdWithBusClassAsync(int id)
         {
             Bus? bus = await _unitOfWork.BusRepo.GetByIdWithBusClassAsync(id);
             if (bus is not null)
             {
-                BusReadDto busReadDto = new BusReadDto
+                var data = new BusReadDto
                 {
                     Id = bus.Id,
                     Number = bus.Number,
@@ -112,16 +116,16 @@ namespace GoBye.BLL.Managers.BusManagers
                     DriverId = bus.DriverId,
                     NoOfTrips = bus.Trips.Count()
                 };
-                return busReadDto;
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, $"Bus is not found");
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(BusAddDto busAddDto)
+        public async Task<Response> AddAsync(BusAddDto busAddDto)
         {
             Bus bus = new Bus
             {
@@ -135,13 +139,18 @@ namespace GoBye.BLL.Managers.BusManagers
             };
             await _unitOfWork.BusRepo.AddAsync(bus);
 
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Bus has been added successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to add Bus");
         }
         #endregion
 
 
         #region UpdateAsync
-        public async Task<bool> UpdateAsync(int id, BusUpdateDto busUpdateDto)
+        public async Task<Response> UpdateAsync(int id, BusUpdateDto busUpdateDto)
         {
             Bus? bus = await _unitOfWork.BusRepo.GetByIdAsync(id);
             if (bus is not null)
@@ -155,20 +164,31 @@ namespace GoBye.BLL.Managers.BusManagers
                 bus.BusClassId = busUpdateDto.BusClassId;
                 bus.DriverId = busUpdateDto.DriverId;
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Bus has been updated successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to update Bus");
         }
         #endregion
 
-
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             Bus? bus = await _unitOfWork.BusRepo.GetByIdAsync(id);
+
             if (bus is not null)
             {
                 _unitOfWork.BusRepo.Delete(bus);
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The Bus has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete Bus");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"Bus is not found");
         }
         #endregion
     }

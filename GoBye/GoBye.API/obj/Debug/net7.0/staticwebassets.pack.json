@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\2c3af5da-fd3c-4e10-a975-b309a42d271f_Photo.jpeg",
+      "PackagePath": "staticwebassets\\Images\\2c3af5da-fd3c-4e10-a975-b309a42d271f_Photo.jpeg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.GoBye.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.GoBye.API.props",
+      "PackagePath": "build\\GoBye.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.GoBye.API.props",
+      "PackagePath": "buildMultiTargeting\\GoBye.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.GoBye.API.props",
+      "PackagePath": "buildTransitive\\GoBye.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

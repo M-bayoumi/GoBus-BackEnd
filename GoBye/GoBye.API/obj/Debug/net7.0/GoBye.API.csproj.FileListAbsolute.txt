@@ -506,3 +506,5 @@ D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\obj\Debug\net7.0\refint\GoBy
 D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\obj\Debug\net7.0\GoBye.API.pdb
 D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\obj\Debug\net7.0\GoBye.API.genruntimeconfig.cache
 D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\obj\Debug\net7.0\ref\GoBye.API.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\bin\Debug\net7.0\Stripe.net.dll
+D:\Graduation-Project\GoBye-BackEnd\GoBye\GoBye.API\bin\Debug\net7.0\GoBye.API.staticwebassets.runtime.json

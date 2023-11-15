@@ -25,7 +25,7 @@ namespace GoBye.BLL.Managers.TripManagers
 
 
         #region FilterAllAsync
-        public async Task<IEnumerable<TripReadDto>?> FilterAllAsync(TripSearchDto tripSearchDto)
+        public async Task<Response> FilterAllAsync(TripSearchDto tripSearchDto)
         {
             IEnumerable<Trip>? trips = await _unitOfWork.TripRepo.FilterAllAsync();
 
@@ -34,37 +34,41 @@ namespace GoBye.BLL.Managers.TripManagers
                 IEnumerable<Trip>? filteredTrips = trips
                 .Where(x => x.AvailableSeats >= tripSearchDto.Quantity)
                 .Where(x => DateOnly.FromDateTime(x.DepartureDate) == DateOnly.Parse(tripSearchDto.DepartureDate))
+                .Where(x => TimeOnly.FromDateTime(x.DepartureDate) > TimeOnly.FromDateTime(DateTime.Now))
                 .Where(x => x.StartBranchId == tripSearchDto.StartBranchId)
                 .Where(x => x.EndBranchId == tripSearchDto.EndBranchId)
                 .ToList();
 
-                return filteredTrips.Select(x => new TripReadDto
+                var data = filteredTrips.Select(x => new TripReadDto
                 {
                     Id = x.Id,
                     Quantity = tripSearchDto.Quantity,
                     AvailableSeats = x.Bus.Capacity,
                     DepartureDate = x.DepartureDate,
                     ArrivalDate = x.ArrivalDate,
+                    BusId = x.BusId,
                     BusClassName = x.Bus.BusClass.Name,
                     StartBranchName = x.StartBranch.Name,
                     EndBranchName = x.EndBranch.Name,
                     Price = x.Price,
                     TotalPrice = x.Price * tripSearchDto.Quantity,
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Trips");
         }
         #endregion
 
 
         #region GetAllWithDetailsAsync
-        public async Task<IEnumerable<TripDetailsDto>?> GetAllWithDetailsAsync()
+        public async Task<Response> GetAllWithDetailsAsync()
         {
             IEnumerable<Trip>? trips = await _unitOfWork.TripRepo.GetAllWithDetailsAsync();
             if (trips is not null)
             {
-                return trips.Select(x => new TripDetailsDto
+                var data = trips.Select(x => new TripDetailsDto
                 {
                     Id = x.Id,
                     AvailableSeats = x.AvailableSeats,
@@ -77,7 +81,6 @@ namespace GoBye.BLL.Managers.TripManagers
                     ReservationReadDtos = x.Reservations.Select(y => new ReservationReadDto
                     {
                         Id = y.Id,
-                        Number = y.Number,
                         Quantity = y.Quantity,
                         TotalPrice = y.TotalPrice,
                         Date = y.Date,
@@ -86,42 +89,45 @@ namespace GoBye.BLL.Managers.TripManagers
                         SeatNumbers = y.Tickets.Select(z => z.SeatNumber).ToList(),
                     }).ToList(),
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Trips");
         }
         #endregion
 
 
         #region GetByIdWithBusClassNameAsync
-        public async Task<TripUserDto?> GetByIdWithBusClassNameAsync(int id)
+        public async Task<Response> GetByIdWithBusClassNameAsync(int id)
         {
             Trip? trip = await _unitOfWork.TripRepo.GetByIdWithBusClassNameAsync(id);
 
             if (trip is not null)
             {
-                TripUserDto tripUserDto = new TripUserDto
+                var data = new TripUserDto
                 {
 
                     Id = trip.Id,
                     AvailableSeats = trip.AvailableSeats,
                     DepartureDate = trip.DepartureDate,
                     ArrivalDate = trip.ArrivalDate,
+                    BusId = trip.BusId,
                     BusClassName = trip.Bus.BusClass.Name,
                     StartBranchName = trip.StartBranch.Name,
                     EndBranchName = trip.EndBranch.Name,
                     Price = trip.Price,
                 };
-                return tripUserDto;
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, $"Trip is not found");
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(TripAddDto tripAddDto)
+        public async Task<Response> AddAsync(TripAddDto tripAddDto)
         {
             Trip trip = new Trip
             {
@@ -146,9 +152,16 @@ namespace GoBye.BLL.Managers.TripManagers
 
                     BackgroundJob.Schedule(() => BusStatus(tripDb.BusId, tripDb.EndBranch.Name.ToString()), tripAddDto.ArrivalDate - tripAddDto.DepartureDate);
 
+                    bool hangFireHandling = await _unitOfWork.SaveChangesAsync() > 0;
+                    if (hangFireHandling)
+                    {
+                        return _unitOfWork.Response(true, null, "The Trip has been added successfully");
+                    }
                 }
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            _unitOfWork.TripRepo.Delete(trip);
+            await _unitOfWork.SaveChangesAsync();
+            return _unitOfWork.Response(false, null, "Failed to add Trip");
         }
 
         public async Task BusStatus(int id, string currentBranch)
@@ -162,7 +175,7 @@ namespace GoBye.BLL.Managers.TripManagers
 
 
         #region UpdateAsync
-        public async Task<bool> UpdateAsync(int id, TripUpdateDto tripUpdateDto)
+        public async Task<Response> UpdateAsync(int id, TripUpdateDto tripUpdateDto)
         {
             Trip? trip = await _unitOfWork.TripRepo.GetByIdAsync(id);
             if (trip is not null)
@@ -182,25 +195,36 @@ namespace GoBye.BLL.Managers.TripManagers
                     if (trip1 is not null)
                     {
                         trip1.AvailableSeats = trip1.Bus.Capacity;
-                        return await _unitOfWork.SaveChangesAsync() > 0 || trip1!.AvailableSeats == trip1.Bus.Capacity; ;
+                        result = await _unitOfWork.SaveChangesAsync() > 0 || trip1!.AvailableSeats == trip1.Bus.Capacity; ;
+                        if (result)
+                        {
+                            return _unitOfWork.Response(true, null, "The Trip has been updated successfully");
+                        }
                     }
                 }
             }
-            return await _unitOfWork.SaveChangesAsync() > 0 ;
+            return _unitOfWork.Response(false, null, "Failed to update Trip");
+
         }
         #endregion
 
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             Trip? trip = await _unitOfWork.TripRepo.GetByIdAsync(id);
 
             if (trip is not null)
             {
                 _unitOfWork.TripRepo.Delete(trip);
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The Trip has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete Trip");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"Trip is not found");
         }
         #endregion
     }

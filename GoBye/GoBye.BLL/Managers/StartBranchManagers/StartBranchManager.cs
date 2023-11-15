@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.BusDtos;
+using GoBye.BLL.Dtos.EndBranchDtos;
 using GoBye.BLL.Dtos.StartBranchDtos;
 using GoBye.BLL.Managers.StartBranchManagers;
 using GoBye.DAL.Data.Models;
@@ -61,6 +62,8 @@ namespace GoBye.BLL.Managers.StartBranchManagers
                     Name = x.Name,
                     Address = x.Address,
                     Phone = x.Phone,
+                    DestinationName = x.Destination.Name,
+                    
                 });
                 return _unitOfWork.Response(true, data, null);
 
@@ -120,6 +123,13 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         #region AddAsync
         public async Task<Response> AddAsync(StartBranchAddDto startBranchAddDto)
         {
+            EndBranch endBranch = new EndBranch
+            {
+                Name = startBranchAddDto.Name,
+                Address = startBranchAddDto.Address,
+                Phone = startBranchAddDto.Phone,
+                DestinationId = startBranchAddDto.DestinationId,
+            };
             StartBranch startBranch = new StartBranch
             {
                 Name = startBranchAddDto.Name,
@@ -127,6 +137,7 @@ namespace GoBye.BLL.Managers.StartBranchManagers
                 Phone = startBranchAddDto.Phone,
                 DestinationId = startBranchAddDto.DestinationId,
             };
+            await _unitOfWork.EndBranchRepo.AddAsync(endBranch);
             await _unitOfWork.StartBranchRepo.AddAsync(startBranch);
             bool result = await _unitOfWork.SaveChangesAsync() > 0;
             if (result)
@@ -142,12 +153,18 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         public async Task<Response> UpdateAsync(int id, StartBranchUpdateDto startBranchUpdateDto)
         {
             StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
-            if (startBranch is not null)
+            EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
+            if (startBranch is not null&& endBranch is not null)
             {
                 startBranch.Name = startBranchUpdateDto.Name;
                 startBranch.Address = startBranchUpdateDto.Address;
                 startBranch.Phone = startBranchUpdateDto.Phone;
                 startBranch.DestinationId = startBranchUpdateDto.DestinationId;
+
+                endBranch.Name = startBranchUpdateDto.Name;
+                endBranch.Address = startBranchUpdateDto.Address;
+                endBranch.Phone = startBranchUpdateDto.Phone;
+                endBranch.DestinationId = startBranchUpdateDto.DestinationId;
             }
             bool result = await _unitOfWork.SaveChangesAsync() > 0;
             if (result)
@@ -162,9 +179,11 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         #region DeleteAsync
         public async Task<Response> DeleteAsync(int id)
         {
+            EndBranch? endBranch = await _unitOfWork.EndBranchRepo.GetByIdAsync(id);
             StartBranch? startBranch = await _unitOfWork.StartBranchRepo.GetByIdAsync(id);
-            if (startBranch is not null)
+            if (endBranch is not null && startBranch is not null)
             {
+                _unitOfWork.EndBranchRepo.Delete(endBranch);
                 _unitOfWork.StartBranchRepo.Delete(startBranch);
                 bool result = await _unitOfWork.SaveChangesAsync() > 0;
                 if (result)
@@ -177,5 +196,5 @@ namespace GoBye.BLL.Managers.StartBranchManagers
         }
         #endregion
     }
-    
+
 }

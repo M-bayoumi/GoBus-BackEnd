@@ -2,6 +2,7 @@
 using GoBye.BLL.Dtos.ReservationDtos;
 using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.BLL.Managers.ReservationManagers;
+using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -24,14 +25,14 @@ namespace GoBye.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithTripDetailsAsync()
         {
-            IEnumerable<ReservationDetailsDto>? reservationDetailsDtos = await _reservationManager.GetAllWithTripDetailsAsync();
+            Response response = await _reservationManager.GetAllWithTripDetailsAsync();
 
-            if (reservationDetailsDtos is not null)
+            if (response.Success)
             {
-                return Ok(reservationDetailsDtos);
+                return Ok(response);
             }
 
-            return NotFound($"There is no Reservation found");
+            return NotFound(response);
         }
         #endregion
 
@@ -40,14 +41,14 @@ namespace GoBye.API.Controllers
         [HttpGet("tripId/{id:int}")]
         public async Task<IActionResult> GetAllByTripIdAsync(int id)
         {
-            IEnumerable<ReservationReadDto>? reservationReadDtos = await _reservationManager.GetAllByTripIdAsync(id);
+            Response response = await _reservationManager.GetAllByTripIdAsync(id);
 
-            if (reservationReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(reservationReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"Reservations with TripId ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
       
@@ -56,30 +57,30 @@ namespace GoBye.API.Controllers
         [HttpGet("userId{id}")]
         public async Task<IActionResult> GetAllWithTripDetailsByUserIdAsync(string id)
         {
-            IEnumerable<ReservationDetailsDto>? reservationReadDtos = await _reservationManager.GetAllWithTripDetailsByUserIdAsync(id);
+            Response response = await _reservationManager.GetAllWithTripDetailsByUserIdAsync(id);
 
-            if (reservationReadDtos is not null)
+            if (response.Success)
             {
-                return Ok(reservationReadDtos);
+                return Ok(response);
             }
 
-            return NotFound($"Reservations with UserId ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
-        
 
-        #region GetByIdWithDestinationNameAsync
+
+        #region GetByIdWithTripDetailsAsync
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdWithTripDetailsAsync(int id)
         {
-            ReservationDetailsDto? reservationDetailsDto = await _reservationManager.GetByIdWithTripDetailsAsync(id);
+            Response response = await _reservationManager.GetByIdWithTripDetailsAsync(id);
 
-            if (reservationDetailsDto is not null)
+            if (response.Success)
             {
-                return Ok(reservationDetailsDto);
+                return Ok(response);
             }
 
-            return NotFound($"Reservation with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
         
@@ -90,12 +91,11 @@ namespace GoBye.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = await _reservationManager.AddAsync(reservationAddDto);
+                Response response = await _reservationManager.AddAsync(reservationAddDto);
 
-                if (result)
-                {
-                    return Ok("Created");
-                }
+                if (response.Success)
+
+                    return Ok(response);
             }
 
             return BadRequest(reservationAddDto);
@@ -107,14 +107,14 @@ namespace GoBye.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            bool result = await _reservationManager.DeleteAsync(id);
+            Response response = await _reservationManager.DeleteAsync(id);
 
-            if (result)
+            if (response.Success)
             {
-                return Ok("Deleted");
+                return Ok(response);
             }
 
-            return NotFound($"Reservation with id ({id}) is not found");
+            return NotFound(response);
         }
         #endregion
     }

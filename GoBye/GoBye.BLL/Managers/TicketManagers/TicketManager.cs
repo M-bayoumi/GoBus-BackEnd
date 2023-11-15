@@ -21,84 +21,90 @@ namespace GoBye.BLL.Managers.TicketManagers
 
 
         #region GetAllWithReservationNumberAsync
-        public async Task<IEnumerable<TicketReadDto>?> GetAllWithReservationNumberAsync()
+        public async Task<Response> GetAllWithReservationNumberAsync()
         {
             IEnumerable<Ticket>? tickets = await _unitOfWork.TicketRepo.GetAllWithReservationNumberAsync();
             if (tickets is not null)
             {
-                return tickets.Select(x => new TicketReadDto
+                var data = tickets.Select(x => new TicketReadDto
                 {
                     Id = x.Id,
                     SeatNumber = x.SeatNumber,
-                    ReservationNumber = x.Reservation.Number,
+                    ReservationId = x.Reservation.Id,
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Tickets");
         }
         #endregion
 
 
         #region GetAllByReservationIdAsync
-        public async Task<IEnumerable<TicketReadDto>?> GetAllByReservationIdAsync(int id)
+        public async Task<Response> GetAllByReservationIdAsync(int id)
         {
             IEnumerable<Ticket>? tickets = await _unitOfWork.TicketRepo.GetAllByReservationIdAsync(id);
             if (tickets is not null)
             {
-                return tickets.Select(x => new TicketReadDto
+                var data = tickets.Select(x => new TicketReadDto
                 {
                     Id = x.Id,
                     SeatNumber = x.SeatNumber,
-                    ReservationNumber = x.Reservation.Number,
+                    ReservationId = x.Reservation.Id,
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Tickets");
         }
         #endregion
 
 
         #region GetAllByTripIdAsync
-        public async Task<IEnumerable<TicketReadDto>?> GetAllByTripIdAsync(int id)
+        public async Task<Response> GetAllByTripIdAsync(int id)
         {
             IEnumerable<Ticket>? tickets = await _unitOfWork.TicketRepo.GetAllByTripIdAsync(id);
             if (tickets is not null)
             {
-                return tickets.Select(x => new TicketReadDto
+                var data = tickets.Select(x => new TicketReadDto
                 {
                     Id = x.Id,
                     SeatNumber = x.SeatNumber,
-                    ReservationNumber = x.Reservation.Number,
+                    ReservationId = x.Reservation.Id,
                 });
+                return _unitOfWork.Response(true, data, null);
+
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, "There is no Tickets");
         }
         #endregion
 
 
         #region GetByIdWithReservationNumberAsync
-        public async Task<TicketReadDto?> GetByIdWithReservationNumberAsync(int id)
+        public async Task<Response> GetByIdWithReservationNumberAsync(int id)
         {
             Ticket? ticket = await _unitOfWork.TicketRepo.GetByIdWithReservationNumberAsync(id);
             if (ticket is not null)
             {
-                TicketReadDto ticketReadDto = new TicketReadDto
+                var data = new TicketReadDto
                 {
                     Id = ticket.Id,
                     SeatNumber = ticket.SeatNumber,
-                    ReservationNumber = ticket.Reservation.Number,
+                    ReservationId = ticket.Reservation.Id,
                 };
-                return ticketReadDto;
+                return _unitOfWork.Response(true, data, null);
             }
 
-            return null;
+            return _unitOfWork.Response(false, null, $"Ticket is not found");
         }
         #endregion
 
 
         #region AddAsync
-        public async Task<bool> AddAsync(TicketAddDto ticketAddDto)
+        public async Task<Response> AddAsync(TicketAddDto ticketAddDto)
         {
             Ticket ticket = new Ticket
             {
@@ -106,13 +112,18 @@ namespace GoBye.BLL.Managers.TicketManagers
                 ReservationId = ticketAddDto.ReservationId,
             };
             await _unitOfWork.TicketRepo.AddAsync(ticket);
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Ticket has been added successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to add Ticket");
         }
         #endregion
 
 
         #region UpdateAsync
-        public async Task<bool> UpdateAsync(int id, TicketUpdateDto ticketUpdateDto)
+        public async Task<Response> UpdateAsync(int id, TicketUpdateDto ticketUpdateDto)
         {
             Ticket? ticket = await _unitOfWork.TicketRepo.GetByIdAsync(id);
 
@@ -121,20 +132,31 @@ namespace GoBye.BLL.Managers.TicketManagers
                 ticket.SeatNumber = ticketUpdateDto.SeatNumber;
                 ticket.ReservationId = ticketUpdateDto.ReservationId;
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            bool result = await _unitOfWork.SaveChangesAsync() > 0;
+            if (result)
+            {
+                return _unitOfWork.Response(true, null, "The Destination has been updated successfully");
+            }
+            return _unitOfWork.Response(false, null, "Failed to update Destination");
         }
         #endregion
 
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(int id)
         {
             Ticket? ticket = await _unitOfWork.TicketRepo.GetByIdAsync(id);
             if (ticket is not null)
             {
                 _unitOfWork.TicketRepo.Delete(ticket);
+                bool result = await _unitOfWork.SaveChangesAsync() > 0;
+                if (result)
+                {
+                    return _unitOfWork.Response(true, null, "The ticket has been deleted successfully");
+                }
+                return _unitOfWork.Response(false, null, "Failed to delete ticket");
             }
-            return await _unitOfWork.SaveChangesAsync() > 0;
+            return _unitOfWork.Response(false, null, $"ticket is not found");
         }
         #endregion
     }

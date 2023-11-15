@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.TicketDtos;
+using GoBye.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace GoBye.BLL.Managers.TicketManagers
 {
     public interface ITicketManager
     {
-        Task<IEnumerable<TicketReadDto>?> GetAllWithReservationNumberAsync();
-        Task<IEnumerable<TicketReadDto>?> GetAllByReservationIdAsync(int id);
-        Task<IEnumerable<TicketReadDto>?> GetAllByTripIdAsync(int id);
-        Task<TicketReadDto?> GetByIdWithReservationNumberAsync(int id);
-        Task<bool> AddAsync(TicketAddDto ticketAddDto);
-        Task<bool> UpdateAsync(int id, TicketUpdateDto ticketUpdateDto);
-        Task<bool> DeleteAsync(int id);
+        Task<Response> GetAllWithReservationNumberAsync();
+        Task<Response> GetAllByReservationIdAsync(int id);
+        Task<Response> GetAllByTripIdAsync(int id);
+        Task<Response> GetByIdWithReservationNumberAsync(int id);
+        Task<Response> AddAsync(TicketAddDto ticketAddDto);
+        Task<Response> UpdateAsync(int id, TicketUpdateDto ticketUpdateDto);
+        Task<Response> DeleteAsync(int id);
     }
 }

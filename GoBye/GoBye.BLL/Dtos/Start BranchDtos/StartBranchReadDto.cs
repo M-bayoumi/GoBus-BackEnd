@@ -13,5 +13,6 @@ namespace GoBye.BLL.Dtos.StartBranchDtos
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
+        public string DestinationName { get; set; } = string.Empty;
     }
 }
