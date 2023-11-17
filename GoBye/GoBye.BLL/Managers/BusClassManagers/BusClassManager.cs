@@ -166,6 +166,20 @@ namespace GoBye.BLL.Managers.BusClassManagers
             {
                 busClass.Name = busClassUpdateDto.Name;
                 busClass.AveragePrice = busClassUpdateDto.AveragePrice;
+                busClass.ClassImages = new List<ClassImage>();
+
+                if (busClassUpdateDto.ClassImageURLs is not null)
+                {
+                    foreach (var ClassImageURL in busClassUpdateDto.ClassImageURLs)
+                    {
+                        ClassImage classImage = new ClassImage
+                        {
+                            BusClassId = busClass.Id,
+                            ImageURL = ClassImageURL
+                        };
+                        await _unitOfWork.ClassImageRepo.AddAsync(classImage);
+                    }
+                }
                 bool result = await _unitOfWork.SaveChangesAsync() > 0;
                 if (result)
                 {

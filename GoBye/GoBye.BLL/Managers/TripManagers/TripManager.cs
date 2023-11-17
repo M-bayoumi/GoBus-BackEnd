@@ -34,7 +34,7 @@ namespace GoBye.BLL.Managers.TripManagers
                 IEnumerable<Trip>? filteredTrips = trips
                 .Where(x => x.AvailableSeats >= tripSearchDto.Quantity)
                 .Where(x => DateOnly.FromDateTime(x.DepartureDate) == DateOnly.Parse(tripSearchDto.DepartureDate))
-                .Where(x => TimeOnly.FromDateTime(x.DepartureDate) > TimeOnly.FromDateTime(DateTime.Now))
+                .Where(x => x.DepartureDate > DateTime.Now)
                 .Where(x => x.StartBranchId == tripSearchDto.StartBranchId)
                 .Where(x => x.EndBranchId == tripSearchDto.EndBranchId)
                 .ToList();
@@ -61,6 +61,51 @@ namespace GoBye.BLL.Managers.TripManagers
         }
         #endregion
 
+        #region FilterByDateAsync
+        public async Task<Response> FilterByDateAsync(DateOnly date)
+        {
+            IEnumerable<Trip>? trips = await _unitOfWork.TripRepo.GetAllWithDetailsAsync();
+
+            if (trips is not null)
+            {
+                IEnumerable<Trip>? filteredTrips = trips
+                .Where(x => DateOnly.FromDateTime(x.DepartureDate) == date)
+                .ToList();
+
+                var data = filteredTrips.Select(x => new TripDetailsDto
+                {
+                    Id = x.Id,
+                    AvailableSeats = x.AvailableSeats,
+                    DepartureDate = x.DepartureDate,
+                    ArrivalDate = x.ArrivalDate,
+                    BusClassName = x.Bus.BusClass.Name,
+                    BusId = x.Bus.Id,
+                    BusNumber = x.Bus.Number,
+                    StartBranchName = x.StartBranch.Name,
+                    StartBranchId = x.StartBranch.Id,
+                    EndBranchName = x.EndBranch.Name,
+                    EndBranchId = x.EndBranch.Id,
+                    Price = x.Price,
+                    ReservationReadDtos = x.Reservations.Select(y => new ReservationReadDto
+                    {
+                        Id = y.Id,
+                        Quantity = y.Quantity,
+                        TotalPrice = y.TotalPrice,
+                        Date = y.Date,
+                        UserId = y.UserId,
+                        UserName = y.User.UserName!,
+                        SeatNumbers = y.Tickets.Select(z => z.SeatNumber).ToList(),
+                    }).ToList(),
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+
+            return _unitOfWork.Response(false, null, "There is no Trips");
+        }
+
+        #endregion
+
 
         #region GetAllWithDetailsAsync
         public async Task<Response> GetAllWithDetailsAsync()
@@ -75,8 +120,12 @@ namespace GoBye.BLL.Managers.TripManagers
                     DepartureDate = x.DepartureDate,
                     ArrivalDate = x.ArrivalDate,
                     BusClassName = x.Bus.BusClass.Name,
+                    BusId = x.Bus.Id,
+                    BusNumber = x.Bus.Number,
                     StartBranchName = x.StartBranch.Name,
+                    StartBranchId = x.StartBranch.Id,
                     EndBranchName = x.EndBranch.Name,
+                    EndBranchId = x.EndBranch.Id,
                     Price = x.Price,
                     ReservationReadDtos = x.Reservations.Select(y => new ReservationReadDto
                     {
@@ -147,10 +196,9 @@ namespace GoBye.BLL.Managers.TripManagers
                 if(tripDb is not null)
                 {
                     tripDb.AvailableSeats = tripDb.Bus.Capacity;
-                    tripDb.Bus.CurrentBranch = "Enroute";
-                    tripDb.Bus.Available = false;
 
-                    BackgroundJob.Schedule(() => BusStatus(tripDb.BusId, tripDb.EndBranch.Name.ToString()), tripAddDto.ArrivalDate - tripAddDto.DepartureDate);
+                    BackgroundJob.Schedule(() => BusStatus1(tripDb.BusId, tripDb.EndBranch.Name.ToString()), trip.DepartureDate);
+                    BackgroundJob.Schedule(() => BusStatus2(tripDb.BusId, tripDb.EndBranch.Name.ToString()), trip.ArrivalDate);
 
                     bool hangFireHandling = await _unitOfWork.SaveChangesAsync() > 0;
                     if (hangFireHandling)
@@ -164,7 +212,15 @@ namespace GoBye.BLL.Managers.TripManagers
             return _unitOfWork.Response(false, null, "Failed to add Trip");
         }
 
-        public async Task BusStatus(int id, string currentBranch)
+        public async Task BusStatus1(int id, string currentBranch)
+        {
+            Bus? bus = await _unitOfWork.BusRepo.GetByIdAsync(id);
+            bus!.Available = false;
+            bus!.CurrentBranch = "Enroute";
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task BusStatus2(int id, string currentBranch)
         {
             Bus? bus = await _unitOfWork.BusRepo.GetByIdAsync(id);
             bus!.Available = true;

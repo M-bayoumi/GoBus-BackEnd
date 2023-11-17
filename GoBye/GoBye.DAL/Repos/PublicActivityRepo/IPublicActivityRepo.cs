@@ -10,6 +10,7 @@ namespace GoBye.DAL.Repos.PublicActivityRepo
 {
     public interface IPublicActivityRepo:IGenericRepo<PublicActivity>
     {
+        Task<IEnumerable<PublicActivity>?> GetAllWithDestinationNameAsync();
         Task<IEnumerable<PublicActivity>?> GetAllByDestinationIdAsync(int id);
     }
 }

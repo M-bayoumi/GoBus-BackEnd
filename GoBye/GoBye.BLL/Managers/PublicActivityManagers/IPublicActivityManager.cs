@@ -10,7 +10,7 @@ namespace GoBye.BLL.Managers.PublicActivityManagers
 {
     public interface IPublicActivityManager
     {
-        Task<Response> GetAllAsync();
+        Task<Response> GetAllWithDestinationNameAsync();
         Task<Response> GetAllByDestinationIdAsync(int id);
         Task<Response> GetByIdAsync(int id);
         Task<Response> AddAsync(PublicActivityAddDto publicActivityAddDto);

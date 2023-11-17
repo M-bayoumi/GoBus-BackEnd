@@ -22,9 +22,9 @@ namespace GoBye.BLL.Managers.PublicActivityManagers
 
 
         #region GetAllAsync
-        public async Task<Response> GetAllAsync()
+        public async Task<Response> GetAllWithDestinationNameAsync()
         {
-            IEnumerable<PublicActivity>? publicActivities = await _unitOfWork.PublicActivityRepo.GetAllAsync();
+            IEnumerable<PublicActivity>? publicActivities = await _unitOfWork.PublicActivityRepo.GetAllWithDestinationNameAsync();
             if (publicActivities is not null)
             {
                 var data = publicActivities.Select(x => new PublicActivityReadDto
@@ -33,6 +33,8 @@ namespace GoBye.BLL.Managers.PublicActivityManagers
                     Title = x.Title,
                     ImageURL = x.ImageURL,
                     Description = x.Description,
+                    DestinationName = x.Destination.Name,
+                    DestinationId = x.Destination.Id
                 });
                 return _unitOfWork.Response(true, data, null);
 

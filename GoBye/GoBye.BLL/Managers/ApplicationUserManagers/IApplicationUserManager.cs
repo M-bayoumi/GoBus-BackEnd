@@ -12,6 +12,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
     public interface IApplicationUserManager
     {
         Task<Response> GetAllUsersAsync();
+        Task<Response> GetAllDriversAsync();
         Task<Response> GetAllUsersWithDetailsAsync();
         Task<Response> GetAllDriversWithDetailsAsync();
 

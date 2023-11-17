@@ -27,6 +27,24 @@ namespace GoBye.DAL.Repos.ApplicationUserRepo
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<ApplicationUser>?> GetAllUsersAsync()
+        {
+            return await _appDbContext
+                .ApplicationUsers
+                .Where(x => x.ApplicationUserRoles.Any(y => y.RoleId == "1837ae0a-7274-4acc-8165-65aced540cd2"))
+
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ApplicationUser>?> GetAllDriversAsync()
+        {
+            return await _appDbContext
+                .ApplicationUsers
+                .Where(x => x.ApplicationUserRoles.Any(y => y.RoleId == "491c779b-92be-4a0c-a1bf-91c28fc20e1e"))
+
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<ApplicationUser>?> GetAllUsersWithDetailsAsync()
         {
             return await _appDbContext

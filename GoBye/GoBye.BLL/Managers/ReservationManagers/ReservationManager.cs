@@ -1,4 +1,5 @@
 ﻿using GoBye.BLL.Dtos.ReservationDtos;
+using GoBye.BLL.Dtos.TripDtos;
 using GoBye.DAL.Data.Models;
 using GoBye.DAL.UnitOfWork;
 using System;
@@ -33,6 +34,7 @@ namespace GoBye.BLL.Managers.ReservationManagers
                     Quantity = x.Quantity,
                     TotalPrice = x.Quantity * x.Trip.Price,
                     Date = x.Date,
+                    TripId =x.TripId,
                     UserId = x.UserId,
                     UserName = x.User.UserName!,
                     SeatNumbers = x.Tickets.Select(x=>x.SeatNumber).ToList(),
@@ -50,6 +52,43 @@ namespace GoBye.BLL.Managers.ReservationManagers
             return _unitOfWork.Response(false, null, "There is no Reservations");
         }
         #endregion
+
+        #region FilterByDateAsync
+        public async Task<Response> FilterByDateAsync(DateOnly date)
+        {
+            IEnumerable<Reservation>? reservations = await _unitOfWork.ReservationRepo.GetAllWithTripDetailsAsync();
+            if (reservations is not null)
+            {
+                IEnumerable<Reservation>? filteredReservations = reservations
+                .Where(x => DateOnly.FromDateTime(x.Date) == date)
+                .ToList();
+                var data = filteredReservations.Select(x => new ReservationDetailsDto
+                {
+                    Id = x.Id,
+                    Price = x.Trip.Price,
+                    Quantity = x.Quantity,
+                    TotalPrice = x.Quantity * x.Trip.Price,
+                    Date = x.Date,
+                    TripId = x.TripId,
+                    UserId = x.UserId,
+                    UserName = x.User.UserName!,
+                    SeatNumbers = x.Tickets.Select(x => x.SeatNumber).ToList(),
+                    DepartureDate = x.Trip.DepartureDate,
+                    ArrivalDate = x.Trip.ArrivalDate,
+                    BusClassName = x.Trip.Bus.BusClass.Name,
+                    StartBranchName = x.Trip.StartBranch.Name,
+                    EndBranchName = x.Trip.EndBranch.Name,
+                }).ToList();
+
+                return _unitOfWork.Response(true, data, null);
+
+            }
+
+            return _unitOfWork.Response(false, null, "There is no Reservations");
+        }
+
+        #endregion
+
 
 
         #region GetAllByTripIdAsync

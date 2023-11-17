@@ -19,7 +19,6 @@ namespace GoBye.DAL.Repos.BusRepo
             _appDbContext = appDbContext;
         }
 
-
         public async Task<IEnumerable<Bus>?> GetAllByBusClassIdAsync(int id)
         {
             return await

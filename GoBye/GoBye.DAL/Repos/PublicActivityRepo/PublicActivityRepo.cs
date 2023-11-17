@@ -19,6 +19,10 @@ namespace GoBye.DAL.Repos.PublicActivityRepo
             _appDbContext = appDbContext;
         }
 
+        public async Task<IEnumerable<PublicActivity>?> GetAllWithDestinationNameAsync()
+        {
+            return await _appDbContext.PublicActivities.Include(x => x.Destination).ToListAsync();
+        }
 
         public async Task<IEnumerable<PublicActivity>?> GetAllByDestinationIdAsync(int id)
         {

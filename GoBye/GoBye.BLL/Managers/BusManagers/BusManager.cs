@@ -37,7 +37,10 @@ namespace GoBye.BLL.Managers.BusManagers
                     Model = x.Model,
                     Year = x.Year,
                     ClassBusName = x.BusClass.Name,
+                    ClassBusId = x.BusClass.Id,
                     DriverId = x.DriverId,
+                    DriverFirstName= x.Driver.FirstName,
+                    DriverLastName= x.Driver.LastName,
                     NoOfTrips = x.Trips.Count()
                 });
                 return _unitOfWork.Response(true, data, null);
@@ -131,7 +134,6 @@ namespace GoBye.BLL.Managers.BusManagers
             {
                 Number = busAddDto.Number,
                 Capacity = busAddDto.Capacity,
-                CurrentBranch = busAddDto.CurrentBranch,
                 Model = busAddDto.Model,
                 Year = busAddDto.Year,
                 BusClassId = busAddDto.BusClassId,
@@ -157,7 +159,6 @@ namespace GoBye.BLL.Managers.BusManagers
             {
                 bus.Number = busUpdateDto.Number;
                 bus.Capacity = busUpdateDto.Capacity;
-                bus.Available = busUpdateDto.Available;
                 bus.CurrentBranch = busUpdateDto.CurrentBranch;
                 bus.Model = busUpdateDto.Model;
                 bus.Year = busUpdateDto.Year;

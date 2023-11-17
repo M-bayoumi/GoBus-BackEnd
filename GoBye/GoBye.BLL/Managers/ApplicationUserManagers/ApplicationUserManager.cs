@@ -39,7 +39,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         #region GetAllUsersAsync
         public async Task<Response> GetAllUsersAsync()
         {
-            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllUsersWithDetailsAsync();
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllUsersAsync();
             if (applicationUsers is not null)
             {
                 var data = applicationUsers.Select(x => new UserReadDto
@@ -56,6 +56,30 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 
             }
             return _unitOfWork.Response(false, null, "There is no Users found");
+
+        }
+        #endregion
+
+        #region GetAllDriversAsync
+        public async Task<Response> GetAllDriversAsync()
+        {
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllDriversAsync();
+            if (applicationUsers is not null)
+            {
+                var data = applicationUsers.Select(x => new UserReadDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserName = x.UserName!,
+                    Email = x.Email!,
+                    PhoneNumber = x.PhoneNumber!,
+
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+            return _unitOfWork.Response(false, null, "There is no Driver found");
 
         }
         #endregion
@@ -370,6 +394,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+
         #region GetAllUserNamesAsync
         public async Task<Response> GetAllUserNamesAsync()
         {
@@ -385,6 +410,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+
         #region GetAllEmailsAsync
         public async Task<Response> GetAllEmailsAsync()
         {
@@ -399,6 +425,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 
         }
         #endregion
+
 
         #region LoginAsync
         public async Task<Response> LoginAsync(LoginDto loginDto)
@@ -447,10 +474,8 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 }
             }
             return _unitOfWork.Response(false, null, $"Email or password is not valid");
-
         }
         #endregion
-
 
 
         #region UpdateAsync

@@ -38,6 +38,7 @@ namespace GoBye.DAL.Repos.TripRepo
                 .ToListAsync();
         }
 
+
         public async Task<Trip?> GetByIdWithBusClassNameAsync(int id)
         {
             return await _appDbContext

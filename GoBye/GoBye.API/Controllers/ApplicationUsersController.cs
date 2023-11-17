@@ -38,9 +38,23 @@ namespace GoBye.API.Controllers
             }
 
             return NotFound(response);
-
         }
+        #endregion
 
+        #region GetAllDriversAsync
+        [HttpGet]
+        [Route("/api/drivers")]
+        public async Task<IActionResult> GetAllDriversAsync()
+        {
+            Response response = await _applicationUserManager.GetAllDriversAsync();
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+        }
         #endregion
 
         #region GetAllUsersWithDetailsAsync

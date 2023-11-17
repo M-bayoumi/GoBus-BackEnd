@@ -11,6 +11,7 @@ namespace GoBye.BLL.Managers.TripManagers
     public interface ITripManager
     {
         Task<Response> FilterAllAsync(TripSearchDto tripSearchDto);
+        Task<Response> FilterByDateAsync(DateOnly date);
         Task<Response> GetAllWithDetailsAsync();
         Task<Response> GetByIdWithBusClassNameAsync(int id);
         Task<Response> AddAsync(TripAddDto tripAddDto);

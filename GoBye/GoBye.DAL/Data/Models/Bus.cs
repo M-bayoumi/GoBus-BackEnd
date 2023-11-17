@@ -1,4 +1,6 @@
-﻿namespace GoBye.DAL.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GoBye.DAL.Data.Models
 {
     public class Bus
     {

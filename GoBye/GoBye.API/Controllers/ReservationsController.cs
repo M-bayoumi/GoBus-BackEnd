@@ -68,6 +68,23 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+        #region FilterByDateAsync
+        [HttpGet("filter/{date}")]
+        public async Task<IActionResult> FilterByDateAsync(DateTime date)
+        {
+            Response response = await _reservationManager.FilterByDateAsync(DateOnly.FromDateTime(date));
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+        }
+        #endregion
+
+
+
 
         #region GetByIdWithTripDetailsAsync
         [HttpGet("{id:int}")]

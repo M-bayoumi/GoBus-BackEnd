@@ -42,6 +42,24 @@ namespace GoBye.API.Controllers
         #endregion
 
 
+
+        #region FilterByDateAsync
+        [HttpGet("filter/{date}")]
+        public async Task<IActionResult> FilterByDateAsync(DateTime date)
+        {
+            Response response = await _tripManager.FilterByDateAsync(DateOnly.FromDateTime(date));
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+        }
+        #endregion
+
+
+
         #region GetAllWithDetailsAsync
         [HttpGet]
         public async Task<IActionResult> GetAllWithDetailsAsync()

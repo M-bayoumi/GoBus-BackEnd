@@ -14,5 +14,6 @@ namespace GoBye.BLL.Dtos.PublicActivityDtos
         public string ImageURL { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string DestinationName { get; set; } = string.Empty;
+        public int DestinationId { get; set; } 
     }
 }

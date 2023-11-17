@@ -7,6 +7,7 @@
         public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
+        public int TripId { get; set; } 
         public string UserId { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;

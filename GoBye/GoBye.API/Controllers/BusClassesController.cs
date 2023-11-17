@@ -1,9 +1,12 @@
 ﻿using GoBye.BLL.Dtos;
 using GoBye.BLL.Dtos.BusClassDtos;
 using GoBye.BLL.Dtos.BusDtos;
+using GoBye.BLL.Dtos.DestinationDtos;
 using GoBye.BLL.Managers.BusClassManagers;
+using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.DAL.Data.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -15,11 +18,15 @@ namespace GoBye.API.Controllers
     public class BusClassesController : ControllerBase
     {
         private readonly IBusClassManager _busClassManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BusClassesController(IBusClassManager busClassManager)
+        public BusClassesController(IBusClassManager busClassManager, IWebHostEnvironment webHostEnvironment)
         {
             _busClassManager = busClassManager;
+            _webHostEnvironment = webHostEnvironment;
+
         }
+
 
 
         #region GetAllAsync
@@ -85,7 +92,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
+        /*
         #region AddAsync
         [HttpPost]
         public async Task<IActionResult> AddAsync(BusClassAddDto busClassAddDto)
@@ -104,8 +111,58 @@ namespace GoBye.API.Controllers
             return BadRequest(busClassAddDto);
         }
         #endregion
+        */
+
+        [HttpPost]
+        public async Task<IActionResult> AddAsync([FromForm] IFormFile file, [FromForm] string name, [FromForm] string averagePrice)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file");
+            }
+
+            string folderPath;
+
+            if (!Directory.Exists(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images")))
+            {
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images"));
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
 
 
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            string filePath = Path.Combine(folderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            var imageUrl = "https://localhost:44331/Images/" + uniqueFileName;
+
+            var busClassAddDto = new BusClassAddDto
+            {
+                Name = name,
+                AveragePrice = averagePrice,
+                ClassImageURLs = new List<string>() { imageUrl },
+            };
+
+
+            Response response = await _busClassManager.AddAsync(busClassAddDto);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+
+        }
+
+        /*
         #region UpdateAsync
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateAsync(int id, BusClassUpdateDto busClassUpdateDto)
@@ -125,7 +182,57 @@ namespace GoBye.API.Controllers
             return BadRequest(busClassUpdateDto);
         }
         #endregion
+        */
 
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] IFormFile file, [FromForm] string name, [FromForm] string averagePrice)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file");
+            }
+
+            string folderPath;
+
+            if (!Directory.Exists(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images")))
+            {
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images"));
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+
+
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            string filePath = Path.Combine(folderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var newImageUrl = "https://localhost:44331/Images/" + uniqueFileName;
+
+            var busClassUpdateDto = new BusClassUpdateDto
+            {
+                Name = name,
+                AveragePrice = averagePrice,
+                ClassImageURLs = new List<string> { newImageUrl },
+            };
+
+
+            Response response = await _busClassManager.UpdateAsync(id, busClassUpdateDto);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+
+        }
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]

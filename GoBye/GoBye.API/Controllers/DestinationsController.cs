@@ -143,8 +143,8 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
-        
 
+        /*
         #region UpdateAsync
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateAsync(int id, DestinationUpdateDto destinationUpdateDto)
@@ -164,7 +164,56 @@ namespace GoBye.API.Controllers
             return BadRequest(destinationUpdateDto);
         }
         #endregion
+        */
 
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateAsync([FromRoute]int id, [FromForm] IFormFile file, [FromForm] string name)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file");
+            }
+
+            string folderPath;
+
+            if (!Directory.Exists(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images")))
+            {
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(_webHostEnvironment!.WebRootPath!, "Images"));
+                folderPath = Path.Combine(_webHostEnvironment!.WebRootPath!, "Images");
+            }
+
+
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            string filePath = Path.Combine(folderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var newImageUrl = "https://localhost:44331/Images/" + uniqueFileName;
+
+            var destinationUpdateDto = new DestinationUpdateDto
+            {
+                Name = name,
+                ImageURL = newImageUrl
+            };
+
+
+            Response response = await _destinationManager.UpdateAsync(id,destinationUpdateDto);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+
+        }
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
