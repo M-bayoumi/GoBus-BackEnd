@@ -54,10 +54,10 @@ namespace GoBye.API.Controllers
       
 
         #region GetAllWithTripDetailsByUserIdAsync
-        [HttpGet("userId{id}")]
-        public async Task<IActionResult> GetAllWithTripDetailsByUserIdAsync(string id)
+        [HttpGet("userId/{userId}")]
+        public async Task<IActionResult> GetAllWithTripDetailsByUserIdAsync(string userId)
         {
-            Response response = await _reservationManager.GetAllWithTripDetailsByUserIdAsync(id);
+            Response response = await _reservationManager.GetAllWithTripDetailsByUserIdAsync(userId);
 
             if (response.Success)
             {

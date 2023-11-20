@@ -81,9 +81,7 @@ namespace GoBye.BLL.Managers.ReservationManagers
                 }).ToList();
 
                 return _unitOfWork.Response(true, data, null);
-
             }
-
             return _unitOfWork.Response(false, null, "There is no Reservations");
         }
 

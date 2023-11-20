@@ -163,6 +163,7 @@ builder.Services.AddAuthentication(options =>
     optione.SaveToken = true;
     optione.TokenValidationParameters = new TokenValidationParameters()
     {
+        RequireExpirationTime = true,
         ValidateIssuer = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,

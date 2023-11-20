@@ -50,6 +50,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     UserName = x.UserName!,
                     Email = x.Email!,
                     PhoneNumber = x.PhoneNumber!,
+                    Blocked = x.Blocked
    
                 });
                 return _unitOfWork.Response(true, data, null);
@@ -79,11 +80,34 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 return _unitOfWork.Response(true, data, null);
 
             }
-            return _unitOfWork.Response(false, null, "There is no Driver found");
+            return _unitOfWork.Response(false, null, "There is no Drivers found");
 
         }
         #endregion
 
+        #region GetAllAdminsAsync
+        public async Task<Response> GetAllAdminsAsync()
+        {
+            IEnumerable<ApplicationUser>? applicationUsers = await _unitOfWork.ApplicationUserRepo.GetAllAdminsAsync();
+            if (applicationUsers is not null)
+            {
+                var data = applicationUsers.Select(x => new UserReadDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserName = x.UserName!,
+                    Email = x.Email!,
+                    PhoneNumber = x.PhoneNumber!,
+
+                });
+                return _unitOfWork.Response(true, data, null);
+
+            }
+            return _unitOfWork.Response(false, null, "There is no Admins found");
+
+        }
+        #endregion
 
         #region GetAllUsersWithDetailsAsync
         public async Task<Response> GetAllUsersWithDetailsAsync()
@@ -98,6 +122,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                     UserName = x.UserName!,
                     Email = x.Email!,
                     PhoneNumber = x.PhoneNumber!,
+                    Blocked = x.Blocked,
                     ReservationUserDtos = x.Reservations.Select(y => new ReservationUserDto
                     {
                         Id = y.Id,
@@ -394,6 +419,85 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+        #region RegisterDriverAsync
+        public async Task<Response> RegisterDriverAsync(RegisterDto registerDto)
+        {
+            ApplicationUser applicationUser = new ApplicationUser
+            {
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                UserName = registerDto.UserName,
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.PhoneNumber,
+            };
+
+            IEnumerable<IdentityError> errors = await _unitOfWork.ApplicationUserRepo.AddAsync(applicationUser, registerDto.Password);
+            if (!errors.Any())
+            {
+                ApplicationRole? applicationRole = await _unitOfWork.ApplicationRoleRepo.GetByIdAsync("491c779b-92be-4a0c-a1bf-91c28fc20e1e");
+
+                if (applicationUser is not null && applicationRole is not null)
+                {
+                    ApplicationUserRole applicationUserRole = new ApplicationUserRole
+                    {
+                        ApplicationRole = applicationRole,
+                        ApplicationUser = applicationUser
+                    };
+                    await _unitOfWork.ApplicationUserRoleRepo.AddAsync(applicationUserRole);
+                    bool ressult = await _unitOfWork.SaveChangesAsync() > 0;
+                    if (ressult)
+                    {
+                        return _unitOfWork.Response(true, null, $"Driver has been assignd to Role ({applicationRole.Name})");
+                    }
+                    return _unitOfWork.Response(true, null, $"Driver has been Added but dosen't assignd to Role ({applicationRole.Name})");
+                }
+
+            }
+            return _unitOfWork.Response(false, null, $"Driver failed to Added");
+        }
+        #endregion
+
+
+        #region RegisterAdminAsync
+        public async Task<Response> RegisterAdminAsync(RegisterDto registerDto)
+        {
+            ApplicationUser applicationUser = new ApplicationUser
+            {
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                UserName = registerDto.UserName,
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.PhoneNumber,
+            };
+
+            IEnumerable<IdentityError> errors = await _unitOfWork.ApplicationUserRepo.AddAsync(applicationUser, registerDto.Password);
+            if (!errors.Any())
+            {
+                ApplicationRole? applicationRole = await _unitOfWork.ApplicationRoleRepo.GetByIdAsync("b79f5098-1212-492e-853b-0ea294f0ec2d");
+
+                if (applicationUser is not null && applicationRole is not null)
+                {
+                    ApplicationUserRole applicationUserRole = new ApplicationUserRole
+                    {
+                        ApplicationRole = applicationRole,
+                        ApplicationUser = applicationUser
+                    };
+                    await _unitOfWork.ApplicationUserRoleRepo.AddAsync(applicationUserRole);
+                    bool ressult = await _unitOfWork.SaveChangesAsync() > 0;
+                    if (ressult)
+                    {
+                        return _unitOfWork.Response(true, null, $"Admin has been assignd to Role ({applicationRole.Name})");
+                    }
+                    return _unitOfWork.Response(true, null, $"Admin has been Added but dosen't assignd to Role ({applicationRole.Name})");
+                }
+
+            }
+            return _unitOfWork.Response(false, null, $"Driver failed to Added");
+        }
+        #endregion
+
+
+
 
         #region GetAllUserNamesAsync
         public async Task<Response> GetAllUserNamesAsync()
@@ -427,12 +531,46 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         #endregion
 
 
+        #region BlockUserAsync
+        public async Task<Response> BlockUserAsync(string id)
+        {
+            ApplicationUser? applicationUser = await _unitOfWork.ApplicationUserRepo.GetByIdAsync(id);
+            if (applicationUser is not null)
+            {
+                bool ressult;
+                if (applicationUser.Blocked == true)
+                {
+                    applicationUser.Blocked = false;
+                    ressult = await _unitOfWork.SaveChangesAsync() > 0;
+
+                }
+                else
+                {
+                    applicationUser.Blocked = true;
+                     ressult = await _unitOfWork.SaveChangesAsync() > 0;
+
+                }
+
+                if (ressult && applicationUser.Blocked)
+                {
+                    return _unitOfWork.Response(true, null, $"User has been blocked successfully");
+                }
+                else
+                {
+                    return _unitOfWork.Response(true, null, $"User has been unBlocked successfully");
+                }
+
+            }
+            return _unitOfWork.Response(false, null, $"User not found");
+        }
+        #endregion
+
         #region LoginAsync
         public async Task<Response> LoginAsync(LoginDto loginDto)
         {
             ApplicationUser? user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user is not null)
+            if (user is not null && !user.Blocked)
             {
                 var roles = await _userManager.GetRolesAsync(user);
                 bool found = await _userManager.CheckPasswordAsync(user, loginDto.Password);
@@ -472,6 +610,11 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                         $"{user.Email} is authorized");
 
                 }
+            }
+            else if (user is not null && user.Blocked)
+            {
+                return _unitOfWork.Response(false, null, $"User is blocked");
+
             }
             return _unitOfWork.Response(false, null, $"Email or password is not valid");
         }

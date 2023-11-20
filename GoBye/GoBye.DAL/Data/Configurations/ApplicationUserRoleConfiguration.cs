@@ -24,7 +24,17 @@ namespace GoBye.DAL.Data.Configurations
 
             builder.HasData(new List<ApplicationUserRole>
             {
-                #region ApplicationUserRoles
+                #region Admin
+                new ApplicationUserRole
+                {
+                    UserId = "38e2719d-2c73-4451-b386-32673b9798f4",
+                    RoleId = "b79f5098-1212-492e-853b-0ea294f0ec2d"
+
+                },
+                
+                #endregion
+
+                #region Drivers
                 new ApplicationUserRole
                 {
                     UserId = "f0fd67a7-a8f6-42d1-924b-4ef2cbfbe7dd",

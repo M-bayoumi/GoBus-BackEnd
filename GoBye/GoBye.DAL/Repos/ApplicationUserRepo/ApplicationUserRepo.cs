@@ -45,6 +45,15 @@ namespace GoBye.DAL.Repos.ApplicationUserRepo
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<ApplicationUser>?> GetAllAdminsAsync()
+        {
+            return await _appDbContext
+                .ApplicationUsers  
+                .Where(x => x.ApplicationUserRoles.Any(y => y.RoleId == "b79f5098-1212-492e-853b-0ea294f0ec2d"))
+                .Where(x=>x.Email != "mbayoumi151@gmail.com")
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<ApplicationUser>?> GetAllUsersWithDetailsAsync()
         {
             return await _appDbContext

@@ -57,6 +57,22 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+        #region GetAllAdminsAsync
+        [HttpGet]
+        [Route("/api/admins")]
+        public async Task<IActionResult> GetAllAdminsAsync()
+        {
+            Response response = await _applicationUserManager.GetAllAdminsAsync();
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return NotFound(response);
+        }
+        #endregion
+
         #region GetAllUsersWithDetailsAsync
         [HttpGet]
         [Route("/api/users/details")]
@@ -73,7 +89,6 @@ namespace GoBye.API.Controllers
 
         }
         #endregion
-
 
         #region GetAllDriversWithDetailsAsync
         [HttpGet]
@@ -92,7 +107,6 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
         #region GetAllByRoleAsync
         [HttpGet]
         [Route("role/id")]
@@ -109,7 +123,6 @@ namespace GoBye.API.Controllers
 
         }
         #endregion
-
 
         #region GetUserByIdWithDetailsAsync
 
@@ -129,7 +142,6 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
         #region GetDriverByIdWithDetailsAsync
         [HttpGet]
         [Route("/api/drivers/{id}")]
@@ -148,8 +160,8 @@ namespace GoBye.API.Controllers
 
         #endregion
 
-
         #region AddAsync
+        /*
         [HttpPost]
         public async Task<IActionResult> AddAsync(RegisterDto registerDto)
         {
@@ -166,10 +178,10 @@ namespace GoBye.API.Controllers
             }
             return BadRequest(ModelState);
         }
+        */
         #endregion
 
-
-        #region RegisterAsync
+        #region RegisterUserAsync
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterDto registerDto)
         {
@@ -188,7 +200,45 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        #region CheckUserNameAsync
+        #region RegisterDriverAsync
+        [HttpPost("register/driver")]
+        public async Task<IActionResult> RegisterDriverAsync(RegisterDto registerDto)
+        {
+            if (ModelState.IsValid)
+            {
+                Response response = await _applicationUserManager.RegisterDriverAsync(registerDto);
+
+                if (response.Success)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
+
+            }
+            return BadRequest(ModelState);
+        }
+        #endregion
+
+        #region RegisterAdminAsync
+        [HttpPost("register/admin")]
+        public async Task<IActionResult> RegisterAdminAsync(RegisterDto registerDto)
+        {
+            if (ModelState.IsValid)
+            {
+                Response response = await _applicationUserManager.RegisterAdminAsync(registerDto);
+
+                if (response.Success)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
+
+            }
+            return BadRequest(ModelState);
+        }
+        #endregion
+
+        #region GetAllUserNamesAsync
         [HttpGet]
         [Route("/api/users/usernames")]
         public async Task<IActionResult> GetAllUserNamesAsync()
@@ -203,7 +253,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        #region CheckEmailAsync
+        #region GetAllEmailsAsync
         [HttpGet]
         [Route("/api/users/emails")]
         public async Task<IActionResult> GetAllEmailsAsync()
@@ -217,6 +267,22 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
+        #endregion
+
+        #region BlockUserAsync
+        [HttpGet("block/{id}")]
+        public async Task<IActionResult> BlockUserAsync(string id)
+        {
+            Response response = await _applicationUserManager.BlockUserAsync(id);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+
+        }
+
         #endregion
 
 
@@ -240,8 +306,6 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
-
         #region UpdateAsync
         [HttpPut]
         [Route("{id}")]
@@ -262,7 +326,6 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-
         #region DeleteAsync
         [HttpDelete]
         [Route("{id}")]
@@ -278,9 +341,10 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+        #region GetUserAsync
         [HttpGet("getUser")]
         [Authorize(Policy = "ForUser")]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUserAsync()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             Response response = await _applicationUserManager.GetByIdAsync(userId);
@@ -291,5 +355,23 @@ namespace GoBye.API.Controllers
             }
             return NotFound(response);
         }
+        #endregion
+
+        #region GetAdminAsync
+        [HttpGet("getAdmin")]
+        [Authorize(Policy = "ForAdmin")]
+        public async Task<IActionResult> GetAdminAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            Response response = await _applicationUserManager.GetByIdAsync(userId);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
+        #endregion
+
     }
 }
