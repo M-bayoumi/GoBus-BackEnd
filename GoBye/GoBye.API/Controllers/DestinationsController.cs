@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoBye.API.Controllers
 {
@@ -97,6 +98,7 @@ namespace GoBye.API.Controllers
 
       
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync([FromForm] IFormFile file, [FromForm] string name)
         {
             if (file == null || file.Length == 0)
@@ -167,6 +169,7 @@ namespace GoBye.API.Controllers
         */
 
         [HttpPut("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync([FromRoute]int id, [FromForm] IFormFile file, [FromForm] string name)
         {
             if (file == null || file.Length == 0)
@@ -217,6 +220,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _destinationManager.DeleteAsync(id);

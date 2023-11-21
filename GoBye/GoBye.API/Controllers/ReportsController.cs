@@ -25,6 +25,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllWithUserInfoAsync
         [HttpGet]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllWithUserInfoAsync()
         {
             Response response = await _reportManager.GetAllWithUserInfoAsync();
@@ -41,6 +42,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllByUserIdAsync
         [HttpGet("userId/{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllByUserIdAsync(string id)
         {
             Response response = await _reportManager.GetAllByUserIdAsync(id);
@@ -92,6 +94,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _reportManager.DeleteAsync(id);

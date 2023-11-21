@@ -1,6 +1,7 @@
 ﻿using GoBye.BLL.Dtos.StartBranchDtos;
 using GoBye.BLL.Managers.StartBranchManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -86,6 +87,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync(StartBranchAddDto startBranchAddDto)
         {
             if (ModelState.IsValid)
@@ -104,6 +106,7 @@ namespace GoBye.API.Controllers
 
         #region UpdateAsync
         [HttpPut("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync(int id, StartBranchUpdateDto startBranchUpdateDto)
         {
             if (ModelState.IsValid)
@@ -125,6 +128,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _startBranchManager.DeleteAsync(id);

@@ -7,6 +7,7 @@ using GoBye.BLL.Managers.ReservationManagers;
 using GoBye.BLL.Managers.TripManagers;
 using GoBye.DAL.Data.Models;
 using GoBye.DAL.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ namespace GoBye.API.Controllers
 
         #region FilterByDateAsync
         [HttpGet("filter/{date}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> FilterByDateAsync(DateTime date)
         {
             Response response = await _tripManager.FilterByDateAsync(DateOnly.FromDateTime(date));
@@ -62,6 +64,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllWithDetailsAsync
         [HttpGet]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllWithDetailsAsync()
         {
             Response response = await _tripManager.GetAllWithDetailsAsync();
@@ -94,6 +97,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync(TripAddDto tripAddDto)
         {
             if (ModelState.IsValid)
@@ -111,6 +115,7 @@ namespace GoBye.API.Controllers
 
         #region UpdateAsync
         [HttpPut("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync(int id, TripUpdateDto tripUpdateDto)
         {
             if (ModelState.IsValid)
@@ -132,6 +137,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _tripManager.DeleteAsync(id);

@@ -3,6 +3,7 @@ using GoBye.BLL.Dtos.ReservationDtos;
 using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.BLL.Managers.ReservationManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace GoBye.API.Controllers
         
         #region GetAllWithTripDetailsAsync
         [HttpGet]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllWithTripDetailsAsync()
         {
             Response response = await _reservationManager.GetAllWithTripDetailsAsync();
@@ -39,6 +41,7 @@ namespace GoBye.API.Controllers
        
         #region GetAllByTripIdAsync
         [HttpGet("tripId/{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllByTripIdAsync(int id)
         {
             Response response = await _reservationManager.GetAllByTripIdAsync(id);
@@ -70,6 +73,7 @@ namespace GoBye.API.Controllers
 
         #region FilterByDateAsync
         [HttpGet("filter/{date}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> FilterByDateAsync(DateTime date)
         {
             Response response = await _reservationManager.FilterByDateAsync(DateOnly.FromDateTime(date));

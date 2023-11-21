@@ -4,6 +4,7 @@ using GoBye.BLL.Dtos.ClassImageDto;
 using GoBye.BLL.Managers.BusClassManagers;
 using GoBye.BLL.Managers.ClassImageManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,6 +72,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync(ClassImageAddDto classImageAddDto)
         {
             if (ModelState.IsValid)
@@ -91,6 +93,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _classImageManager.DeleteAsync(id);

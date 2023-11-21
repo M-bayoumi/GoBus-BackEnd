@@ -60,6 +60,7 @@ namespace GoBye.API.Controllers
         #region GetAllAdminsAsync
         [HttpGet]
         [Route("/api/admins")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllAdminsAsync()
         {
             Response response = await _applicationUserManager.GetAllAdminsAsync();
@@ -93,6 +94,7 @@ namespace GoBye.API.Controllers
         #region GetAllDriversWithDetailsAsync
         [HttpGet]
         [Route("/api/drivers/details")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllDriversWithDetailsAsync()
         {
             Response response = await _applicationUserManager.GetAllDriversWithDetailsAsync();
@@ -110,6 +112,7 @@ namespace GoBye.API.Controllers
         #region GetAllByRoleAsync
         [HttpGet]
         [Route("role/id")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllByRoleAsync(string id)
         {
             Response response = await _applicationUserManager.GetAllByRoleAsync(id);
@@ -145,6 +148,7 @@ namespace GoBye.API.Controllers
         #region GetDriverByIdWithDetailsAsync
         [HttpGet]
         [Route("/api/drivers/{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetDriverByIdWithDetailsAsync(string id)
         {
             Response response = await _applicationUserManager.GetDriverByIdWithDetailsAsync(id);
@@ -202,6 +206,7 @@ namespace GoBye.API.Controllers
 
         #region RegisterDriverAsync
         [HttpPost("register/driver")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> RegisterDriverAsync(RegisterDto registerDto)
         {
             if (ModelState.IsValid)
@@ -221,6 +226,7 @@ namespace GoBye.API.Controllers
 
         #region RegisterAdminAsync
         [HttpPost("register/admin")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> RegisterAdminAsync(RegisterDto registerDto)
         {
             if (ModelState.IsValid)
@@ -271,6 +277,7 @@ namespace GoBye.API.Controllers
 
         #region BlockUserAsync
         [HttpGet("block/{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> BlockUserAsync(string id)
         {
             Response response = await _applicationUserManager.BlockUserAsync(id);
@@ -309,6 +316,7 @@ namespace GoBye.API.Controllers
         #region UpdateAsync
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync(string id, UserUpdateDto userUpdateDto)
         {
             if (ModelState.IsValid)
@@ -329,6 +337,7 @@ namespace GoBye.API.Controllers
         #region DeleteAsync
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(string id)
         {
             Response response = await _applicationUserManager.DeleteAsync(id);

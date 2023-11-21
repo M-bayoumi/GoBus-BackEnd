@@ -131,6 +131,7 @@ namespace GoBye.BLL.Managers.ReservationManagers
                     TotalPrice = x.TotalPrice,
                     Date = x.Date,
                     UserId = x.UserId,
+                    TripId = x.TripId,
                     UserName = x.User.UserName!,
                     SeatNumbers = x.Tickets.Select(x => x.SeatNumber).ToList(),
                     DepartureDate = x.Trip.DepartureDate,

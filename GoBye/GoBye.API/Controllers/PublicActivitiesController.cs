@@ -5,6 +5,7 @@ using GoBye.BLL.Managers.DestinationManagers;
 using GoBye.BLL.Managers.PolicyManager;
 using GoBye.BLL.Managers.PublicActivityManagers;
 using GoBye.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -94,6 +95,7 @@ namespace GoBye.API.Controllers
         */
 
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync
             (
             [FromForm] IFormFile file,
@@ -173,6 +175,7 @@ namespace GoBye.API.Controllers
         */
 
         [HttpPut("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync
             (
             [FromRoute] int id,
@@ -232,6 +235,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _publicActivityManager.DeleteAsync(id);

@@ -21,6 +21,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllWithBusClassAsync
         [HttpGet]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllWithBusClassAsync()
         {
             Response response = await _busManager.GetAllWithBusClassAsync();
@@ -37,6 +38,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllByBusClassIdAsync
         [HttpGet("ClassId/{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllByBusClassIdAsync(int id)
         {
             Response response = await _busManager.GetAllByBusClassIdAsync(id);
@@ -53,6 +55,7 @@ namespace GoBye.API.Controllers
 
         #region GetAllAvailableBusesAsync
         [HttpGet("Available")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllAvailableBusesAsync()
         {
             Response response = await _busManager.GetAllAvailableBusesAsync();
@@ -69,6 +72,7 @@ namespace GoBye.API.Controllers
 
         #region GetByIdWithBusClassAsync
         [HttpGet("{id:int}")]
+
         public async Task<IActionResult> GetByIdWithBusClassAsync(int id)
         {
             Response response = await _busManager.GetByIdWithBusClassAsync(id);
@@ -85,6 +89,7 @@ namespace GoBye.API.Controllers
 
         #region AddAsync
         [HttpPost]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync(BusAddDto busAddDto)
         {
             if (ModelState.IsValid)
@@ -105,6 +110,7 @@ namespace GoBye.API.Controllers
 
         #region UpdateAsync
         [HttpPut("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync(int id, BusUpdateDto busUpdateDto)
         {
             if (ModelState.IsValid)
@@ -126,6 +132,7 @@ namespace GoBye.API.Controllers
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Response response = await _busManager.DeleteAsync(id);
