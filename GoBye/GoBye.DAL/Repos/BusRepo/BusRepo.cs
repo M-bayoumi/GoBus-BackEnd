@@ -46,7 +46,7 @@ namespace GoBye.DAL.Repos.BusRepo
                 _appDbContext
                 .Buses
                 .Include(x => x.BusClass)
-                .Where(x=>x.Available == true)
+                .Include(x=>x.Trips)
                 .ToListAsync();
         }
 

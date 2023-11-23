@@ -20,7 +20,7 @@ namespace GoBye.DAL.Repos.TripRepo
         }
 
 
-        public async Task<IEnumerable<Trip>?> FilterAllAsync()
+        public async Task<IEnumerable<Trip>?> SearchAsync()
         {
             return await _appDbContext
                 .Trips

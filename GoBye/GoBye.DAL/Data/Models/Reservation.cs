@@ -13,7 +13,7 @@
         public Trip Trip { get; set; } = null!;
         public IEnumerable<Ticket> Tickets { get; set; } = new List<Ticket>();
 
-        ///////////////////////////
+        ///////////////////////////    Stripe    ///////////////////////////
         public string ClientSecret { get; set; } = string.Empty;
         public string PaymentIntentId { get; set; } = string.Empty;
     }

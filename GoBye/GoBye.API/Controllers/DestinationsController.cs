@@ -44,6 +44,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+
         #region GetAllWithBranchesDetailsAsync
         [HttpGet("branches")]
         public async Task<IActionResult> GetAllWithBranchesDetailsAsync()
@@ -60,6 +61,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+
         #region GetByIdAsync
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
@@ -75,28 +77,8 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        /*
+
         #region AddAsync
-        [HttpPost]
-        public async Task<IActionResult> AddAsync(DestinationAddDto destinationAddDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _destinationManager.AddAsync(destinationAddDto);
-
-                if (response.Success)
-
-                    return Ok(response);
-            }
-
-            return BadRequest(destinationAddDto);
-        }
-
-        #endregion
-        */
-
-
-      
         [HttpPost]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync([FromForm] IFormFile file, [FromForm] string name)
@@ -145,29 +127,10 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
-
-        /*
-        #region UpdateAsync
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateAsync(int id, DestinationUpdateDto destinationUpdateDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _destinationManager.UpdateAsync(id, destinationUpdateDto);
-
-                if (response.Success)
-                {
-                    return Ok(response);
-                }
-                return BadRequest(response);
-
-            }
-
-            return BadRequest(destinationUpdateDto);
-        }
         #endregion
-        */
 
+
+        #region UpdateAsync
         [HttpPut("{id:int}")]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync([FromRoute]int id, [FromForm] IFormFile file, [FromForm] string name)
@@ -217,6 +180,8 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
+        #endregion
+
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]

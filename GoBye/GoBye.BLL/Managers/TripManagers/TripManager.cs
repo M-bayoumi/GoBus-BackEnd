@@ -24,10 +24,10 @@ namespace GoBye.BLL.Managers.TripManagers
         }
 
 
-        #region FilterAllAsync
-        public async Task<Response> FilterAllAsync(TripSearchDto tripSearchDto)
+        #region SearchAsync
+        public async Task<Response> SearchAsync(TripSearchDto tripSearchDto)
         {
-            IEnumerable<Trip>? trips = await _unitOfWork.TripRepo.FilterAllAsync();
+            IEnumerable<Trip>? trips = await _unitOfWork.TripRepo.SearchAsync();
 
             if (trips is not null)
             {
@@ -60,6 +60,7 @@ namespace GoBye.BLL.Managers.TripManagers
             return _unitOfWork.Response(false, null, "There is no Trips");
         }
         #endregion
+
 
         #region FilterByDateAsync
         public async Task<Response> FilterByDateAsync(DateOnly date)

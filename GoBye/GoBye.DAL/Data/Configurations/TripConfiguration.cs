@@ -39,33 +39,6 @@ namespace GoBye.DAL.Data.Configurations
                 .IsRequired();
 
             builder.ToTable("Trips");
-
-            /*
-            public DateTime DepartureDate { get; set; }
-            public DateTime ArrivalDate { get; set; }
-            public decimal Price { get; set; }
-            public int BusId { get; set; }
-            public int StartBranchId { get; set; }
-            public int EndBranchId { get; set; }
-            */
-
-            /*
-            var now = DateTime.Now;
-            builder.HasData(new List<Trip>
-            {
-                new Trip
-                {
-                    Id = 1,
-                    DepartureDate = DateTime.Now.AddDays(1).AddHours(0),
-                    ArrivalDate = DateTime.Now.AddDays(1).AddHours(0),
-                    Price = 300,
-                    BusId = 1,
-                    StartBranchId = 1,
-                    EndBranchId = 14
-                },
-            });
-            
-            */
         }
     }
 }

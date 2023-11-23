@@ -75,25 +75,8 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        /*
+
         #region AddAsync
-        [HttpPost]
-        public async Task<IActionResult> AddAsync(PublicActivityAddDto publicActivityAddDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _publicActivityManager.AddAsync(publicActivityAddDto);
-
-                if (response.Success)
-
-                    return Ok(response);
-            }
-
-            return BadRequest(publicActivityAddDto);
-        }
-        #endregion
-        */
-
         [HttpPost]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync
@@ -150,30 +133,10 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
-
-
-        /*
-        #region UpdateAsync
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateAsync(int id, PublicActivityUpdateDto publicActivityUpdateDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _publicActivityManager.UpdateAsync(id, publicActivityUpdateDto);
-
-                if (response.Success)
-                {
-                    return Ok(response);
-                }
-                return BadRequest(response);
-
-            }
-
-            return BadRequest(publicActivityUpdateDto);
-        }
         #endregion
-        */
 
+ 
+        #region UpdateAsync
         [HttpPut("{id:int}")]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync
@@ -232,6 +195,8 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
+        #endregion
+
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]

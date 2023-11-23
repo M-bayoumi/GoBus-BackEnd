@@ -42,6 +42,7 @@ namespace GoBye.BLL.Managers.DestinationManagers
         }
         #endregion
 
+
         #region GetAllAsync
         public async Task<Response> GetAllWithBranchesDetailsAsync()
         {

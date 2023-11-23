@@ -20,22 +20,6 @@ namespace GoBye.DAL.Data.Configurations
                 .IsRequired();
 
             builder.ToTable("Tickets");
-
-            /*
-            public int SeatNumber { get; set; }
-            public int ReservationId { get; set; }
-            */
-
-            /*
-            builder.HasData(new List<Ticket>
-            {
-                new Ticket
-                {
-
-                },
-            });
-            */
-            
         }
     }
 }

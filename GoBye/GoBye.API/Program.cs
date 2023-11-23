@@ -64,6 +64,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 #endregion
 
+
 #region Files Service
 builder.Services.Configure<FormOptions>(options =>
 {
@@ -175,6 +176,7 @@ builder.Services.AddAuthentication(options =>
 
 #endregion
 
+
 #region Authorization
 
 builder.Services.AddAuthorization(options =>
@@ -198,7 +200,9 @@ builder.Services.AddAuthorization(options =>
 
 #endregion
 
+
 var app = builder.Build();
+
 
 #region Middlewares
 
@@ -222,5 +226,6 @@ app.MapControllers();
 
 
 #endregion
+
 
 app.Run();

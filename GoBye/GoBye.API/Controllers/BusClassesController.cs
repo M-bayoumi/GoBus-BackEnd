@@ -92,27 +92,8 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
-        /*
+
         #region AddAsync
-        [HttpPost]
-        public async Task<IActionResult> AddAsync(BusClassAddDto busClassAddDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _busClassManager.AddAsync(busClassAddDto);
-
-                if (response.Success)
-                {
-                    return Ok(response);
-                }
-                return BadRequest(response);
-
-            }
-            return BadRequest(busClassAddDto);
-        }
-        #endregion
-        */
-
         [HttpPost]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> AddAsync([FromForm] IFormFile file, [FromForm] string name, [FromForm] string averagePrice)
@@ -162,29 +143,10 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
-
-        /*
-        #region UpdateAsync
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateAsync(int id, BusClassUpdateDto busClassUpdateDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Response response = await _busClassManager.UpdateAsync(id, busClassUpdateDto);
-
-                if (response.Success)
-                {
-                    return Ok(response);
-                }
-                return BadRequest(response);
-
-            }
-
-            return BadRequest(busClassUpdateDto);
-        }
         #endregion
-        */
 
+
+        #region UpdateAsync
         [HttpPut("{id:int}")]
         [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] IFormFile file, [FromForm] string name, [FromForm] string averagePrice)
@@ -235,6 +197,8 @@ namespace GoBye.API.Controllers
             return BadRequest(response);
 
         }
+        #endregion
+
 
         #region DeleteAsync
         [HttpDelete("{id:int}")]

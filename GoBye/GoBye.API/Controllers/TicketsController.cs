@@ -21,6 +21,7 @@ namespace GoBye.API.Controllers
             _ticketManager = ticketManager;
         }
 
+
         #region GetAllWithReservationNumberAsync
         [HttpGet]
         public async Task<IActionResult> GetAllWithReservationNumberAsync()
@@ -51,6 +52,7 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
+
 
         #region GetAllByTripIdAsync
         [HttpGet("trip/{id:int}")]

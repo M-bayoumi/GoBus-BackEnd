@@ -53,6 +53,7 @@ namespace GoBye.BLL.Managers.ReservationManagers
         }
         #endregion
 
+
         #region FilterByDateAsync
         public async Task<Response> FilterByDateAsync(DateOnly date)
         {
@@ -86,7 +87,6 @@ namespace GoBye.BLL.Managers.ReservationManagers
         }
 
         #endregion
-
 
 
         #region GetAllByTripIdAsync

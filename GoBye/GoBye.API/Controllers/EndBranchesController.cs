@@ -54,6 +54,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+
         #region FilterEndBranchesByStartBranchDestinationIdAsync
         [HttpGet("filter/destinationId/{id:int}")]
         public async Task<IActionResult> FilterEndBranchesByStartBranchDestinationIdAsync(int id)
@@ -69,6 +70,7 @@ namespace GoBye.API.Controllers
 
         }
         #endregion
+
 
         #region GetByIdWithDestinationNameAsync
         [HttpGet("{id:int}")]
@@ -142,7 +144,6 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
-
 
     }
 }

@@ -73,6 +73,7 @@ namespace GoBye.BLL.Managers.EndBranchManagers
         }
         #endregion
 
+
         #region FilterEndBranchesByStartBranchDestinationIdAsync
         public async Task<Response> FilterEndBranchesByStartBranchDestinationIdAsync(int id)
         {
@@ -94,6 +95,7 @@ namespace GoBye.BLL.Managers.EndBranchManagers
 
         }
         #endregion
+
 
         #region GetByIdWithDestinationNameAsync
         public async Task<Response> GetByIdWithDestinationNameAsync(int id)

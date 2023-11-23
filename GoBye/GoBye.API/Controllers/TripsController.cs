@@ -27,11 +27,11 @@ namespace GoBye.API.Controllers
         }
 
 
-        #region FilterAllAsync
+        #region SearchAsync
         [HttpPost("search")]
-        public async Task<IActionResult> FilterAllAsync(TripSearchDto tripSearchDto)
+        public async Task<IActionResult> SearchAsync(TripSearchDto tripSearchDto)
         {
-            Response response = await _tripManager.FilterAllAsync(tripSearchDto);
+            Response response = await _tripManager.SearchAsync(tripSearchDto);
 
             if (response.Success)
             {
@@ -41,7 +41,6 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
-
 
 
         #region FilterByDateAsync
@@ -59,7 +58,6 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
-
 
 
         #region GetAllWithDetailsAsync
@@ -112,6 +110,7 @@ namespace GoBye.API.Controllers
             return BadRequest(tripAddDto);
         }
         #endregion
+
 
         #region UpdateAsync
         [HttpPut("{id}")]

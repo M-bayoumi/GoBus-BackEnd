@@ -71,6 +71,7 @@ namespace GoBye.API.Controllers
         }
         #endregion
 
+
         #region FilterByDateAsync
         [HttpGet("filter/{date}")]
         [Authorize(Policy = "ForAdmin")]
@@ -86,8 +87,6 @@ namespace GoBye.API.Controllers
             return NotFound(response);
         }
         #endregion
-
-
 
 
         #region GetByIdWithTripDetailsAsync

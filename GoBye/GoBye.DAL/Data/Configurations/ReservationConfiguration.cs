@@ -45,16 +45,6 @@ namespace GoBye.DAL.Data.Configurations
                 .IsRequired();
 
             builder.ToTable("Reservations");
-
-            /*
-            builder.HasData(new List<Reservation>
-            {
-                new Reservation
-                {
-
-                },
-            });
-            */
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GoBye.DAL.Repos.TripRepo
 {
     public interface ITripRepo:IGenericRepo<Trip>
     {
-        Task<IEnumerable<Trip>?> FilterAllAsync();
+        Task<IEnumerable<Trip>?> SearchAsync();
         Task<Trip?> GetByIdWithBusClassNameAsync(int id);
         Task<IEnumerable<Trip>?> GetAllWithDetailsAsync();
     }

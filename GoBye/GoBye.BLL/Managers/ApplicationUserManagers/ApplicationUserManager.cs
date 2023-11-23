@@ -61,6 +61,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+
         #region GetAllDriversAsync
         public async Task<Response> GetAllDriversAsync()
         {
@@ -85,6 +86,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+
         #region GetAllAdminsAsync
         public async Task<Response> GetAllAdminsAsync()
         {
@@ -108,6 +110,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
 
         }
         #endregion
+
 
         #region GetAllUsersWithDetailsAsync
         public async Task<Response> GetAllUsersWithDetailsAsync()
@@ -419,6 +422,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         }
         #endregion
 
+
         #region RegisterDriverAsync
         public async Task<Response> RegisterDriverAsync(RegisterDto registerDto)
         {
@@ -497,8 +501,6 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
         #endregion
 
 
-
-
         #region GetAllUserNamesAsync
         public async Task<Response> GetAllUserNamesAsync()
         {
@@ -564,6 +566,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
             return _unitOfWork.Response(false, null, $"User not found");
         }
         #endregion
+
 
         #region LoginAsync
         public async Task<Response> LoginAsync(LoginDto loginDto)

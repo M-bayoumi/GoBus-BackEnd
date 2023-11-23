@@ -54,11 +54,11 @@ namespace GoBye.API.Controllers
 
 
         #region GetAllAvailableBusesAsync
-        [HttpGet("Available")]
+        [HttpGet("Available/{departureDate}/{arrivalDate}")]
         [Authorize(Policy = "ForAdmin")]
-        public async Task<IActionResult> GetAllAvailableBusesAsync()
+        public async Task<IActionResult> GetAllAvailableBusesAsync(DateTime departureDate, DateTime arrivalDate)
         {
-            Response response = await _busManager.GetAllAvailableBusesAsync();
+            Response response = await _busManager.GetAllAvailableBusesAsync(departureDate, arrivalDate);
 
             if (response.Success)
             {

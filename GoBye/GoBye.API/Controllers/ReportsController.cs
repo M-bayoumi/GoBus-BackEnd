@@ -1,5 +1,4 @@
-﻿
-using GoBye.BLL.Dtos.BusDtos;
+﻿using GoBye.BLL.Dtos.BusDtos;
 using GoBye.BLL.Dtos.QuestionDtos;
 using GoBye.BLL.Dtos.ReportDtos;
 using GoBye.BLL.Managers.BusManagers;

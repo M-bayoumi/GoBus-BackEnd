@@ -87,7 +87,6 @@ namespace GoBye.DAL.Data.Configurations
                 },
                 #endregion
 
-
                 #region New Deluxe Images
                 new ClassImage
                 {

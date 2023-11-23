@@ -5,7 +5,6 @@ using GoBye.BLL.Dtos.ReportDtos;
 using GoBye.BLL.Dtos.ReservationDtos;
 using GoBye.BLL.Dtos.TripDtos;
 using GoBye.DAL.Data.Models;
-
 using GoBye.DAL.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using System;

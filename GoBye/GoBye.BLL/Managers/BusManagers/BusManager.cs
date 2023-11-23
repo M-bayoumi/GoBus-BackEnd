@@ -79,12 +79,32 @@ namespace GoBye.BLL.Managers.BusManagers
 
 
         #region GetAllAvailableBusesAsync
-        public async Task<Response> GetAllAvailableBusesAsync()
+        public async Task<Response> GetAllAvailableBusesAsync(DateTime departureDate, DateTime arrivalDate)
         {
             IEnumerable<Bus>? buses = await _unitOfWork.BusRepo.GetAllAvailableBusesAsync();
+            List<Bus> avaBuses = new List<Bus>();
+
             if (buses is not null)
             {
-                var data = buses.Select(x => new BusAvailableDto
+                foreach (var bus in buses)
+                {
+                    if(bus.Trips == null || bus.Trips.Count() == 0)
+                    {
+                        avaBuses.Add(bus);
+
+                    }
+                    else
+                    {
+                        foreach (var trip in bus.Trips)
+                        {
+                            if((departureDate < trip.DepartureDate && arrivalDate < trip.DepartureDate) || ( departureDate > trip.ArrivalDate && arrivalDate> trip.ArrivalDate)  )
+                            {
+                                avaBuses.Add(bus);
+                            }
+                        }
+                    }
+                }
+                var data = avaBuses.Select(x => new BusAvailableDto
                 {
                     Id = x.Id,
                     Number = x.Number,
@@ -173,6 +193,7 @@ namespace GoBye.BLL.Managers.BusManagers
             return _unitOfWork.Response(false, null, "Failed to update Bus");
         }
         #endregion
+
 
         #region DeleteAsync
         public async Task<Response> DeleteAsync(int id)
