@@ -88,22 +88,26 @@ namespace GoBye.BLL.Managers.BusManagers
             {
                 foreach (var bus in buses)
                 {
-                    if(bus.Trips == null || bus.Trips.Count() == 0)
-                    {
-                        avaBuses.Add(bus);
+                    bool isAvailable = true;
 
-                    }
-                    else
+                    if (bus.Trips != null && bus.Trips.Any())
                     {
                         foreach (var trip in bus.Trips)
                         {
-                            if((departureDate < trip.DepartureDate && arrivalDate < trip.DepartureDate) || ( departureDate > trip.ArrivalDate && arrivalDate> trip.ArrivalDate)  )
+                            if (!((departureDate < trip.DepartureDate && arrivalDate < trip.DepartureDate) || (departureDate > trip.ArrivalDate && arrivalDate > trip.ArrivalDate)))
                             {
-                                avaBuses.Add(bus);
+                                isAvailable = false; 
+                                break;
                             }
                         }
                     }
+
+                    if (isAvailable)
+                    {
+                        avaBuses.Add(bus);
+                    }
                 }
+
                 var data = avaBuses.Select(x => new BusAvailableDto
                 {
                     Id = x.Id,
@@ -112,6 +116,7 @@ namespace GoBye.BLL.Managers.BusManagers
                     CurrentBranch = x.CurrentBranch,
                     ClassBusName = x.BusClass.Name,
                 });
+
                 return _unitOfWork.Response(true, data, null);
             }
 

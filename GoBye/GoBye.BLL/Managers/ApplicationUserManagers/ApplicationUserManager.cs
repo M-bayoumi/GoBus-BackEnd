@@ -658,9 +658,9 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                 bool result = await _unitOfWork.SaveChangesAsync() > 0;
                 if (result)
                 {
-                    return _unitOfWork.Response(true, null, $"The User with id ({id}) has been deleted successfully");
+                    return _unitOfWork.Response(true, null, $"The User has been deleted successfully");
                 }
-                return _unitOfWork.Response(false, null, $"Failed to delete User with id ({id})");
+                return _unitOfWork.Response(false, null, $"Failed to delete User");
             }
             return _unitOfWork.Response(false, null, $"User not found");
         }

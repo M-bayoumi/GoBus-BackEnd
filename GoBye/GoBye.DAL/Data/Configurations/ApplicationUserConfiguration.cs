@@ -22,7 +22,6 @@ namespace GoBye.DAL.Data.Configurations
                .HasColumnType("bit")
                .IsRequired();
 
-            //builder.ToTable("ApplicationUsers");
 
 
             builder.HasData(new List<ApplicationUser>
@@ -34,9 +33,11 @@ namespace GoBye.DAL.Data.Configurations
                     FirstName = "Mohamed",
                     LastName = "Bayoumi",
                     UserName = "mbayoumi151",
+                    NormalizedUserName= "MBAYOUMI151",
                     Email = "mbayoumi151@gmail.com",
                     PhoneNumber = "01093996245",
-                    PasswordHash = "Sm612147?",
+                    PasswordHash = "AQAAAAIAAYagAAAAEMkgLtsF9ReuCfvVRFoB4D+raq+vPryyqw9F4mHf5jk6cwSd2VwJHJjPAxa8UdTkOg==",
+                    NormalizedEmail = "MBAYOUMI151@GMAIL.COM"
                 },
                
                 #endregion

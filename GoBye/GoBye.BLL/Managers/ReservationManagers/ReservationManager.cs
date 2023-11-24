@@ -95,17 +95,25 @@ namespace GoBye.BLL.Managers.ReservationManagers
             IEnumerable<Reservation>? reservations = await _unitOfWork.ReservationRepo.GetAllByTripIdAsync(id);
             if (reservations is not null)
             {
-                var data = reservations.Select(x => new ReservationReadDto
+                IEnumerable<Reservation>? filteredReservations = reservations
+                .Where(x => x.TripId == id)
+                .ToList();
+                var data = filteredReservations.Select(x => new ReservationDetailsDto
                 {
                     Id = x.Id,
                     Price = x.Trip.Price,
                     Quantity = x.Quantity,
-                    TotalPrice = x.TotalPrice,
+                    TotalPrice = x.Quantity * x.Trip.Price,
                     Date = x.Date,
+                    TripId = x.TripId,
                     UserId = x.UserId,
                     UserName = x.User.UserName!,
-                    PhoneNumber = x.User.PhoneNumber!,
                     SeatNumbers = x.Tickets.Select(x => x.SeatNumber).ToList(),
+                    DepartureDate = x.Trip.DepartureDate,
+                    ArrivalDate = x.Trip.ArrivalDate,
+                    BusClassName = x.Trip.Bus.BusClass.Name,
+                    StartBranchName = x.Trip.StartBranch.Name,
+                    EndBranchName = x.Trip.EndBranch.Name,
                 }).ToList();
 
                 return _unitOfWork.Response(true, data, null);

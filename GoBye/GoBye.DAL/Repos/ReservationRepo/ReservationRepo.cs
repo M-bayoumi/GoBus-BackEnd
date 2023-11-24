@@ -69,17 +69,23 @@ namespace GoBye.DAL.Repos.ReservationRepo
         public async Task<IEnumerable<Reservation>?> GetAllByTripIdAsync(int id)
         {
             return await _appDbContext
-                .Reservations
+                 .Reservations
 
-                .Include(x => x.User)
+                 .Include(x => x.User)
 
-                .Include(y=>y.Trip)
+                 .Include(x => x.Tickets)
 
-                .Include(y=>y.Tickets)
+                 .Include(x => x.Trip)
+                 .ThenInclude(y => y.StartBranch)
 
-                .Where(x => x.TripId == id)
+                 .Include(x => x.Trip)
+                 .ThenInclude(y => y.EndBranch)
 
-                .ToListAsync();
+                 .Include(x => x.Trip)
+                 .ThenInclude(y => y.Bus)
+                 .ThenInclude(z => z.BusClass)
+
+                 .ToListAsync();
         }
 
         public async Task<Reservation?> GetByIdWithTripDetailsAsync(int id)
