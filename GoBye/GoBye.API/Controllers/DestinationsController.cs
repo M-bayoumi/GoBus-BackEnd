@@ -27,7 +27,6 @@ namespace GoBye.API.Controllers
 
 
 
-
         #region GetAllAsync
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()

@@ -600,7 +600,7 @@ namespace GoBye.BLL.Managers.ApplicationUserManager
                         issuer: _configuration["JWT:Issuer"],
                         audience: _configuration["JWT:Audience"],
                         claims: claims,
-                        expires: loginDto.RememberMe? DateTime.Now.AddDays(15):DateTime.Now.AddMinutes(20),
+                        expires: loginDto.RememberMe? DateTime.Now.AddDays(15):DateTime.Now.AddHours(1),
                         signingCredentials: signingCred
                         );
 

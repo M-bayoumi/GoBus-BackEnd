@@ -38,7 +38,6 @@ namespace GoBye.API.Controllers
 
         #region GetAllByBusClassIdAsync
         [HttpGet("ClassId/{id:int}")]
-        [Authorize(Policy = "ForAdmin")]
         public async Task<IActionResult> GetAllByBusClassIdAsync(int id)
         {
             Response response = await _busManager.GetAllByBusClassIdAsync(id);

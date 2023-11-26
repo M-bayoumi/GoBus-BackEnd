@@ -36,7 +36,7 @@ namespace GoBye.DAL.Data.Configurations
                     NormalizedUserName= "MBAYOUMI151",
                     Email = "mbayoumi151@gmail.com",
                     PhoneNumber = "01093996245",
-                    PasswordHash = "AQAAAAIAAYagAAAAEMkgLtsF9ReuCfvVRFoB4D+raq+vPryyqw9F4mHf5jk6cwSd2VwJHJjPAxa8UdTkOg==",
+                    PasswordHash = "AQAAAAIAAYagAAAAEMkgLtsF9ReuCfvVRFoB4D+raq+vPryyqw9F4mHf5jk6cwSd2VwJHJjPAxa8UdTkOg==", // Sm612147?
                     NormalizedEmail = "MBAYOUMI151@GMAIL.COM"
                 },
                

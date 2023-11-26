@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zr0kGwRD2S/ODcltBrQTRxbtYpvUN6Hqf8+dCcrBDY4=",
+  "Hash": "gkPADKPC+9q9iDgBlOMitYvohBgkBXvPjJNl6twN/lI=",
   "Source": "GoBye.API",
   "BasePath": "_content/GoBye.API",
   "Mode": "Default",
@@ -85,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\1a09663e-a6c4-4c2b-944c-b87d32be610c_busClass.jpeg"
     },
     {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\5ecfa2f1-7ee8-4fd6-b9a6-9edb7fcf2988_activity.jpg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/5ecfa2f1-7ee8-4fd6-b9a6-9edb7fcf2988_activity.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\5ecfa2f1-7ee8-4fd6-b9a6-9edb7fcf2988_activity.jpg"
+    },
+    {
       "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\60d07f52-4838-481c-8218-db6c7a771359_activity.jpg",
       "SourceId": "GoBye.API",
       "SourceType": "Discovered",
@@ -117,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\67d2dc6b-8ec9-4dd5-a32a-02049c22078f_busClass.jpeg"
+    },
+    {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\68bcea2b-5804-42b6-9979-6f22e9c8bf31_activity.jpg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/68bcea2b-5804-42b6-9979-6f22e9c8bf31_activity.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\68bcea2b-5804-42b6-9979-6f22e9c8bf31_activity.jpg"
     },
     {
       "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\6c5793bc-07dc-4740-9aaf-b16921687cc5_activity.jpg",
@@ -185,6 +219,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\85cd24bd-77e6-443b-8858-34606da8f0a5_busClass.jpeg"
+    },
+    {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\88e526b7-44e4-456f-a383-9f57d2b956c8_destination.jpg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/88e526b7-44e4-456f-a383-9f57d2b956c8_destination.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\88e526b7-44e4-456f-a383-9f57d2b956c8_destination.jpg"
     },
     {
       "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\8a1bba1e-735d-40d6-b60c-0827982d282c_busClass.jpeg",
@@ -304,6 +355,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\d047eae6-906b-4fb0-ba10-f759159520a6_busClass.jpeg"
+    },
+    {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\d7ba0a07-f57f-4a54-9984-05f1de9794ef_activity.jpg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/d7ba0a07-f57f-4a54-9984-05f1de9794ef_activity.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\d7ba0a07-f57f-4a54-9984-05f1de9794ef_activity.jpg"
+    },
+    {
+      "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\d82fe53f-8bcc-41eb-9d85-dd1057d6af33_destination.jpg",
+      "SourceId": "GoBye.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\",
+      "BasePath": "_content/GoBye.API",
+      "RelativePath": "Images/d82fe53f-8bcc-41eb-9d85-dd1057d6af33_destination.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\d82fe53f-8bcc-41eb-9d85-dd1057d6af33_destination.jpg"
     },
     {
       "Identity": "D:\\Graduation-Project\\GoBye-BackEnd\\GoBye\\GoBye.API\\wwwroot\\Images\\df4c2ceb-8adc-4a8a-840a-41fcbff465d8_busClass.jpeg",
